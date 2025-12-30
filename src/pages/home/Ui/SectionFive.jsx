@@ -1,0 +1,77 @@
+"use client";
+
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+export default function SectionFive() {
+  const processes = [
+    {
+      title: "Discovery",
+      description: "The journey begins with understanding your brand, your goals, and the story you want to tell. We take the time to collaborate with you, ensuring we grasp the essence of your message."
+    },
+    {
+      title: "Script & Structure",
+      description: "Once we understand your goals, we move into crafting the narrative. We write a script that aligns with your brand's voice, ensuring the message is both engaging and effective."
+    },
+    {
+      title: "Production",
+      description: "With the script and structure in place, our production team takes the reins."
+    },
+    {
+      title: "Edit",
+      description: "Post-production is where the magic happens. We edit the footage, adding graphics, sound, and any additional elements that elevate the final product."
+    },
+    {
+      title: "Delivery",
+      description: "Once the film is complete, we deliver the final product in the format you need. Whether it's for social media, a website, or an event presentation, we ensure it's optimized for your distribution channels."
+    }
+  ];
+
+  const timelineRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"]
+  });
+
+  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <div className="min-h-screen max-w-[85%] mx-auto py-20">
+      <h1 className="text-7xl text-[#24144C] font-bold leading-tight mb-10 tracking-tight">
+        PROCESS PREVIEW
+      </h1>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-24">
+          <div className="lg:sticky lg:top-20 h-fit">
+            <p className="text-base text-gray-600 leading-relaxed">
+              We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
+            </p>
+          </div>
+          <div ref={timelineRef} className="relative pt-3 pb-48">
+            <div className="absolute left-2 top-8 bottom-8 w-0.5 bg-gray-300 z-10" />
+            <motion.div
+              style={{ height }}
+              className="absolute left-2 top-8 w-0.5 bg-[#1a1a2e] origin-top z-20"
+            />
+            <div className="relative z-30">
+              {processes.map((process, index) => (
+                <div key={index} className="flex gap-8 items-start mb-20 last:mb-0">
+                  <div className="w-4 h-4 bg-[#1a1a2e] rounded-full shrink-0 mt-2 relative z-30" />
+                  <div className="flex-1 pb-8">
+                    <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                      {process.title}
+                    </h3>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      {process.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
