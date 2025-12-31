@@ -72,12 +72,12 @@ const SectionSix = () => {
     <div className="max-w-[85%] mx-auto">
       <h1
         ref={titleRef}
-        className="text-[110px] text-[#271751] relative z-10 leading-tight"
+        className="lg:text-[110px]  text-5xl text-[#271751] relative z-10 leading-tight"
       >
         WHY WILMARCS
       </h1>
-      <div className="grid grid-cols-3 -mt-12">
-        <div ref={leftContentRef} className="py-48 text-left">
+      <div className="grid grid-cols-1 lg:grid-cols-3 -mt-12">
+        <div ref={leftContentRef} className="lg:py-48 py-20 text-center lg:text-left">
           <p className="text-lg leading-relaxed mb-8">
             We combine artistry and technical expertise to deliver visually
             stunning films. Every film is custom-made to align with your
@@ -87,24 +87,25 @@ const SectionSix = () => {
             and event filmmaking, our team understands how to craft powerful
             stories that resonate with your audience.
           </p>
-          <button className="bg-[#201147] text-white py-4 px-10 rounded-full font-medium hover:bg-[#271751] transition">
+          <button className="bg-[#201147] text-white py-4 px-10 rounded-full 
+                            font-medium hover:bg-[#271751] transition">
             Plan A Project
           </button>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center -mt-10 lg:mt-0">
           <Image
             src={sectionSixGif}
             alt="Why Wilmarcs visual"
             width={551}
             height={900}
-            className="w-full max-w-[551px] h-screen object-cover rounded-2xl shadow-2xl"
+            className="w-full max-w-[551px] h-auto lg:h-screen object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
         </div>
 
-        <div className="py-28 -ml-12">
+        <div className="lg:py-28 py-12 lg:-ml-12 ml-0 ">
           {[
             'Reliable timelines',
             'Founder-led direction',
