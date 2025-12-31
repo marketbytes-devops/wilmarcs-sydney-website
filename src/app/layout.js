@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content">
-            <main className="pt-32 lg:pt-40">
+            <main className="">
               {children}
             </main>
             <Footer />
