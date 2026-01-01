@@ -11,32 +11,43 @@ import hero2 from "../../../assets/images/home/heroimg2.png";
 import hero3 from "../../../assets/images/home/heroimg3.png";
 import hero4 from "../../../assets/images/home/heroimg4.png";
 
+import bgImage1 from "../../../assets/images/home/backgroundhero.png";
+
 const HeroSection = () => {
-  const videoRef = useRef(null);
   const sectionRef = useRef(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-
+  const [isScrolling, setIsScrolling] = useState(false);
+  
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
+    let scrollTimeout;
 
-      const section = sectionRef.current;
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const scrollY = window.scrollY;
+const handleScroll = () => {
+  if (!sectionRef.current) return;
 
-      const progress = Math.min(
-        Math.max((scrollY - sectionTop) / (sectionHeight * 0.5), 0),
-        1
-      );
+  setIsScrolling(true);
 
-      setScrollProgress(progress);
-    };
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    setIsScrolling(false);
+  }, 150);
+
+  const section = sectionRef.current;
+  const sectionTop = section.offsetTop;
+  const sectionHeight = section.offsetHeight;
+  const scrollY = window.scrollY;
+
+  const progress = Math.min(
+    Math.max((scrollY - sectionTop) / (sectionHeight * 0.5), 0),
+    1
+  );
+
+  setScrollProgress(progress);
+};
+
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -50,11 +61,13 @@ const HeroSection = () => {
     verticalSwiping: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    speed: 800,
+    speed: 600,
     pauseOnHover: false,
     focusOnSelect: false,
-    beforeChange: (current, next) => setCurrentSlideIndex(next),
-    dotsClass: "slick-dots",
+   beforeChange: (_, next) => {
+  if (!isScrolling) setCurrentSlideIndex(next);
+},
+
   };
 
   const slides = [
@@ -66,38 +79,64 @@ const HeroSection = () => {
 
   const headingTransform = `translateY(${-scrollProgress * 300}px)`;
   const headingOpacity = 1 - scrollProgress * 2;
-  const paragraphTransform = `translateY(${scrollProgress * 400}px)`;
-  const centerImageOpacity = scrollProgress;
-  const centerImageScale = 0.5 + scrollProgress * 0.5;
-  const sliderOpacity = Math.max(1 - scrollProgress * 3, 0);
-  const sliderTransform = `translateX(${scrollProgress * 100}px)`;
+  const paragraphTransform = `translateY(${scrollProgress * 280}px)`;
 
+  const centerImageOpacity = scrollProgress;
+  const centerImageScale = 0.5 + scrollProgress * 0.4;
+  const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
+  const sliderTransform = `translateX(${scrollProgress * 100}px)`;
+   
   return (
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-black min-h-screen"
     >
-      {/* Background Video */}
-      <div className="absolute inset-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
+      {/* RIGHT BACKGROUND */}
+      <div className="absolute  top-0 right-0 h-[74%] w-[45%]">
+        <Image
+          src={bgImage1}
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 "></div>
+
+        {/* CIRCLE MASK */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            opacity: sliderOpacity,
+            transform: sliderTransform,
+            transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
+          }}
         >
-          <source
-            src="https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+          <div className="relative w-[700px] h-[600px]  overflow-hidden">
+            {/* FORCE SLICK HEIGHT */}
+            <div className="h-full">
+              <Slider {...settings}>
+                {slides.map((slide) => (
+                  <div key={slide.id} className="py-2">
+                    <div className="relative mx-auto w-[220px] h-[140px]">
+                      <Image
+                        src={slide.thumbnail}
+                        alt={`Thumbnail ${slide.id}`}
+                        fill
+                        className="object-cover rounded-xl"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </div>
       </div>
 
+      {/* CONTENT */}
       <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-20 mt-30">
         <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
-          {/* Heading */}
+          {/* HEADING */}
           <div
             style={{
               transform: headingTransform,
@@ -116,33 +155,49 @@ const HeroSection = () => {
           </div>
 
           <div className="mt-2 relative min-h-[600px]">
-            {/* Paragraph */}
+            {/* PARAGRAPH */}
             <div
               className="w-full lg:w-1/2"
               style={{
                 transform: paragraphTransform,
-                transition: "transform 0.1s ease-out",
+              transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+
                 position: scrollProgress > 0.3 ? "absolute" : "relative",
-                bottom: scrollProgress > 0.3 ? "40px" : "auto",
+                top: scrollProgress > 0.3 ? "calc(50% + 220px)" : "auto",
+                left: scrollProgress > 0.3 ? "50%" : "auto",
+                transform:
+                  scrollProgress > 0.3
+                    ? "translateX(-100%)"
+                    : paragraphTransform,
               }}
             >
               <p className="text-white/80 text-lg mb-8 max-w-lg">
                 You'll only receive updates on new templates <br />
                 no spam, just what you signed up for.
               </p>
-              
+              <div className=" flex gap-5">
+                <button className="text-black bg-white rounded-3xl py-3 px-8 font-semibold">
+                  {" "}
+                  Plan a Project
+                </button>
+                <button className="text-white bg-black rounded-3xl py-3 px-8 font-semibold border border-white">
+                  {" "}
+                  Watch Work
+                </button>
+              </div>
             </div>
 
-            {/* Center Image */}
+            {/* CENTER IMAGE */}
             <div
               className="absolute top-1/2 left-1/2 pointer-events-none"
               style={{
                 opacity: centerImageOpacity,
                 transform: `translate(-50%, -50%) scale(${centerImageScale})`,
-                transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
+               transition: "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
+
               }}
             >
-              <div className="relative w-[600px] h-[340px]">
+              <div className="relative w-[500px] h-[340px]">
                 <Image
                   src={slides[currentSlideIndex % slides.length].thumbnail}
                   alt="Hero slide"
@@ -150,33 +205,6 @@ const HeroSection = () => {
                   className="object-cover rounded-2xl"
                   priority
                 />
-              </div>
-            </div>
-
-            {/* Slider */}
-            <div
-              className="absolute bottom-44 right-10 w-full flex justify-center lg:justify-end"
-              style={{
-                opacity: sliderOpacity,
-                transform: sliderTransform,
-                transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
-              }}
-            >
-              <div className="w-[380px] h-[700px]">
-                <Slider {...settings}>
-                  {slides.map((slide) => (
-                    <div key={slide.id} className="py-2">
-                      <div className="relative mx-auto w-[220px] h-[150px]">
-                        <Image
-                          src={slide.thumbnail}
-                          alt={`Thumbnail ${slide.id}`}
-                          fill
-                          className="object-cover rounded-2xl"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
               </div>
             </div>
           </div>
