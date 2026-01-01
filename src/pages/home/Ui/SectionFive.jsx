@@ -38,13 +38,14 @@ export default function SectionFive() {
 
   return (
     <div className="min-h-screen max-w-[85%] mx-auto py-20">
-      <h1 className="text-7xl text-[#24144C] font-bold leading-tight mb-10 tracking-tight">
+      <h1 className="text-3xl lg:text-7xl text-[#24144C] text-center lg:text-left
+                    font-bold leading-tight mb-10 tracking-tight">
         PROCESS PREVIEW
       </h1>
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-24">
           <div className="lg:sticky lg:top-20 h-fit">
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed text-center lg:text-left">
               We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
             </p>
           </div>
@@ -56,7 +57,7 @@ export default function SectionFive() {
             />
             <div className="relative z-30">
               {processes.map((process, index) => (
-                <div key={index} className="flex gap-8 items-start mb-20 last:mb-0">
+                <div key={index} className="flex gap-8 items-start mb-0 lg:mb-20 last:mb-0">
                   <div className="w-4 h-4 bg-[#1a1a2e] rounded-full shrink-0 mt-2 relative z-30" />
                   <div className="flex-1 pb-8">
                     <h3 className="text-3xl font-bold text-gray-900 mb-4">

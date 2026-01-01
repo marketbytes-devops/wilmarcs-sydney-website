@@ -72,7 +72,7 @@ const SectionSix = () => {
     <div className="max-w-[85%] mx-auto">
       <h1
         ref={titleRef}
-        className="lg:text-[110px]  text-5xl text-[#271751] relative z-10 leading-tight"
+        className="lg:text-[110px] text-center lg:text-left text-5xl text-[#271751] relative z-10 leading-tight"
       >
         WHY WILMARCS
       </h1>
