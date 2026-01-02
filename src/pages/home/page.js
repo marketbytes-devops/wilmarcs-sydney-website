@@ -15,16 +15,16 @@ const HomePage = () => {
       <header>
         <HeroSection />
       </header>
-      <section>
+      <section className="lg:mt-20 mt-10">
         <SectionTwo />
       </section>
-      <section className="mt-6">
+      <section className="mt-18">
         <SectionThree />
       </section>
       <section className="mt-5">
         <SectionFour />
       </section>
-      <section className="mt-6">
+      <section className="mt-0 lg:mt-6">
         <SectionFive />
       </section>
       <section className="mt-5">

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Button from "../Button";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -9,7 +10,9 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { RiServiceLine } from "react-icons/ri";
 import { BsDiagram3 } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
-
+import { FiArrowUpRight } from "react-icons/fi";
+import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
+import ContactIcon from "./../Icons/ContactIcon";
 import { motion } from "framer-motion";
 
 const navLinks = [
@@ -41,6 +44,7 @@ export default function Navbar() {
   const isHomePage = pathname === "/";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -64,7 +68,10 @@ export default function Navbar() {
   return (
     <>
       {showInitialNavbar && (
-        <nav className="bg-black py-6 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
+        <nav
+          className="bg-black/95
+ py-6 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="hidden lg:flex items-center justify-between">
               <div className="flex items-center space-x-8">
@@ -72,11 +79,12 @@ export default function Navbar() {
                   const isHome = link.name === "Home";
                   const Icon = link.icon;
 
-                  // ✅ HOME (no animation, icon inside border)
+                  //HOME (no animation, icon inside border)
                   if (isHome) {
                     return (
                       <Link key={link.name} href={link.href}>
-                        <div className="flex items-center gap-2 border border-white rounded-full px-5 py-1 text-white">
+                        <div className="flex items-center  gap-2 border
+                                      border-white rounded-full px-5 py-1 text-white">
                           <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white">
                             <Icon size={16} className="text-black" />
                           </span>
@@ -86,7 +94,7 @@ export default function Navbar() {
                     );
                   }
 
-                  // ✅ OTHER MENUS (animated)
+                  // OTHER MENUS (animated)
                   return (
                     <Link key={link.name} href={link.href}>
                       <motion.div
@@ -128,9 +136,16 @@ export default function Navbar() {
                 })}
               </div>
 
-             <div className="absolute left-1/2 -translate-x-1/2 -top-12
-                           bg-white px-6 py-4 shadow-lg logo-hex pt-12
-                           flex items-center justify-center">
+              <div
+                className="absolute left-[55%] -translate-x-1/2 -top-20
+             w-64 h-48 flex items-center justify-center " 
+                style={{
+                  backgroundImage: "url('/LogoBg.png')",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
                 <Link href="/">
                   <Image
                     src="/wilmarcs-logo.png"
@@ -143,12 +158,71 @@ export default function Navbar() {
               </div>
 
               <div className="flex items-center space-x-4">
-                <button className="text-gray-500 hover:text-white transition-colors">
+                {/* "Contact Us" Button: Simple text, gray-to-white hover (no bg) */}
+                <Button
+                  style={{
+                    background: "transparent", // No bg
+                    color: "#9ca3af", // Gray
+                    padding: "8px 0", // Minimal padding
+                    fontSize: "15px",
+                    borderRadius: "0", // Square for text button
+                    boxShadow: "none", // No shadow
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = "white";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = "#9ca3af";
+                  }}
+                  onClick={() => console.log("Contact clicked")} // Add your handler
+                >
                   Contact Us
-                </button>
-                <button className="bg-white text-black px-6 py-2 rounded-md hover:bg-gray-200 transition-colors">
+                </Button>
+
+                {/* "Plan A Project" Button: Conic gradient from image, with arrow */}
+                <Button
+                  style={{
+                    background: isHovered
+                      ? "conic-gradient(from 76.38deg at 69.04% 57.5%, #381A8C 0deg, #1A0F37 180deg, #936FEC 360deg)"
+                      : "conic-gradient(from 76.38deg at 69.04% 57.5%, #936FEC 0deg, #1A0F37 180deg, #381A8C 360deg)",
+                    color: "white",
+                    padding: "10px 30px",
+                    fontSize: "15px",
+                    boxShadow: `
+      0 0 40px rgba(255, 255, 255, 0),
+      inset 0 0 0 4px rgba(255, 255, 255, 0.8)
+    `,
+                    transition: "all 0.6s ease",
+                    overflow: "hidden",
+                  }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  onClick={() => console.log("Plan clicked")}
+                >
                   Plan A Project
-                </button>
+                  {/* Arrow Container */}
+                  <span
+                    style={{
+                      marginLeft: "12px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      backgroundColor: "#FFFFFF",
+                      color: "#3B1D8F",
+                      transition: "all 0.4s ease",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {isHovered ? (
+                      <GoArrowRight size={18} />
+                    ) : (
+                      <GoArrowUpRight size={18} />
+                    )}
+                  </span>
+                </Button>
               </div>
             </div>
 

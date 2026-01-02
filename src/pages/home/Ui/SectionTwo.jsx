@@ -28,7 +28,7 @@ const SectionTwo = () => {
   return (
     <div className="max-w-[85%] mx-auto">
       <motion.h1
-        className="text-center text-5xl md:text-6xl font-bold leading-tight"
+        className="text-center text-3xl lg:text-6xl font-bold leading-tight"
         initial={{ opacity: 0, y: -50 }}
         whileInView={hasScrolled ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}
@@ -37,13 +37,13 @@ const SectionTwo = () => {
         Our approach to filmmaking is rooted in structured and intentional storytelling.
       </motion.h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 mt-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-12 md:py-28 text-left"
+          className="py-6 lg:py-28 lg:text-left text-center"
         >
           <p className="text-lg leading-relaxed">
             At Wilmarcs Motion Pictures, we are passionate about creating meaningful and impactful
@@ -65,7 +65,7 @@ const SectionTwo = () => {
             alt="Animated section visual"
             width={800}
             height={500}
-            className="w-full max-w-full h-auto md:h-96 object-cover rounded-2xl shadow-2xl"
+            className="w-full max-w-full h-auto lg:h-96 object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
@@ -76,7 +76,7 @@ const SectionTwo = () => {
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-12 md:py-28 text-left"
+          className="py-6 lg:py-28 lg:text-left text-center"
         >
           <p className="text-lg leading-relaxed">
             Our approach to filmmaking is rooted in structured and intentional storytelling.
@@ -89,7 +89,7 @@ const SectionTwo = () => {
       </div>
 
       <motion.div
-        className="flex justify-center items-center mt-12"
+        className="flex justify-center items-center"
         initial={{ opacity: 0, y: 50 }}
         whileInView={hasScrolled ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}
