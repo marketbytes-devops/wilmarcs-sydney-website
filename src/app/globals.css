@@ -2,3 +2,195 @@
 
 
 
+/* Import Fonts */
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+
+@import "@fontsource/jost/400.css";
+@import "@fontsource/jost/500.css";
+@import "@fontsource/jost/600.css";
+@import "@fontsource/jost/700.css";
+
+@import "@fontsource/kumbh-sans/400.css";
+@import "@fontsource/kumbh-sans/500.css";
+@import "@fontsource/kumbh-sans/600.css";
+@import "@fontsource/kumbh-sans/700.css";
+
+
+@theme {
+  --font-family-geist: "Geist Sans", sans-serif;
+  --font-family-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-family-jost: "Jost", sans-serif;
+  --font-family-kumbh: "Kumbh Sans", sans-serif;
+}
+.container{
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+body {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Typography Classes */
+
+/* H1 - Jost, 48px, 60px line height */
+h1,
+.heading-1 {
+  font-family: "Jost", sans-serif;
+  font-size: 48px;
+  line-height: 60px;
+}
+
+/* H2 - Geist, 40px, 120% line height */
+h2,
+.heading-2 {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 40px;
+  line-height: 120%;
+}
+
+/* H3 - Geist, 80px, 120% line height */
+h3,
+.heading-3 {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 80px;
+  line-height: 120%;
+}
+
+/* H4 - Geist, 73px, 80px line height */
+h4,
+.heading-4 {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 73px;
+  line-height: 80px;
+}
+
+/* H5 - Geist, 52px, 120% line height */
+h5,
+.heading-5 {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 52px;
+  line-height: 120%;
+}
+
+/* H6 - Geist, 28px, 120% line height */
+h6,
+.heading-6 {
+  font-family: "Geist Sans", sans-serif;
+  font-size: 28px;
+  line-height: 120%;
+}
+
+/* Paragraph - Geist, 18px, 150% line height */
+p{
+  font-family: "Geist Sans", sans-serif;
+  font-size: 18px;
+  line-height: 150%;
+}
+
+/* Utility Classes for Other Fonts */
+.font-plus-jakarta {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-jost {
+  font-family: "Jost", sans-serif;
+}
+
+.font-kumbh {
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+.font-geist {
+  font-family: "Geist Sans", sans-serif;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1,
+  .heading-1 {
+    font-size: 36px;
+  }
+
+  h2,
+  .heading-2 {
+    font-size: 32px;
+  }
+
+  h3,
+  .heading-3 {
+    font-size: 48px;
+
+  }
+
+  h4,
+  .heading-4 {
+    font-size: 40px;
+    
+  }
+
+  h5,
+  .heading-5 {
+    font-size: 36px;
+    
+  }
+
+  h6,
+  .heading-6 {
+    font-size: 24px;
+  
+  }
+
+  p,
+  .body-text {
+    font-size: 16px;
+
+  }
+}
+
+@media (max-width: 480px) {
+  h1,
+  .heading-1 {
+    font-size: 28px;
+  }
+
+  h2{
+    font-size: 24px;
+  }
+
+  h3{
+  
+    font-size: 32px;
+  }
+
+  h4,
+  .heading-4 {
+    font-size: 28px;
+  }
+
+  h5,
+  .heading-5 {
+    font-size: 24px;
+  }
+
+  h6 {
+    font-size: 20px;
+  
+  }
+
+  p,
+  .body-text {
+    font-size: 14px;
+    
+  }
+}

@@ -3,7 +3,7 @@ import React from "react";
 const ContactIcon = () => {
   return (
     <>
-      <div className="bg-white rounded-full">
+      <div className="bg-white rounded-full p-2">
         <svg
           width="24"
           height="20"
