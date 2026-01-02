@@ -26,16 +26,16 @@ const SectionTwo = () => {
   }, []);
 
   return (
-    <div className="max-w-[85%] mx-auto">
-      <motion.h1
-        className="text-center text-3xl lg:text-6xl font-bold leading-tight"
+    <div className="container mx-auto">
+      <motion.h2
+        className="text-center font-semibold leading-tight uppercase text-[#25154E]"
         initial={{ opacity: 0, y: -50 }}
         whileInView={hasScrolled ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
         Our approach to filmmaking is rooted in structured and intentional storytelling.
-      </motion.h1>
+      </motion.h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <motion.div
@@ -45,7 +45,7 @@ const SectionTwo = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="py-6 lg:py-28 lg:text-left text-center"
         >
-          <p className="text-lg leading-relaxed">
+          <p className="font-extralight leading-relaxed">
             At Wilmarcs Motion Pictures, we are passionate about creating meaningful and impactful
             films that tell your story with precision, creativity, and intention. Based in Sydney,
             we specialize in crafting corporate, CSR (Corporate Social Responsibility), and event
@@ -78,7 +78,7 @@ const SectionTwo = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="py-6 lg:py-28 lg:text-left text-center"
         >
-          <p className="text-lg leading-relaxed">
+          <p className="font-extralight leading-relaxed">
             Our approach to filmmaking is rooted in structured and intentional storytelling.
             Every frame is meticulously planned, every message carefully considered, and every
             story told with purpose. Whether you're looking to showcase your brand, highlight

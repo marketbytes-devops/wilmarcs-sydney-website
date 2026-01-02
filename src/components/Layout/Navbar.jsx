@@ -45,6 +45,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [isContactHovered, setIsContactHovered] = useState(false);
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -72,9 +74,9 @@ export default function Navbar() {
           className="bg-black/95
  py-6 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className=" mx-auto px-6">
             <div className="hidden lg:flex items-center justify-between">
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-4 font-geist text-[16px] font-medium">
                 {navLinks.map((link) => {
                   const isHome = link.name === "Home";
                   const Icon = link.icon;
@@ -83,8 +85,10 @@ export default function Navbar() {
                   if (isHome) {
                     return (
                       <Link key={link.name} href={link.href}>
-                        <div className="flex items-center  gap-2 border
-                                      border-white rounded-full px-5 py-1 text-white">
+                        <div
+                          className="flex items-center  gap-2 border hover:text-white
+                                      border-white rounded-full px-2 py-1 text-[#B0B0B0]"
+                        >
                           <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white">
                             <Icon size={16} className="text-black" />
                           </span>
@@ -98,7 +102,7 @@ export default function Navbar() {
                   return (
                     <Link key={link.name} href={link.href}>
                       <motion.div
-                        className={`relative flex items-center text-gray-500 hover:text-white ${
+                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${
                           pathname === link.href ? "text-white" : ""
                         }`}
                         initial="rest"
@@ -137,8 +141,8 @@ export default function Navbar() {
               </div>
 
               <div
-                className="absolute left-[55%] -translate-x-1/2 -top-20
-             w-64 h-48 flex items-center justify-center " 
+                className="absolute left-[50%] -translate-x-1/2 -top-22
+             w-64 h-48 flex items-center justify-center "
                 style={{
                   backgroundImage: "url('/LogoBg.png')",
                   backgroundSize: "contain",
@@ -159,25 +163,43 @@ export default function Navbar() {
 
               <div className="flex items-center space-x-4">
                 {/* "Contact Us" Button: Simple text, gray-to-white hover (no bg) */}
-                <Button
-                  style={{
-                    background: "transparent", // No bg
-                    color: "#9ca3af", // Gray
-                    padding: "8px 0", // Minimal padding
-                    fontSize: "15px",
-                    borderRadius: "0", // Square for text button
-                    boxShadow: "none", // No shadow
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = "white";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = "#9ca3af";
-                  }}
-                  onClick={() => console.log("Contact clicked")} // Add your handler
-                >
-                  Contact Us
-                </Button>
+
+              <Button
+  style={{
+    background: hovered
+      ? "conic-gradient(from 76.38deg at 69.04% 57.5%, #381A8C 0deg, #1A0F37 180deg, #936FEC 360deg)"
+      : "conic-gradient(from 76.38deg at 69.04% 57.5%, #936FEC 0deg, #1A0F37 180deg, #381A8C 360deg)",
+    color: "white",
+    padding: "10px",
+    fontSize: "15px",
+    boxShadow: `
+      0 0 40px rgba(255, 255, 255, 0),
+      inset 0 0 0 4px rgba(255, 255, 255, 0.8)
+    `,
+    transition: "all 0.6s ease",
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    gap: hovered ? "10px" : "0px",
+    whiteSpace: "nowrap",
+  }}
+  onMouseEnter={() => setHovered(true)}
+  onMouseLeave={() => setHovered(false)}
+  onClick={() => console.log("Contact clicked")}
+>
+  <ContactIcon />
+  <span
+    style={{
+      maxWidth: hovered ? "120px" : "0px", // Use maxWidth instead of width
+      opacity: hovered ? 1 : 0,
+      overflow: "hidden",
+      transition: "max-width 0.5s ease, opacity 0.5s ease",
+      display: "inline-block",
+    }}
+  >
+    Contact Us
+  </span>
+</Button>
 
                 {/* "Plan A Project" Button: Conic gradient from image, with arrow */}
                 <Button
