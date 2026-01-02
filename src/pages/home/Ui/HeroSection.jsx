@@ -77,15 +77,17 @@ const handleScroll = () => {
     { id: 4, thumbnail: hero4 },
   ];
 
-  const headingTransform = `translateY(${-scrollProgress * 300}px)`;
-  const headingOpacity = 1 - scrollProgress * 2;
-  const paragraphTransform = `translateY(${scrollProgress * 280}px)`;
+ const headingTransform = `translateY(${-scrollProgress * 20}px)`;
+const headingOpacity = Math.max(1 - scrollProgress * 1.2, 0);
+const paragraphTransform = `translateY(${scrollProgress * 100}px)`;
 
-  const centerImageOpacity = scrollProgress;
-  const centerImageScale = 0.5 + scrollProgress * 0.4;
-  const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
-  const sliderTransform = `translateX(${scrollProgress * 100}px)`;
-   
+const zoomProgress = Math.min(scrollProgress / 0.35, 1);
+
+const centerImageOpacity = zoomProgress;
+const centerImageScale = 0.7 + zoomProgress * 0.3;
+
+const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
+const sliderTransform = `translateX(${scrollProgress * 100}px)`;
   return (
     <section
       ref={sectionRef}
