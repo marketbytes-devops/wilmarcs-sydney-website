@@ -18,33 +18,32 @@ const HeroSection = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
-  
+
   useEffect(() => {
     let scrollTimeout;
 
-const handleScroll = () => {
-  if (!sectionRef.current) return;
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
 
-  setIsScrolling(true);
+      setIsScrolling(true);
 
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(() => {
-    setIsScrolling(false);
-  }, 150);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
 
-  const section = sectionRef.current;
-  const sectionTop = section.offsetTop;
-  const sectionHeight = section.offsetHeight;
-  const scrollY = window.scrollY;
+      const section = sectionRef.current;
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const scrollY = window.scrollY;
 
-  const progress = Math.min(
-    Math.max((scrollY - sectionTop) / (sectionHeight * 0.5), 0),
-    1
-  );
+      const progress = Math.min(
+        Math.max((scrollY - sectionTop) / (sectionHeight * 0.5), 0),
+        1
+      );
 
-  setScrollProgress(progress);
-};
-
+      setScrollProgress(progress);
+    };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
@@ -64,10 +63,9 @@ const handleScroll = () => {
     speed: 600,
     pauseOnHover: false,
     focusOnSelect: false,
-   beforeChange: (_, next) => {
-  if (!isScrolling) setCurrentSlideIndex(next);
-},
-
+    beforeChange: (_, next) => {
+      if (!isScrolling) setCurrentSlideIndex(next);
+    },
   };
 
   const slides = [
@@ -77,24 +75,42 @@ const handleScroll = () => {
     { id: 4, thumbnail: hero4 },
   ];
 
- const headingTransform = `translateY(${-scrollProgress * 20}px)`;
-const headingOpacity = Math.max(1 - scrollProgress * 1.2, 0);
-const paragraphTransform = `translateY(${scrollProgress * 100}px)`;
+  const headingTransform = `translateY(${-scrollProgress * 20}px)`;
+  const headingOpacity = Math.max(1 - scrollProgress * 1.2, 0);
+  const paragraphTransform = `translateY(${scrollProgress * 100}px)`;
 
-const zoomProgress = Math.min(scrollProgress / 0.35, 1);
+  const zoomProgress = Math.min(scrollProgress / 0.35, 1);
 
-const centerImageOpacity = zoomProgress;
-const centerImageScale = 0.7 + zoomProgress * 0.3;
+  const centerImageOpacity = zoomProgress;
+  const centerImageScale = 0.7 + zoomProgress * 0.3;
 
-const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
-const sliderTransform = `translateX(${scrollProgress * 100}px)`;
+  const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
+  const sliderTransform = `translateX(${scrollProgress * 100}px)`;
+
+  // Calculate section margin based on scroll progress
+  const sectionMargin = scrollProgress > 0.3 ? "0px" : "24px"; 
+  
+  // Calculate background position based on scroll progress
+  const bgRightPosition = scrollProgress > 0.3 ? "0px" : "-24px";
+
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-black min-h-screen"
+      className="relative  overflow-hidden bg-black min-h-screen mt-14"
+      style={{
+        marginLeft: sectionMargin,
+        marginRight: sectionMargin,
+        transition: "margin 0.3s ease-out",
+      }}
     >
       {/* RIGHT BACKGROUND */}
-      <div className="absolute  top-0 right-0 h-[74%] w-[45%]">
+      <div 
+        className="absolute top-0 h-[74%] w-[45%]"
+        style={{
+          right: bgRightPosition,
+          transition: "right 0.3s ease-out",
+        }}
+      >
         <Image
           src={bgImage1}
           alt="Background"
@@ -102,7 +118,7 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 "></div>
+        <div className="absolute inset-0"></div>
 
         {/* CIRCLE MASK */}
         <div
@@ -113,7 +129,7 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
             transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
           }}
         >
-          <div className="relative w-[700px] h-[600px]  overflow-hidden">
+          <div className="relative w-[700px] h-[600px] overflow-hidden">
             {/* FORCE SLICK HEIGHT */}
             <div className="h-full">
               <Slider {...settings}>
@@ -137,7 +153,7 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
 
       {/* CONTENT */}
       <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-20 mt-30">
-        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
+        <div className="container mx-auto  max-w-7xl">
           {/* HEADING */}
           <div
             style={{
@@ -146,7 +162,7 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
               transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
             }}
           >
-            <h1 className="text-5xl lg:text-5xl xl:text-4xl font-bold text-white leading-tight">
+            <h1 className="font-bold text-white leading-tight">
               Cinematic Films For{" "}
               <span className="text-purple-400 bg-purple-400/20 px-4 py-2 rounded-2xl inline-block">
                 Brands
@@ -162,8 +178,7 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
               className="w-full lg:w-1/2"
               style={{
                 transform: paragraphTransform,
-              transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-
+                transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                 position: scrollProgress > 0.3 ? "absolute" : "relative",
                 top: scrollProgress > 0.3 ? "calc(50% + 220px)" : "auto",
                 left: scrollProgress > 0.3 ? "50%" : "auto",
@@ -177,13 +192,11 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
                 You'll only receive updates on new templates <br />
                 no spam, just what you signed up for.
               </p>
-              <div className=" flex gap-5">
+              <div className="flex gap-5">
                 <button className="text-black bg-white rounded-3xl py-3 px-8 font-semibold">
-                  {" "}
                   Plan a Project
                 </button>
                 <button className="text-white bg-black rounded-3xl py-3 px-8 font-semibold border border-white">
-                  {" "}
                   Watch Work
                 </button>
               </div>
@@ -195,8 +208,8 @@ const sliderTransform = `translateX(${scrollProgress * 100}px)`;
               style={{
                 opacity: centerImageOpacity,
                 transform: `translate(-50%, -50%) scale(${centerImageScale})`,
-               transition: "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
-
+                transition:
+                  "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
               <div className="relative w-[500px] h-[340px]">

@@ -46,16 +46,16 @@ const SectionSeven = () => {
 
   return (
     <>
-      <div className="max-w-[85%] mx-auto bg-white">
+      <div className="container mx-auto bg-white">
         <div className="">
           <div className="flex flex-col lg:flex-row lg:items-start gap-12 lg:gap-24">
             <div className="w-full lg:w-1/2 lg:py-32 py-0">
-              <h2
-                className="text-3xl md:text-6xl lg:text-[73px] text-center lg:text-left
-                            leading-tight font-bold text-gray-900"
+              <h4
+                className="text-center lg:text-left
+                            leading-tight font-semibold text-gray-900"
               >
                 What Clients Say About the Tool
-              </h2>
+              </h4>
             </div>
             <div className="w-full lg:w-1/2 lg:mb-28 mb-8">
               <div className="bg-white rounded-3xl shadow-[5px_10px_15.8px_-1px_#0000002E] p-8 md:p-12 relative overflow-hidden flex flex-col min-h-[520px] md:min-h-[580px]">
@@ -63,10 +63,10 @@ const SectionSeven = () => {
                   <span className="absolute -top-8 -left-6 text-9xl text-black font-serif leading-none opacity-20">
                     “
                   </span>
-                  <p className="text-lg md:text-xl text-center text-gray-700 leading-relaxed mb-12 pt-12">
+                  <span className="text-lg md:text-[24px] text-center text-gray-700 leading-relaxed mb-12 pt-12">
                     {current.quote}
-                  </p>
-                  <div className="flex flex-col md:flex-row items-center justify-between  mt-20">
+                  </span>
+                  <div className="flex flex-col md:flex-row items-center justify-between  ">
                     <footer className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-200 rounded-full border-2 border-dashed border-gray-400 shrink-0" />
                       <div>
@@ -146,11 +146,11 @@ const SectionSeven = () => {
                 <div className="w-5 h-5">
                   <PeopleIcon />
                 </div>
-                <p className="text-sm text-gray-600">Work Together</p>
+                <p className=" text-gray-600">Work Together</p>
               </div>
-              <h2 className=" text-center lg:text-left text-4xl md:text-5xl lg:text-5xl font-bold leading-tight">
+              <h5 className="  font-semibold ">
                 Let's talk about your project
-              </h2>
+              </h5>
               <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center mb-2 lg:mb-0 ">
                 <input
                   type="email"
