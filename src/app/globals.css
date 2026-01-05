@@ -1,28 +1,25 @@
 @import "tailwindcss";
 
 
+@import "@fontsource/geist-sans/index.css";
 
-/* Import Fonts */
-@import "@fontsource/geist-sans/400.css";
-@import "@fontsource/geist-sans/500.css";
-@import "@fontsource/geist-sans/600.css";
-@import "@fontsource/geist-sans/700.css";
-
+/* Plus Jakarta Sans */
 @import "@fontsource/plus-jakarta-sans/400.css";
 @import "@fontsource/plus-jakarta-sans/500.css";
 @import "@fontsource/plus-jakarta-sans/600.css";
 @import "@fontsource/plus-jakarta-sans/700.css";
 
+/* Jost */
 @import "@fontsource/jost/400.css";
 @import "@fontsource/jost/500.css";
 @import "@fontsource/jost/600.css";
 @import "@fontsource/jost/700.css";
 
+/* Kumbh Sans */
 @import "@fontsource/kumbh-sans/400.css";
 @import "@fontsource/kumbh-sans/500.css";
 @import "@fontsource/kumbh-sans/600.css";
 @import "@fontsource/kumbh-sans/700.css";
-
 
 @theme {
   --font-family-geist: "Geist Sans", sans-serif;
