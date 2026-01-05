@@ -81,8 +81,7 @@ h5,
 }
 
 /* H6 - Geist, 28px, 120% line height */
-h6,
-.heading-6 {
+h6{
   font-family: "Geist Sans", sans-serif;
   font-size: 28px;
   line-height: 120%;
@@ -114,36 +113,30 @@ p{
 
 /* Responsive Typography */
 @media (max-width: 768px) {
-  h1,
-  .heading-1 {
+  h1 {
     font-size: 36px;
   }
 
-  h2,
-  .heading-2 {
+  h2 {
     font-size: 32px;
   }
 
-  h3,
-  .heading-3 {
-    font-size: 48px;
+  h3 {
+    font-size: 32px;
 
   }
 
-  h4,
-  .heading-4 {
+  h4 {
     font-size: 40px;
     
   }
 
-  h5,
-  .heading-5 {
+  h5{
     font-size: 36px;
     
   }
 
-  h6,
-  .heading-6 {
+  h6 {
     font-size: 24px;
   
   }
@@ -156,27 +149,24 @@ p{
 }
 
 @media (max-width: 480px) {
-  h1,
-  .heading-1 {
+  h1 {
     font-size: 28px;
   }
 
   h2{
-    font-size: 24px;
+    font-size: 20px;
   }
 
   h3{
   
-    font-size: 32px;
+    font-size: 20px;
   }
 
-  h4,
-  .heading-4 {
+  h4 {
     font-size: 28px;
   }
 
-  h5,
-  .heading-5 {
+  h5{
     font-size: 24px;
   }
 

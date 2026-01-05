@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import SectionTwoGif from "../../../assets/videos/home/gif.gif";
 import Image from "next/image";
-import Button from "./../../../components/Button/index"
+import Button from "./../../../components/Button/index";
 
 const SectionTwo = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -35,7 +35,8 @@ const SectionTwo = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        Our approach to filmmaking is rooted in structured and intentional storytelling.
+        Our approach to filmmaking is rooted in structured and intentional
+        storytelling.
       </motion.h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 md:gap-8 gap-3">
@@ -47,9 +48,10 @@ const SectionTwo = () => {
           className="py-4 lg:py-28 lg:text-left text-center"
         >
           <p className="font-extralight leading-relaxed">
-            At Wilmarcs Motion Pictures, we are passionate about creating meaningful and impactful
-            films that tell your story with precision, creativity, and intention. Based in Sydney,
-            we specialize in crafting corporate, CSR (Corporate Social Responsibility), and event
+            At Wilmarcs Motion Pictures, we are passionate about creating
+            meaningful and impactful films that tell your story with precision,
+            creativity, and intention. Based in Sydney, we specialize in
+            crafting corporate, CSR (Corporate Social Responsibility), and event
             films that leave a lasting impression on your audience.
           </p>
         </motion.div>
@@ -80,11 +82,12 @@ const SectionTwo = () => {
           className="py-4 lg:py-28 lg:text-left text-center"
         >
           <p className="font-extralight leading-relaxed">
-            Our approach to filmmaking is rooted in structured and intentional storytelling.
-            Every frame is meticulously planned, every message carefully considered, and every
-            story told with purpose. Whether you're looking to showcase your brand, highlight
-            your social responsibility efforts, or capture the essence of your event, we are here
-            to help you connect with your audience on a deeper level.
+            Our approach to filmmaking is rooted in structured and intentional
+            storytelling. Every frame is meticulously planned, every message
+            carefully considered, and every story told with purpose. Whether
+            you're looking to showcase your brand, highlight your social
+            responsibility efforts, or capture the essence of your event, we are
+            here to help you connect with your audience on a deeper level.
           </p>
         </motion.div>
       </div>
@@ -96,8 +99,11 @@ const SectionTwo = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
-        <Button className="bg-[#201147] text-white px-8 py-2 md:py-4 md:px-10 rounded-full
-                           font-medium hover:bg-[#271751] transition">
+        <Button
+          className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium transition
+             bg-[conic-gradient(from_90deg_at_50%_50%,#201147_0deg,#7356BC_360deg)]
+             hover:bg-[conic-gradient(from_360deg_at_50%_50%,#7356BC_0deg,#201147_90deg)]"
+        >
           Plan A Project
         </Button>
       </motion.div>
