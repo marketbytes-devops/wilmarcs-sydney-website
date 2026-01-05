@@ -6,6 +6,7 @@ import img1 from '../../../assets/images/home/section4_2.png';
 import sectionFourImg from '../../../assets/images/home/section4.jpg';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "./../../../components/Button/index"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,9 +80,9 @@ const SectionFour = () => {
           className="w-full h-screen shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <button className="text-white bg-white/20 px-4 sm:px-6 py-2 rounded-lg hover:bg-white/30 transition text-sm">
+            <Button className="text-white bg-white/20 px-4 sm:px-6 py-2 rounded-lg hover:bg-white/30 transition text-sm">
               Films
-            </button>
+            </Button>
             <button className="text-white bg-white/20 px-4 sm:px-6 py-2 rounded-lg hover:bg-white/30 transition text-sm">
               Plan A Project
             </button>

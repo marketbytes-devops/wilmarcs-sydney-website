@@ -16,13 +16,14 @@ const Footer = () => {
           />
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-y-6 md:gap-y-0">
-          <ul className="flex gap-x-4 sm:gap-x-6 md:gap-x-8 px-4 sm:px-6 md:px-10 list-none justify-center md:justify-start">
+          <ul className="font-kumbh flex gap-x-4 sm:gap-x-6 md:gap-x-8 sm:text-[16px] text-[14px]
+                         px-4 sm:px-6 md:px-10 list-none justify-center md:justify-start">
             <li className="cursor-pointer hover:text-blue-600">Facebook</li>
             <li className="cursor-pointer hover:text-pink-600">Instagram</li>
             <li className="cursor-pointer hover:text-red-600">Youtube</li>
             <li className="cursor-pointer hover:text-blue-700">Linkedin</li>
           </ul>
-          <ul className="flex flex-col items-center md:items-end  text-center md:text-right">
+          <ul className="font-kumbh flex flex-col items-center md:items-end  text-center md:text-right">
             <li className="text-sm sm:text-base">hello@wilmarcs.com</li>
             <li className="text-sm sm:text-base">+61 (***** number)</li>
           </ul>
@@ -48,7 +49,7 @@ const Footer = () => {
       </div>
 
       <div className="flex justify-center h-auto py-6 sm:py-10 px-4 sm:px-0">
-        <p className="text-xs sm:text-sm -mt-5 text-center text-gray-600">
+        <p className="font-kumbh  -mt-5 text-center text-gray-600">
           &copy; {new Date().getFullYear()} Wilmarcs Motion Pictures. All rights
           reserved.
         </p>

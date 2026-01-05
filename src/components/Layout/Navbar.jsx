@@ -164,79 +164,76 @@ export default function Navbar() {
               <div className="flex items-center space-x-4">
                 {/* "Contact Us" Button: Simple text, gray-to-white hover (no bg) */}
 
-              <Button
-  style={{
-    background: hovered
-      ? "conic-gradient(from 76.38deg at 69.04% 57.5%, #381A8C 0deg, #1A0F37 180deg, #936FEC 360deg)"
-      : "conic-gradient(from 76.38deg at 69.04% 57.5%, #936FEC 0deg, #1A0F37 180deg, #381A8C 360deg)",
-    color: "white",
-    padding: "10px",
-    fontSize: "15px",
-    boxShadow: `
-      0 0 40px rgba(255, 255, 255, 0),
-      inset 0 0 0 4px rgba(255, 255, 255, 0.8)
-    `,
-    transition: "all 0.6s ease",
-    overflow: "hidden",
-    display: "flex",
-    alignItems: "center",
-    gap: hovered ? "10px" : "0px",
-    whiteSpace: "nowrap",
-  }}
-  onMouseEnter={() => setHovered(true)}
-  onMouseLeave={() => setHovered(false)}
-  onClick={() => console.log("Contact clicked")}
->
-  <ContactIcon />
-  <span
-    style={{
-      maxWidth: hovered ? "120px" : "0px", // Use maxWidth instead of width
-      opacity: hovered ? 1 : 0,
-      overflow: "hidden",
-      transition: "max-width 0.5s ease, opacity 0.5s ease",
-      display: "inline-block",
-    }}
-  >
-    Contact Us
-  </span>
-</Button>
+                <Button
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                  onClick={() => console.log("Contact clicked")}
+                  className={`
+    flex items-center
+    overflow-hidden whitespace-nowrap
+    text-white text-[15px]
+    p-[10px]
+    transition-all duration-[600ms] ease-in-out
+
+    ${
+      hovered
+        ? "gap-2.5 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
+        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
+    }
+
+    shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
+  `}
+                >
+                  <ContactIcon />
+
+                  <span
+                    className={`
+      inline-block overflow-hidden
+      transition-[max-width,opacity] duration-[500ms] ease-in-out
+
+      ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}
+    `}
+                  >
+                    Contact Us
+                  </span>
+                </Button>
 
                 {/* "Plan A Project" Button: Conic gradient from image, with arrow */}
                 <Button
-                  style={{
-                    background: isHovered
-                      ? "conic-gradient(from 76.38deg at 69.04% 57.5%, #381A8C 0deg, #1A0F37 180deg, #936FEC 360deg)"
-                      : "conic-gradient(from 76.38deg at 69.04% 57.5%, #936FEC 0deg, #1A0F37 180deg, #381A8C 360deg)",
-                    color: "white",
-                    padding: "10px 30px",
-                    fontSize: "15px",
-                    boxShadow: `
-      0 0 40px rgba(255, 255, 255, 0),
-      inset 0 0 0 4px rgba(255, 255, 255, 0.8)
-    `,
-                    transition: "all 0.6s ease",
-                    overflow: "hidden",
-                  }}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                   onClick={() => console.log("Plan clicked")}
+                  className={`
+  text-white
+  px-8 py-2.5
+  overflow-hidden
+
+  [--a:76.38deg]
+  [--c1:#936FEC]
+  [--c3:#381A8C]
+
+  bg-[conic-gradient(from_var(--a)_at_69.04%_57.5%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+
+  shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
+
+  transition-[--a,--c1,--c3]
+  duration-700
+  ease-in-out
+
+  hover:[--a:436.38deg]
+  hover:[--c1:#381A8C]
+  hover:[--c3:#936FEC]
+`}
                 >
                   Plan A Project
                   {/* Arrow Container */}
                   <span
-                    style={{
-                      marginLeft: "12px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "50%",
-                      backgroundColor: "#FFFFFF",
-                      color: "#3B1D8F",
-                      transition: "all 0.4s ease",
-                      overflow: "hidden",
-                    }}
+                    className={`
+      ml-3 inline-flex items-center justify-center
+      w-8 h-8 rounded-full
+      bg-white text-[#3B1D8F]
+      transition-all duration-400
+    `}
                   >
                     {isHovered ? (
                       <GoArrowRight size={18} />
@@ -258,7 +255,7 @@ export default function Navbar() {
                   className="object-contain bg-white p-2"
                 />
               </Link>
-              <button
+              <Button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-gray-500 hover:text-white focus:outline-none"
               >
@@ -279,7 +276,7 @@ export default function Navbar() {
                     }
                   />
                 </svg>
-              </button>
+              </Button>
             </div>
           </div>
 
