@@ -215,7 +215,7 @@ const HeroSection = () => {
         </div>
 
         {/* CONTENT */}
-        <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-20  mt-20">
+        <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-8  mt-20">
           <div className="container mx-auto  max-w-7xl">
             <div
               style={{

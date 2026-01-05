@@ -171,14 +171,14 @@ export default function Navbar() {
                   className={`
     flex items-center
     overflow-hidden whitespace-nowrap
-    text-white text-[15px]
+    text-white text-[15px] 
     p-[10px]
     transition-all duration-[600ms] ease-in-out
 
     ${
       hovered
-        ? "gap-2.5 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
+        ? "gap-8  pr-4   bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
+        : "  gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
     }
 
     shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
@@ -191,10 +191,10 @@ export default function Navbar() {
       inline-block overflow-hidden
       transition-[max-width,opacity] duration-[500ms] ease-in-out
 
-      ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}
+      ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0 "}
     `}
                   >
-                    Contact Us
+                    Contact Us 
                   </span>
                 </Button>
 
@@ -296,7 +296,7 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <div className="pt-4 space-y-3">
-                  <button className="block w-full text-left text-gray-500 hover:text-white">
+                  <button className="block w-full text-left  text-gray-500 hover:text-white">
                     Contact Us
                   </button>
                   <button className="block w-full text-center bg-white text-black px-6 py-3 rounded-md hover:bg-gray-200">

@@ -90,7 +90,7 @@ const SectionFour = () => {
           <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
             Corporate Films
           </span>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-1">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 ">
             <Image
               src={img1}
               alt="Corporate Films"
@@ -126,7 +126,7 @@ const SectionFour = () => {
          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-black leading-none mb-6 md:mb-8">
             Documentary Films
           </span>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-1">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 ">
             <Image
               src={img1}
               alt="Documentary Films"
@@ -161,7 +161,7 @@ const SectionFour = () => {
           <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
             Commercial Films
           </span>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-1">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 ">
             <Image
               src={img1}
               alt="Commercial Films"
@@ -196,7 +196,7 @@ const SectionFour = () => {
           <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
             Event Coverage
           </span>
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-1">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 ">
             <Image
               src={img1}
               alt="Event Coverage"
