@@ -18,21 +18,35 @@ const HeroSection = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
 
   useEffect(() => {
+    if (!isDesktop) return;
+
     let scrollTimeout;
 
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
-      setIsScrolling(true);
+      const section = sectionRef.current;
+      if (section.offsetHeight === 0) return;
 
+      setIsScrolling(true);
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
       }, 150);
 
-      const section = sectionRef.current;
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       const scrollY = window.scrollY;
@@ -47,8 +61,9 @@ const HeroSection = () => {
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isDesktop]);
 
   const settings = {
     dots: true,
@@ -68,6 +83,17 @@ const HeroSection = () => {
     },
   };
 
+  const mobileSettings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 500,
+  };
+
   const slides = [
     { id: 1, thumbnail: hero1 },
     { id: 2, thumbnail: hero2 },
@@ -80,152 +106,187 @@ const HeroSection = () => {
   const paragraphTransform = `translateY(${scrollProgress * 100}px)`;
 
   const zoomProgress = Math.min(scrollProgress / 0.35, 1);
-
   const centerImageOpacity = zoomProgress;
   const centerImageScale = 0.7 + zoomProgress * 0.3;
 
   const sliderOpacity = Math.max(1 - scrollProgress * 2, 0);
   const sliderTransform = `translateX(${scrollProgress * 100}px)`;
 
-  // Calculate section margin based on scroll progress
-  const sectionMargin = scrollProgress > 0.3 ? "0px" : "24px"; 
-  
-  // Calculate background position based on scroll progress
+  const sectionMargin = scrollProgress > 0.3 ? "0px" : "24px";
   const bgRightPosition = scrollProgress > 0.3 ? "0px" : "-24px";
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative  overflow-hidden bg-black min-h-screen mt-14"
-      style={{
-        marginLeft: sectionMargin,
-        marginRight: sectionMargin,
-        transition: "margin 0.3s ease-out",
-      }}
-    >
-      {/* RIGHT BACKGROUND */}
-      <div 
-        className="absolute top-0 h-[74%] w-[45%]"
+    <>
+      {/*MOBILE */}
+      <section className="md:hidden relative min-h-screen overflow-hidden">
+        <img
+          src={bgImage1.src}
+          alt="Background"
+          className="absolute  w-full h-[590px] object-cover -z-10"
+        />
+
+        <div className="relative z-10 flex flex-col justify-center h-[640px] px-5  text-black">
+          {/* HEADING */}
+          <span className="font-bold text-center mb-4">
+            Cinematic films for brands that value clear communication.
+          </span>
+
+          {/* SLIDER */}
+          <div className="mb-4">
+            <Slider {...mobileSettings}>
+              {slides.map((slide) => (
+                <div key={slide.id}>
+                  <div className="relative w-full h-[260px]">
+                    <Image
+                      src={slide.thumbnail}
+                      alt="Slide"
+                      fill
+                      className="object-cover rounded-2xl"
+                    />
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+          {/* PARAGRAPH */}
+          <p className="text-center text-sm opacity-80">
+            You'll only receive updates on new templates.
+            <br />
+            No spam, just what you signed up for.
+          </p>
+        </div>
+      </section>
+
+      {/* DESKTOP  */}
+      <section
+        ref={sectionRef}
+        className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-14"
         style={{
-          right: bgRightPosition,
-          transition: "right 0.3s ease-out",
+          marginLeft: sectionMargin,
+          marginRight: sectionMargin,
+          transition: "margin 0.3s ease-out",
         }}
       >
-        <Image
-          src={bgImage1}
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0"></div>
-
-        {/* CIRCLE MASK */}
+        {/* RIGHT BACKGROUND */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute top-0 h-[74%] w-[45%]"
           style={{
-            opacity: sliderOpacity,
-            transform: sliderTransform,
-            transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
+            right: bgRightPosition,
+            transition: "right 0.3s ease-out",
           }}
         >
-          <div className="relative w-[700px] h-[600px] overflow-hidden">
-            {/* FORCE SLICK HEIGHT */}
-            <div className="h-full">
-              <Slider {...settings}>
-                {slides.map((slide) => (
-                  <div key={slide.id} className="py-2">
-                    <div className="relative mx-auto w-[220px] h-[140px]">
-                      <Image
-                        src={slide.thumbnail}
-                        alt={`Thumbnail ${slide.id}`}
-                        fill
-                        className="object-cover rounded-xl"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
-        </div>
-      </div>
+          <Image
+            src={bgImage1}
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
 
-      {/* CONTENT */}
-      <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-20 mt-30">
-        <div className="container mx-auto  max-w-7xl">
-          {/* HEADING */}
+          {/* CIRCLE MASK */}
           <div
+            className="absolute inset-0 flex items-center justify-center"
             style={{
-              transform: headingTransform,
-              opacity: headingOpacity,
-              transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
+              opacity: sliderOpacity,
+              transform: sliderTransform,
+              transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
             }}
           >
-            <h1 className="font-bold text-white leading-tight">
-              Cinematic Films For{" "}
-              <span className="text-purple-400 bg-purple-400/20 px-4 py-2 rounded-2xl inline-block">
-                Brands
-              </span>
-              <br />
-              That Value Clear Communication.
-            </h1>
-          </div>
-
-          <div className="mt-2 relative min-h-[600px]">
-            {/* PARAGRAPH */}
-            <div
-              className="w-full lg:w-1/2"
-              style={{
-                transform: paragraphTransform,
-                transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-                position: scrollProgress > 0.3 ? "absolute" : "relative",
-                top: scrollProgress > 0.3 ? "calc(50% + 220px)" : "auto",
-                left: scrollProgress > 0.3 ? "50%" : "auto",
-                transform:
-                  scrollProgress > 0.3
-                    ? "translateX(-100%)"
-                    : paragraphTransform,
-              }}
-            >
-              <p className="text-white/80 text-lg mb-8 max-w-lg">
-                You'll only receive updates on new templates <br />
-                no spam, just what you signed up for.
-              </p>
-              <div className="flex gap-5">
-                <button className="text-black bg-white rounded-3xl py-3 px-8 font-semibold">
-                  Plan a Project
-                </button>
-                <button className="text-white bg-black rounded-3xl py-3 px-8 font-semibold border border-white">
-                  Watch Work
-                </button>
-              </div>
-            </div>
-
-            {/* CENTER IMAGE */}
-            <div
-              className="absolute top-1/2 left-1/2 pointer-events-none"
-              style={{
-                opacity: centerImageOpacity,
-                transform: `translate(-50%, -50%) scale(${centerImageScale})`,
-                transition:
-                  "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
-              }}
-            >
-              <div className="relative w-[500px] h-[340px]">
-                <Image
-                  src={slides[currentSlideIndex % slides.length].thumbnail}
-                  alt="Hero slide"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                />
+            <div className="relative w-[700px] h-[600px] overflow-hidden">
+              <div className="h-full">
+                <Slider {...settings}>
+                  {slides.map((slide) => (
+                    <div key={slide.id} className="py-2">
+                      <div className="relative mx-auto w-[220px] h-[140px]">
+                        <Image
+                          src={slide.thumbnail}
+                          alt={`Thumbnail ${slide.id}`}
+                          fill
+                          className="object-cover rounded-xl"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* CONTENT */}
+        <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-20  mt-20">
+          <div className="container mx-auto  max-w-7xl">
+            <div
+              style={{
+                transform: headingTransform,
+                opacity: headingOpacity,
+                transition: "transform 0.1s ease-out, opacity 0.1s ease-out",
+              }}
+            >
+              <h1 className="font-normal text-white leading-tight">
+                Cinematic Films For{" "}
+                <span className="text-purple-400 bg-purple-400/20 px-4 py-2 rounded-2xl inline-block">
+                  Brands
+                </span>
+                <br />
+                That Value Clear Communication.
+              </h1>
+            </div>
+
+            <div className="mt-2 relative min-h-[600px]">
+              <div
+                className="w-full lg:w-1/2"
+                style={{
+                  transform: paragraphTransform,
+                  transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                  position: scrollProgress > 0.3 ? "absolute" : "relative",
+                  top: scrollProgress > 0.3 ? "calc(50% + 220px)" : "auto",
+                  left: scrollProgress > 0.3 ? "50%" : "auto",
+                  transform:
+                    scrollProgress > 0.3
+                      ? "translateX(-100%)"
+                      : paragraphTransform,
+                }}
+              >
+                <p className="text-white/80 text-lg mb-4 max-w-lg">
+                  You'll only receive updates on new templates <br />
+                  no spam, just what you signed up for.
+                </p>
+                <div className="flex gap-5  ">
+                  <button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
+                    Plan a Project
+                  </button>
+                  <button className="text-white bg-black rounded-3xl py-2 px-8 font-semibold border border-white">
+                    Watch Work
+                  </button>
+                </div>
+              </div>
+
+              <div
+                className="absolute top-1/2 left-1/2 pointer-events-none"
+                style={{
+                  opacity: centerImageOpacity,
+                  transform: `translate(-50%, -50%) scale(${centerImageScale})`,
+                  transition:
+                    "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              >
+                <div className="relative w-[500px] h-[340px]">
+                  <Image
+                    src={slides[currentSlideIndex % slides.length].thumbnail}
+                    alt="Hero slide"
+                    fill
+                    className="object-cover rounded-2xl"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

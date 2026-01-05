@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content">
-            <main className="mt-10">
+            <main className="sm:mt-10 mt-2 ">
               {children}
             </main>
             <Footer />
