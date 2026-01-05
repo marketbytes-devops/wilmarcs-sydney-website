@@ -69,16 +69,16 @@ const SectionSix = () => {
   }, []);
 
   return (
-    <div className="max-w-[85%] mx-auto">
-      <h1
+    <div className="container mx-auto">
+      <h3
         ref={titleRef}
-        className="lg:text-[110px] text-center lg:text-left text-5xl text-[#271751] relative z-10 leading-tight"
+        className="text-center lg:text-left  text-[#271751] relative z-10 leading-tight"
       >
         WHY WILMARCS
-      </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 -mt-28">
-        <div ref={leftContentRef} className="lg:py-48 py-20 text-center lg:text-left">
-          <p className="text-lg leading-relaxed mb-8">
+      </h3>
+      <div className="grid grid-cols-1 lg:grid-cols-3 -mt-32 gap-3">
+        <div ref={leftContentRef} className="lg:py-56 py-20 text-center lg:text-left">
+          <p className="lg leading-relaxed mb-8">
             We combine artistry and technical expertise to deliver visually
             stunning films. Every film is custom-made to align with your
             brand and communication goals. Our structured process ensures
@@ -113,13 +113,13 @@ const SectionSix = () => {
             'Story-first approach',
             'Cinematic visuals',
           ].map((text, index) => (
-            <p
+            <h6
               key={index}
               ref={(el) => (itemsRef.current[index] = el)}
-              className="bg-white p-5 drop-shadow-xl mt-3 first:mt-0 text-lg font-medium"
+              className="bg-white p-5 drop-shadow-xl mt-3 first:mt-0 text-lg font-semibold"
             >
               {text}
-            </p>
+            </h6>
           ))}
         </div>
       </div>
