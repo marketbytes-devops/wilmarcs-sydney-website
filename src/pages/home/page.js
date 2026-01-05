@@ -15,7 +15,7 @@ const HomePage = () => {
       <header>
         <HeroSection />
       </header>
-      <section className="lg:mt-20 mt-10">
+      <section className="lg:mt-20 sm:mt-10 mt-6">
         <SectionTwo />
       </section>
       <section className="mt-18">

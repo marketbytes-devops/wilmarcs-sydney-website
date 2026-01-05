@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import SectionTwoGif from "../../../assets/videos/home/gif.gif";
 import Image from "next/image";
+import Button from "./../../../components/Button/index"
 
 const SectionTwo = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -37,13 +38,13 @@ const SectionTwo = () => {
         Our approach to filmmaking is rooted in structured and intentional storytelling.
       </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:gap-8 gap-3">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-6 lg:py-28 lg:text-left text-center"
+          className="py-4 lg:py-28 lg:text-left text-center"
         >
           <p className="font-extralight leading-relaxed">
             At Wilmarcs Motion Pictures, we are passionate about creating meaningful and impactful
@@ -76,7 +77,7 @@ const SectionTwo = () => {
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-6 lg:py-28 lg:text-left text-center"
+          className="py-4 lg:py-28 lg:text-left text-center"
         >
           <p className="font-extralight leading-relaxed">
             Our approach to filmmaking is rooted in structured and intentional storytelling.
@@ -95,9 +96,10 @@ const SectionTwo = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
-        <button className="bg-[#201147] text-white py-4 px-10 rounded-full font-medium hover:bg-[#271751] transition">
+        <Button className="bg-[#201147] text-white px-8 py-2 md:py-4 md:px-10 rounded-full
+                           font-medium hover:bg-[#271751] transition">
           Plan A Project
-        </button>
+        </Button>
       </motion.div>
     </div>
   );
