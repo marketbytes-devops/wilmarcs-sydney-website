@@ -76,7 +76,7 @@ const SectionSix = () => {
       >
         WHY WILMARCS
       </h3>
-      <div className="grid grid-cols-1 lg:grid-cols-3 -mt-32 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:-mt-32 -mt-18 gap-3">
         <div ref={leftContentRef} className="lg:py-56 py-20 text-center lg:text-left">
           <p className="lg leading-relaxed mb-8">
             We combine artistry and technical expertise to deliver visually

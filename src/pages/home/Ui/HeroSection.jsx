@@ -118,14 +118,14 @@ const HeroSection = () => {
   return (
     <>
       {/*MOBILE */}
-      <section className="md:hidden relative min-h-screen overflow-hidden">
+      <section className="md:hidden relative  overflow-hidden">
         <img
           src={bgImage1.src}
           alt="Background"
           className="absolute  w-full h-[590px] object-cover -z-10"
         />
 
-        <div className="relative z-10 flex flex-col justify-center h-[640px] px-5  text-black">
+        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5  text-black">
           {/* HEADING */}
           <span className="font-bold text-center mb-4">
             Cinematic films for brands that value clear communication.
