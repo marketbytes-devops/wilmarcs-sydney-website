@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Button from "../../../components/Button";
 import hero1 from "../../../assets/images/home/heroimg1.png";
 import hero2 from "../../../assets/images/home/heroimg2.png";
 import hero3 from "../../../assets/images/home/heroimg3.png";
@@ -118,7 +118,7 @@ const HeroSection = () => {
   return (
     <>
       {/*MOBILE */}
-      <section className="md:hidden relative  overflow-hidden">
+      <section className="md:hidden relative mt-4 sm:mt-0  overflow-hidden">
         <img
           src={bgImage1.src}
           alt="Background"
@@ -127,9 +127,8 @@ const HeroSection = () => {
 
         <div className="relative z-10 flex flex-col justify-center h-[600px] px-5  text-black">
           {/* HEADING */}
-          <span className="font-bold text-center mb-4">
-            Cinematic films for brands that value clear communication.
-          </span>
+          
+          
 
           {/* SLIDER */}
           <div className="mb-4">
@@ -150,6 +149,9 @@ const HeroSection = () => {
           </div>
 
           {/* PARAGRAPH */}
+          <span className="font-bold text-center mb-4">
+            Cinematic films for brands that value clear communication.
+          </span>
           <p className="text-center text-sm opacity-80">
             You'll only receive updates on new templates.
             <br />
@@ -241,7 +243,7 @@ const HeroSection = () => {
                   transform: paragraphTransform,
                   transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                   position: scrollProgress > 0.3 ? "absolute" : "relative",
-                  top: scrollProgress > 0.3 ? "calc(50% + 220px)" : "auto",
+                  top: scrollProgress > 0.3 ? "calc(50% + 210px)" : "auto",
                   left: scrollProgress > 0.3 ? "50%" : "auto",
                   transform:
                     scrollProgress > 0.3
@@ -249,17 +251,17 @@ const HeroSection = () => {
                       : paragraphTransform,
                 }}
               >
-                <p className="text-white/80 text-lg mb-4 max-w-lg">
+                <p className="text-white/80 text-lg mb-2 max-w-lg">
                   You'll only receive updates on new templates <br />
                   no spam, just what you signed up for.
                 </p>
                 <div className="flex gap-5  ">
-                  <button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
+                  <Button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
                     Plan a Project
-                  </button>
-                  <button className="text-white bg-black rounded-3xl py-2 px-8 font-semibold border border-white">
+                  </Button>
+                  <Button className="text-white bg-black rounded-3xl py-2 px-8 font-semibold border border-white">
                     Watch Work
-                  </button>
+                  </Button>
                 </div>
               </div>
 

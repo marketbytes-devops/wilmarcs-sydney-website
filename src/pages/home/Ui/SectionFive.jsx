@@ -37,9 +37,9 @@ export default function SectionFive() {
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="min-h-screen container mx-auto py-20">
+    <div className=" container mx-auto ">
       <h3 className=" text-[#24144C] text-center lg:text-left
-                    font-semibold leading-tight mb-10 tracking-tight">
+                    font-semibold leading-tight mb-5 tracking-tight">
         PROCESS PREVIEW
       </h3>
       <div className="max-w-7xl mx-auto">
