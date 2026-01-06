@@ -194,7 +194,7 @@ export default function Navbar() {
       ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0 "}
     `}
                   >
-                    Contact Us 
+                    Contact Us
                   </span>
                 </Button>
 
@@ -208,19 +208,19 @@ export default function Navbar() {
   px-8 py-2.5
   overflow-hidden
 
-  [--a:76.38deg]
+  [--a:90.00deg]
   [--c1:#936FEC]
   [--c3:#381A8C]
 
-  bg-[conic-gradient(from_var(--a)_at_69.04%_57.5%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+  bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
 
-  shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
+  shadow-[inset_0_0_0_5px_rgba(255,255,255,0.5)]
 
   transition-[--a,--c1,--c3]
   duration-700
   ease-in-out
 
-  hover:[--a:436.38deg]
+  hover:[--a:90.00deg]
   hover:[--c1:#381A8C]
   hover:[--c3:#936FEC]
 `}

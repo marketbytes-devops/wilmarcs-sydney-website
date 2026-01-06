@@ -3,6 +3,7 @@
 
 @import "@fontsource/geist-sans/index.css";
 
+
 /* Plus Jakarta Sans */
 @import "@fontsource/plus-jakarta-sans/400.css";
 @import "@fontsource/plus-jakarta-sans/500.css";
@@ -40,58 +41,44 @@ body {
 
 /* Typography Classes */
 
-/* H1 - Jost, 48px, 60px line height */
-h1,
-.heading-1 {
+
+h1{
   font-family: "Jost", sans-serif;
   font-size: 48px;
-  line-height: 60px;
 }
 
-/* H2 - Geist, 40px, 120% line height */
-h2,
-.heading-2 {
+
+h2 {
   font-family: "Geist Sans", sans-serif;
   font-size: 40px;
-  line-height: 120%;
 }
 
-/* H3 - Geist, 80px, 120% line height */
-h3,
-.heading-3 {
+
+h3{
   font-family: "Geist Sans", sans-serif;
   font-size: 80px;
-  line-height: 120%;
 }
 
-/* H4 - Geist, 73px, 80px line height */
-h4,
-.heading-4 {
+h4 {
   font-family: "Geist Sans", sans-serif;
   font-size: 73px;
-  line-height: 80px;
 }
 
-/* H5 - Geist, 52px, 120% line height */
-h5,
-.heading-5 {
+
+h5 {
   font-family: "Geist Sans", sans-serif;
-  font-size: 52px;
-  line-height: 120%;
+  font-size: 50px;
 }
 
-/* H6 - Geist, 28px, 120% line height */
+
 h6{
   font-family: "Geist Sans", sans-serif;
   font-size: 28px;
-  line-height: 120%;
 }
 
-/* Paragraph - Geist, 18px, 150% line height */
 p{
   font-family: "Geist Sans", sans-serif;
   font-size: 18px;
-  line-height: 150%;
 }
 
 /* Utility Classes for Other Fonts */
@@ -182,3 +169,4 @@ p{
   }
   
 }
+
