@@ -45,9 +45,9 @@ const SectionTwo = () => {
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-4 lg:py-28 lg:text-left text-center"
+          className="lg:text-left text-center"
         >
-          <p className="font-extralight leading-relaxed">
+          <p className="font-extralight leading-light lg:leading-tight lg:mt-32 sm:mt-6 mt-4">
             At Wilmarcs Motion Pictures, we are passionate about creating
             meaningful and impactful films that tell your story with precision,
             creativity, and intention. Based in Sydney, we specialize in
@@ -68,7 +68,7 @@ const SectionTwo = () => {
             alt="Animated section visual"
             width={800}
             height={500}
-            className="w-full max-w-full h-auto lg:h-96 object-cover rounded-2xl shadow-2xl"
+            className="w-full  h-auto lg:h-[454px]  mt-6 object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
@@ -79,9 +79,9 @@ const SectionTwo = () => {
           whileInView={hasScrolled ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-4 lg:py-28 lg:text-left text-center"
+          className="lg:text-left text-center"
         >
-          <p className="font-extralight leading-relaxed">
+          <p className="font-thin leading-light  lg:leading-tight lg:mt-32 sm:mt-6 mt-4">
             Our approach to filmmaking is rooted in structured and intentional
             storytelling. Every frame is meticulously planned, every message
             carefully considered, and every story told with purpose. Whether
@@ -93,7 +93,7 @@ const SectionTwo = () => {
       </div>
 
       <motion.div
-        className="flex justify-center items-center"
+        className="flex justify-center items-center md:mt-8 mt-4"
         initial={{ opacity: 0, y: 50 }}
         whileInView={hasScrolled ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import sectionSixGif from '../../../assets/videos/home/section-six.gif';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import sectionSixGif from "../../../assets/videos/home/section-six.gif";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "./../../../components/Button/index";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,20 +78,27 @@ const SectionSix = () => {
         WHY WILMARCS
       </h3>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:-mt-32 -mt-18 gap-3">
-        <div ref={leftContentRef} className="lg:py-56 py-20 text-center lg:text-left">
-          <p className="lg leading-relaxed mb-8">
+        <div
+          ref={leftContentRef}
+          className="lg:py-56 py-20 text-center lg:text-left"
+        >
+          <p className="leading-tight mb-8">
             We combine artistry and technical expertise to deliver visually
-            stunning films. Every film is custom-made to align with your
-            brand and communication goals. Our structured process ensures
-            that you're always in the loop and that your film is delivered
-            on time and on budget. With years of experience in corporate, CSR,
-            and event filmmaking, our team understands how to craft powerful
-            stories that resonate with your audience.
+            stunning films. Every film is custom-made to align with your brand
+            and communication goals. Our structured process ensures that you're
+            always in the loop and that your film is delivered on time and on
+            budget. With years of experience in corporate, CSR, and event
+            filmmaking, our team understands how to craft powerful stories that
+            resonate with your audience.
           </p>
-          <button className="bg-[#201147] text-white py-4 px-10 rounded-full 
-                            font-medium hover:bg-[#271751] transition">
+
+          <Button
+            className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium transition
+                       bg-[conic-gradient(from_90deg_at_50%_50%,#201147_0deg,#7356BC_360deg)]
+                       hover:bg-[conic-gradient(from_360deg_at_50%_50%,#7356BC_0deg,#201147_90deg)]"
+          >
             Plan A Project
-          </button>
+          </Button>
         </div>
 
         <div className="flex items-center justify-center -mt-10 lg:mt-0">
@@ -99,7 +107,7 @@ const SectionSix = () => {
             alt="Why Wilmarcs visual"
             width={551}
             height={900}
-            className="w-full max-w-[551px] h-auto lg:h-screen object-cover rounded-2xl shadow-2xl"
+            className="w-full  h-auto lg:h-[700px] object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
@@ -107,16 +115,16 @@ const SectionSix = () => {
 
         <div className="lg:py-28 py-12 lg:-ml-12 ml-0 ">
           {[
-            'Reliable timelines',
-            'Founder-led direction',
-            'Corporate-friendly workflows',
-            'Story-first approach',
-            'Cinematic visuals',
+            "Reliable timelines",
+            "Founder-led direction",
+            "Corporate-friendly workflows",
+            "Story-first approach",
+            "Cinematic visuals",
           ].map((text, index) => (
             <h6
               key={index}
               ref={(el) => (itemsRef.current[index] = el)}
-              className="bg-white p-5 drop-shadow-xl mt-3 first:mt-0 text-lg font-semibold"
+              className="bg-white p-5 drop-shadow-xl mt-3 first:mt-0  font-semibold"
             >
               {text}
             </h6>
