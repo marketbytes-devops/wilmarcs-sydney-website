@@ -63,7 +63,7 @@ const SectionSeven = () => {
                              p-8 md:p-12 relative overflow-hidden flex flex-col
                               min-h-[520px] md:min-h-[580px]">
                 <blockquote className="relative z-10 flex flex-col flex-1">
-                  <span className="absolute -top-8 -left-6 text-9xl text-black font-serif leading-none opacity-20">
+                  <span className="absolute -top-8 -left-6 text-9xl text-[#26164F] font-serif leading-none opacity-20">
                     “
                   </span>
                   <span className="text-lg md:text-[24px] lg:text-left text-center  text-gray-700
@@ -83,7 +83,7 @@ const SectionSeven = () => {
                     <div className="flex items-center gap-3 mt-6 md:mt-0">
                       <button
                         onClick={prevTestimonial}
-                        className="p-3 rounded-full bg-gray-100 hover:bg-[#271751] hover:text-white transition"
+                        className="p-3 rounded-full bg-black text-white hover:bg-[#271751] cursor-pointer transition"
                         aria-label="Previous testimonial"
                       >
                         <svg
@@ -102,7 +102,7 @@ const SectionSeven = () => {
                       </button>
                       <button
                         onClick={nextTestimonial}
-                        className="p-3 rounded-full bg-gray-100 hover:bg-[#271751] hover:text-white transition"
+                        className="p-3 rounded-full bg-black hover:bg-[#271751] text-white cursor-pointer transition"
                         aria-label="Next testimonial"
                       >
                         <svg

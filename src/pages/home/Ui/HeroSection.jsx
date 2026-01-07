@@ -10,8 +10,9 @@ import hero1 from "../../../assets/images/home/heroimg1.png";
 import hero2 from "../../../assets/images/home/heroimg2.png";
 import hero3 from "../../../assets/images/home/heroimg3.png";
 import hero4 from "../../../assets/images/home/heroimg4.png";
-
 import bgImage1 from "../../../assets/images/home/backgroundhero.png";
+
+
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -66,7 +67,7 @@ const HeroSection = () => {
   }, [isDesktop]);
 
   const settings = {
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
     slidesToShow: 3,
@@ -207,6 +208,7 @@ const HeroSection = () => {
                           fill
                           className="object-cover rounded-xl"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/40"></div>
                       </div>
                     </div>
                   ))}
@@ -214,6 +216,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
+          
         </div>
 
         {/* CONTENT */}
@@ -228,7 +231,8 @@ const HeroSection = () => {
             >
               <h1 className="font-normal text-white leading-tight">
                 Cinematic Films For{" "}
-                <span className="text-purple-400 bg-purple-400/20 px-4 py-2 rounded-2xl inline-block">
+                <span className="text-[] bg-[linear-gradient(180deg,#BBAEB9_0%,#6B41FF_100%)] px-4 py-2
+                                inline-block rounded-2xl">
                   Brands
                 </span>
                 <br />
@@ -243,7 +247,7 @@ const HeroSection = () => {
                   transform: paragraphTransform,
                   transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                   position: scrollProgress > 0.3 ? "absolute" : "relative",
-                  top: scrollProgress > 0.3 ? "calc(50% + 210px)" : "auto",
+                  top: scrollProgress > 0.3 ? "calc(50% + 170px)" : "auto",
                   left: scrollProgress > 0.3 ? "50%" : "auto",
                   transform:
                     scrollProgress > 0.3
@@ -251,11 +255,11 @@ const HeroSection = () => {
                       : paragraphTransform,
                 }}
               >
-                <p className="text-white/80 text-lg mb-2 max-w-lg">
+                <p className="text-white/80 mb-2 max-w-lg">
                   You'll only receive updates on new templates <br />
                   no spam, just what you signed up for.
                 </p>
-                <div className="flex gap-5  ">
+                <div className="flex gap-5 ">
                   <Button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
                     Plan a Project
                   </Button>
@@ -266,7 +270,7 @@ const HeroSection = () => {
               </div>
 
               <div
-                className="absolute top-1/2 left-1/2 pointer-events-none"
+                className="absolute top-[40%] left-1/2 pointer-events-none"
                 style={{
                   opacity: centerImageOpacity,
                   transform: `translate(-50%, -50%) scale(${centerImageScale})`,
@@ -284,6 +288,7 @@ const HeroSection = () => {
                   />
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

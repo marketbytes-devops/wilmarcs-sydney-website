@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import "aos/dist/aos.css";
 
 @import "@fontsource/geist-sans/index.css";
 
@@ -169,4 +169,3 @@ p{
   }
   
 }
-
