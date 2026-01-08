@@ -2,11 +2,13 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import img1 from '../../../assets/images/home/section4_2.png';
-import sectionFourImg from '../../../assets/images/home/section4.jpg';
+import img1 from "../../../assets/images/home/section4_2.png";
+import sectionFourImg from "../../../assets/images/home/section4.jpg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Button from "./../../../components/Button/index"
+import Button from "./../../../components/Button/index";
+import RightArrow from "@/components/Icons/RightArrow";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,16 +36,36 @@ const SectionFour = () => {
         pinSpacing: false,
         anticipatePin: 1,
         onEnter: () => {
-          gsap.to(card, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
         },
         onLeave: () => {
-          gsap.to(card, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
         },
         onEnterBack: () => {
-          gsap.to(card, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
         },
         onLeaveBack: () => {
-          gsap.to(card, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
         },
       });
     });
@@ -64,9 +86,10 @@ const SectionFour = () => {
             WHAT WE DO
           </h3>
           <p className="mt-3 font-extralight text-[#404040] justify-center">
-            At Wilmarcs Motion Pictures, we are passionate about creating meaningful
-            and impactful films that tell your story. At Wilmarcs Motion Pictures, we are passionate about creating meaningful
-            and impactful films that tell your story.
+            At Wilmarcs Motion Pictures, we are passionate about creating
+            meaningful and impactful films that tell your story. At Wilmarcs
+            Motion Pictures, we are passionate about creating meaningful and
+            impactful films that tell your story.
           </p>
         </div>
       </div>
@@ -78,7 +101,8 @@ const SectionFour = () => {
         {/* Card 1 - Corporate Films */}
         <div
           ref={(el) => (cardsRef.current[0] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col"
+          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] 
+                    rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
@@ -89,11 +113,13 @@ const SectionFour = () => {
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
+          <span
+            className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none
+                           mb-6 md:mb-8 font-jakarta font-medium"
+          >
             Corporate Films
           </span>
 
-       
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
             <Image
               src={img1}
@@ -102,14 +128,22 @@ const SectionFour = () => {
               height={600}
               className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
             />
-            <div className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2">
-              <p className="font-normal mb-4 md:mb-6">
+            <div
+              className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 
+                            lg:order-2"
+            >
+              <p className="font-normal  mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+              <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
+              </Link>
             </div>
           </div>
         </div>
@@ -117,10 +151,11 @@ const SectionFour = () => {
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
-          className="sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col"
+          className="sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl 
+                     p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-              <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Films
             </Button>
             <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
@@ -145,9 +180,16 @@ const SectionFour = () => {
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+              <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300
+                                       group-hover:translate-x-3"
+                            color="black" />
+              </Link>
             </div>
           </div>
         </div>
@@ -155,10 +197,11 @@ const SectionFour = () => {
         {/* Card 3 - Commercial Films */}
         <div
           ref={(el) => (cardsRef.current[2] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col"
+          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] 
+                   rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-              <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Films
             </Button>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
@@ -183,9 +226,14 @@ const SectionFour = () => {
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+              <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
+              </Link>
             </div>
           </div>
         </div>
@@ -193,10 +241,11 @@ const SectionFour = () => {
         {/* Card 4 - Event Coverage */}
         <div
           ref={(el) => (cardsRef.current[3] = el)}
-          className="sm:h-screen sm:w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl flex flex-col"
+          className="sm:h-screen sm:w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16
+                    shadow-2xl flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Films
             </Button>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
@@ -210,22 +259,21 @@ const SectionFour = () => {
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
             <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-[50%] w-full md:w-full lg:w-[45%]">
-            <Image
-              src={img1}
-              alt="Event Coverage"
-              width={800}
-            
-              className=""
-            />
+              <Image src={img1} alt="Event Coverage" width={800} className="" />
             </div>
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+              <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
+              </Link>
             </div>
           </div>
         </div>
@@ -233,10 +281,10 @@ const SectionFour = () => {
         {/* Card 5 - Music Videos + Short Films */}
         <div
           ref={(el) => (cardsRef.current[4] = el)}
-          className="w-full h-auto bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-8 shadow-2xl"
+          className="w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-              <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Films
             </Button>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
@@ -254,21 +302,27 @@ const SectionFour = () => {
               alt="Music Videos"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[300px] w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px]  w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+               <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
+              </Link>
             </div>
           </div>
 
           {/* Short Films */}
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-right text-white leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-right block
+                           text-white mb-6 md:mb-8">
             Short Films
           </span>
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8 mt-3 pb-4 md:pb-8">
@@ -277,19 +331,28 @@ const SectionFour = () => {
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-              <button className="font-bold hover:underline self-start text-sm md:text-[20px]">
-                See More →
-              </button>
+               <Link
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
+                            flex items-center gap-8 group transition-all duration-300"
+              >
+                See More
+                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 
+                                      group-hover:translate-x-3"
+                 />
+              </Link>
             </div>
             <Image
               src={sectionFourImg}
               alt="Short Films"
               width={800}
-              height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[300px] w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-2"
+              height={500}
+              className="h-[200px] sm:h-[250px] md:h-[400px]  w-full md:w-full lg:w-[45%]
+                        object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-2"
             />
           </div>
         </div>
+
       </div>
     </div>
   );

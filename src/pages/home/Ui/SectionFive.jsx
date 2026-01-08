@@ -45,7 +45,7 @@ export default function SectionFive() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-24">
           <div className="lg:sticky lg:top-20 h-fit">
-            <p className="font-extralight text-gray-600 leading-relaxed text-center lg:text-left">
+            <p className="font-extralight py-4 text-gray-600 leading-relaxed text-center lg:text-left">
               We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
             </p>
           </div>
@@ -57,9 +57,9 @@ export default function SectionFive() {
             />
             <div className="relative z-30">
               {processes.map((process, index) => (
-                <div key={index} className="flex gap-8 items-start mb-0 lg:mb-20 last:mb-0">
+                <div key={index} className="flex gap-8 items-start mb-0 lg:mb-12 last:mb-0">
                   <div className="w-4 h-4 bg-[#1a1a2e] rounded-full shrink-0 mt-2 relative z-30" />
-                  <div className="flex-1 pb-8">
+                  <div className="flex-1">
                     <h6 className=" font-semibold text-gray-900 mb-4">
                       {process.title}
                     </h6>
