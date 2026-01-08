@@ -8,6 +8,7 @@ import lastPic1 from "../../../assets/images/home/lastpic1.jpg";
 import lastPic2 from "../../../assets/images/home/lastpic2.jpg";
 import lastPic3 from "../../../assets/images/home/lastpic3.png";
 import Button from "./../../../components/Button/index";
+import DetoIcon from "@/components/Icons/DetoIcon";
 
 const SectionSeven = () => {
   const testimonials = [
@@ -63,8 +64,8 @@ const SectionSeven = () => {
                              p-8 md:p-12 relative overflow-hidden flex flex-col
                               min-h-[520px] md:min-h-[580px]">
                 <blockquote className="relative z-10 flex flex-col flex-1">
-                  <span className="absolute -top-8 -left-6 text-9xl text-[#26164F] font-serif leading-none opacity-20">
-                    “
+                  <span className="absolute -top-8 -left-6  leading-none">
+                    <DetoIcon className="text-[#26164F]"/>
                   </span>
                   <span className="text-lg md:text-[24px] lg:text-left text-center  text-gray-700
                                    leading-tight mb-12 pt-12">
