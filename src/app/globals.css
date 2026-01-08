@@ -1,27 +1,27 @@
 @import "tailwindcss";
 @import "aos/dist/aos.css";
-
+ 
 @import "@fontsource/geist-sans/index.css";
-
-
+ 
+ 
 /* Plus Jakarta Sans */
 @import "@fontsource/plus-jakarta-sans/400.css";
 @import "@fontsource/plus-jakarta-sans/500.css";
 @import "@fontsource/plus-jakarta-sans/600.css";
 @import "@fontsource/plus-jakarta-sans/700.css";
-
+ 
 /* Jost */
 @import "@fontsource/jost/400.css";
 @import "@fontsource/jost/500.css";
 @import "@fontsource/jost/600.css";
 @import "@fontsource/jost/700.css";
-
+ 
 /* Kumbh Sans */
 @import "@fontsource/kumbh-sans/400.css";
 @import "@fontsource/kumbh-sans/500.css";
 @import "@fontsource/kumbh-sans/600.css";
 @import "@fontsource/kumbh-sans/700.css";
-
+ 
 @theme {
   --font-family-geist: "Geist Sans", sans-serif;
   --font-family-jakarta: "Plus Jakarta Sans", sans-serif;
@@ -32,140 +32,142 @@
   max-width: 90%;
   margin: 0 auto;
 }
-
+ 
 body {
   font-family: "Geist Sans", sans-serif;
   font-size: 18px;
   line-height: 1.5;
 }
-
+ 
 /* Typography Classes */
-
-
+ 
+ 
 h1{
   font-family: "Jost", sans-serif;
   font-size: 48px;
 }
-
-
+ 
+ 
 h2 {
   font-family: "Geist Sans", sans-serif;
   font-size: 40px;
 }
-
-
+ 
+ 
 h3{
   font-family: "Geist Sans", sans-serif;
   font-size: 80px;
 }
-
+ 
 h4 {
   font-family: "Geist Sans", sans-serif;
   font-size: 73px;
 }
-
-
+ 
+ 
 h5 {
   font-family: "Geist Sans", sans-serif;
   font-size: 50px;
 }
-
-
+ 
+ 
 h6{
   font-family: "Geist Sans", sans-serif;
   font-size: 28px;
 }
-
+ 
 p{
   font-family: "Geist Sans", sans-serif;
   font-size: 18px;
 }
-
+ 
 /* Utility Classes for Other Fonts */
 .font-plus-jakarta {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
-
+ 
 .font-jost {
   font-family: "Jost", sans-serif;
 }
-
+ 
 .font-kumbh {
   font-family: "Kumbh Sans", sans-serif;
 }
-
+ 
 .font-geist {
   font-family: "Geist Sans", sans-serif;
 }
-
+ 
 /* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
     font-size: 36px;
   }
-
+ 
   h2 {
     font-size: 32px;
   }
-
+ 
   h3 {
     font-size: 32px;
-
+ 
   }
-
+ 
   h4 {
     font-size: 40px;
-    
+   
   }
-
+ 
   h5{
     font-size: 36px;
-    
+   
   }
-
+ 
   h6 {
     font-size: 24px;
-  
+ 
   }
-
+ 
   p,
   .body-text {
     font-size: 16px;
-
+ 
   }
 }
-
+ 
 @media (max-width: 480px) {
   h1 {
     font-size: 28px;
   }
-
+ 
   h2{
     font-size: 20px;
   }
-
+ 
   h3{
-  
+ 
     font-size: 20px;
   }
-
+ 
   h4 {
     font-size: 28px;
   }
-
+ 
   h5{
     font-size: 24px;
   }
-
+ 
   h6 {
     font-size: 20px;
-  
+ 
   }
-
+ 
   p,
   .body-text {
     font-size: 14px;
-    
+   
   }
-  
+ 
 }
+ 
+ 

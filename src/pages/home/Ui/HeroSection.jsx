@@ -6,13 +6,6 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "../../../components/Button";
-import hero1 from "../../../assets/images/home/heroimg1.png";
-import hero2 from "../../../assets/images/home/heroimg2.png";
-import hero3 from "../../../assets/images/home/heroimg3.png";
-import hero4 from "../../../assets/images/home/heroimg4.png";
-import bgImage1 from "../../../assets/images/home/backgroundhero.png";
-
-
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -20,6 +13,10 @@ const HeroSection = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Track playing state for each slide video (true = playing, false = paused)
+  const [playingVideos, setPlayingVideos] = useState({});
+
   useEffect(() => {
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 768);
@@ -82,6 +79,7 @@ const HeroSection = () => {
     beforeChange: (_, next) => {
       if (!isScrolling) setCurrentSlideIndex(next);
     },
+    cssEase: 'linear',
   };
 
   const mobileSettings = {
@@ -96,10 +94,9 @@ const HeroSection = () => {
   };
 
   const slides = [
-    { id: 1, thumbnail: hero1 },
-    { id: 2, thumbnail: hero2 },
-    { id: 3, thumbnail: hero3 },
-    { id: 4, thumbnail: hero4 },
+    { id: 1, video: "/videos/home/slider1.mp4" },
+    { id: 2, video: "/videos/home/slider2.mp4" },
+    { id: 3, video: "/videos/home/slider1.mp4" },
   ];
 
   const headingTransform = `translateY(${-scrollProgress * 20}px)`;
@@ -116,33 +113,73 @@ const HeroSection = () => {
   const sectionMargin = scrollProgress > 0.3 ? "0px" : "24px";
   const bgRightPosition = scrollProgress > 0.3 ? "0px" : "-24px";
 
+  // Toggle play/pause for a specific video
+  const togglePlayPause = (id, videoRef) => {
+    if (!videoRef) return;
+
+    if (videoRef.paused) {
+      videoRef.play();
+      setPlayingVideos(prev => ({ ...prev, [id]: true }));
+    } else {
+      videoRef.pause();
+      setPlayingVideos(prev => ({ ...prev, [id]: false }));
+    }
+  };
+
   return (
     <>
-      {/*MOBILE */}
-      <section className="md:hidden relative mt-4 sm:mt-0  overflow-hidden">
-        <img
-          src={bgImage1.src}
-          alt="Background"
-          className="absolute  w-full h-[590px] object-cover -z-10"
-        />
-
-        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5  text-black">
-          {/* HEADING */}
-          
-          
-
+      {/* MOBILE */}
+      <section className="md:hidden relative mt-4 sm:mt-0 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/home/backgroundhero.png"
+          className="absolute inset-0 w-full h-[590px] object-cover -z-10"
+        >
+          <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
+        </video>
+        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5 text-black">
           {/* SLIDER */}
           <div className="mb-4">
             <Slider {...mobileSettings}>
               {slides.map((slide) => (
                 <div key={slide.id}>
-                  <div className="relative w-full h-[260px]">
-                    <Image
-                      src={slide.thumbnail}
-                      alt="Slide"
-                      fill
-                      className="object-cover rounded-2xl"
-                    />
+                  <div className="relative w-full h-[260px] rounded-2xl overflow-hidden">
+                    <video
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                      ref={(ref) => {
+                        if (ref && playingVideos[slide.id] === false) ref.pause();
+                      }}
+                    >
+                      <source src={slide.video} type="video/mp4" />
+                    </video>
+
+                    {/* Play / Pause Button Overlay */}
+                    <div
+                      className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/30 transition-opacity hover:bg-black/40"
+                      onClick={(e) => {
+                        const video = e.currentTarget.previousSibling;
+                        togglePlayPause(slide.id, video);
+                      }}
+                    >
+                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
+                        {playingVideos[slide.id] ? (
+                          // Pause icon (two bars)
+                          <div className="flex gap-1">
+                            <div className="w-3 h-8 bg-black rounded"></div>
+                            <div className="w-3 h-8 bg-black rounded"></div>
+                          </div>
+                        ) : (
+                          // Play icon (triangle)
+                          <div className="w-0 h-0 border-l-[24px] border-l-white border-y-[16px] border-y-transparent border-solid ml-2"></div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -161,7 +198,7 @@ const HeroSection = () => {
         </div>
       </section>
 
-      {/* DESKTOP  */}
+      {/* DESKTOP */}
       <section
         ref={sectionRef}
         className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-14"
@@ -171,44 +208,75 @@ const HeroSection = () => {
           transition: "margin 0.3s ease-out",
         }}
       >
-        {/* RIGHT BACKGROUND */}
         <div
-          className="absolute top-0 h-[74%] w-[45%]"
+          className="absolute top-0 h-[74%] w-[100%]"
           style={{
             right: bgRightPosition,
             transition: "right 0.3s ease-out",
           }}
         >
-          <Image
-            src={bgImage1}
-            alt="Background"
-            fill
-            className="object-cover"
-            priority
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/home/backgroundhero.png"
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
+          </video>
 
-          {/* CIRCLE MASK */}
+          {/* VERTICAL SLIDER */}
           <div
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex justify-end"
             style={{
               opacity: sliderOpacity,
               transform: sliderTransform,
               transition: "opacity 0.1s ease-out, transform 0.1s ease-out",
             }}
           >
-            <div className="relative w-[700px] h-[600px] overflow-hidden">
-              <div className="h-full">
+            <div className="relative w-[400px] h-[600px] overflow-hidden">
+              <div className="h-full [&_.slick-track]:!flex [&_.slick-track]:!flex-col [&_.slick-track]:!transition-transform [&_.slick-slide>div]:!h-full [&_.slick-slide]:!h-full">
                 <Slider {...settings}>
                   {slides.map((slide) => (
-                    <div key={slide.id} className="py-2">
-                      <div className="relative mx-auto w-[220px] h-[140px]">
-                        <Image
-                          src={slide.thumbnail}
-                          alt={`Thumbnail ${slide.id}`}
-                          fill
-                          className="object-cover rounded-xl"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/40"></div>
+                    <div key={slide.id} className="py-2 h-full">
+                      <div className="relative mx-auto w-[220px] h-[140px] rounded-xl overflow-hidden">
+                        <video
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-full object-cover"
+                          ref={(ref) => {
+                            if (ref && playingVideos[slide.id] === false) ref.pause();
+                          }}
+                        >
+                          <source src={slide.video} type="video/mp4" />
+                        </video>
+
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/40 pointer-events-none"></div>
+
+                        {/* Play / Pause Button Overlay */}
+                        <div
+                          className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/20 transition-opacity hover:bg-black/30"
+                          onClick={(e) => {
+                            const video = e.currentTarget.previousSibling.previousSibling;
+                            togglePlayPause(slide.id, video);
+                          }}
+                        >
+                          <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-md">
+                            {playingVideos[slide.id] ? (
+                              // Pause icon
+                              <div className="flex gap-1">
+                                <div className="w-2 h-7 bg-black rounded"></div>
+                                <div className="w-2 h-7 bg-black rounded"></div>
+                              </div>
+                            ) : (
+                              // Play icon
+                              <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[12px] border-y-transparent border-solid ml-1"></div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -216,12 +284,11 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          
         </div>
 
         {/* CONTENT */}
-        <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-8  mt-20">
-          <div className="container mx-auto  max-w-7xl">
+        <div className="relative z-10 flex h-full min-h-screen flex-col justify-center py-8 mt-20">
+          <div className="container mx-auto max-w-7xl">
             <div
               style={{
                 transform: headingTransform,
@@ -231,8 +298,9 @@ const HeroSection = () => {
             >
               <h1 className="font-normal text-white leading-tight">
                 Cinematic Films For{" "}
-                <span className="text-[] bg-[linear-gradient(180deg,#BBAEB9_0%,#6B41FF_100%)] px-4 py-2
-                                inline-block rounded-2xl">
+                <span
+                  className="text-[] bg-[linear-gradient(180deg,#BBAEB9_0%,#6B41FF_100%)] px-4 py-2 inline-block rounded-2xl"
+                >
                   Brands
                 </span>
                 <br />
@@ -259,7 +327,7 @@ const HeroSection = () => {
                   You'll only receive updates on new templates <br />
                   no spam, just what you signed up for.
                 </p>
-                <div className="flex gap-5 ">
+                <div className="flex gap-5">
                   <Button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
                     Plan a Project
                   </Button>
@@ -269,26 +337,28 @@ const HeroSection = () => {
                 </div>
               </div>
 
+              {/* CENTER LARGE VIDEO PREVIEW (Auto-plays as before) */}
               <div
-                className="absolute top-[40%] left-1/2 pointer-events-none"
+                className="absolute top-[40%] left-1/2 pointer-events-none rounded-2xl overflow-hidden"
                 style={{
                   opacity: centerImageOpacity,
                   transform: `translate(-50%, -50%) scale(${centerImageScale})`,
-                  transition:
-                    "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
+                  transition: "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
                 <div className="relative w-[500px] h-[340px]">
-                  <Image
-                    src={slides[currentSlideIndex % slides.length].thumbnail}
-                    alt="Hero slide"
-                    fill
-                    className="object-cover rounded-2xl"
-                    priority
-                  />
+                  <video
+                    key={currentSlideIndex}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src={slides[currentSlideIndex % slides.length].video} type="video/mp4" />
+                  </video>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
