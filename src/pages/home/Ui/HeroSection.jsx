@@ -97,6 +97,7 @@ const HeroSection = () => {
     { id: 1, video: "/videos/home/slider1.mp4" },
     { id: 2, video: "/videos/home/slider2.mp4" },
     { id: 3, video: "/videos/home/slider1.mp4" },
+    { id: 4, video: "/videos/home/slider2.mp4" },
   ];
 
   const headingTransform = `translateY(${-scrollProgress * 20}px)`;
@@ -201,7 +202,7 @@ const HeroSection = () => {
       {/* DESKTOP */}
       <section
         ref={sectionRef}
-        className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-14"
+        className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-10 rounded-3xl"
         style={{
           marginLeft: sectionMargin,
           marginRight: sectionMargin,
@@ -228,7 +229,7 @@ const HeroSection = () => {
 
           {/* VERTICAL SLIDER */}
           <div
-            className="absolute inset-0 flex justify-end"
+            className="absolute inset-0 flex justify-end mt-28"
             style={{
               opacity: sliderOpacity,
               transform: sliderTransform,

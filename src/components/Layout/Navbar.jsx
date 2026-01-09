@@ -16,7 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "/", icon: GoHome },
-  { name: "About", href: "/about", icon: HiOutlineInformationCircle },
+  { name: "About", href: "/about-us", icon: HiOutlineInformationCircle },
   { name: "Services", href: "/services", icon: RiServiceLine },
   { name: "Works", href: "/works", icon: MdOutlineWorkOutline },
   { name: "Process", href: "/process", icon: BsDiagram3 },
@@ -44,7 +44,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -66,23 +65,19 @@ export default function Navbar() {
 
   return (
     <>
-
       {showInitialNavbar && (
-<nav className="bg-black/95 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3 py-2 relative overflow-visible">
-
-
+        <nav className="bg-black/95 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3 py-2 relative overflow-visible">
           <div className="mx-auto px-6">
             <div className="flex items-center justify-center lg:justify-between">
-         
-      <Link href="/">
-                  <Image
-                    src="/wilmarcs-logo.png"
-                    alt="Wilmarcs Logo"
-                    width={120}
-                    height={20}
-                    className="object-contain"
-                  />
-                </Link>
+              <Link href="/">
+                <Image
+                  src="/wilmarcs-logo.png"
+                  alt="Wilmarcs Logo"
+                  width={120}
+                  height={20}
+                  className="object-contain"
+                />
+              </Link>
             </div>
 
             {/* Desktop navigation */}
@@ -108,13 +103,18 @@ export default function Navbar() {
                   return (
                     <Link key={link.name} href={link.href}>
                       <motion.div
-                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${pathname === link.href ? "text-white" : ""}`}
+                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${
+                          pathname === link.href ? "text-white" : ""
+                        }`}
                         initial="rest"
                         animate="rest"
                         whileHover="hover"
                       >
                         <motion.span
-                          variants={{ rest: { opacity: 0, x: -6 }, hover: { opacity: 1, x: 0 } }}
+                          variants={{
+                            rest: { opacity: 0, x: -6 },
+                            hover: { opacity: 1, x: 0 },
+                          }}
                           transition={hoverTransition}
                           className="absolute left-0"
                         >
@@ -147,7 +147,13 @@ export default function Navbar() {
                   } shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]`}
                 >
                   <ContactIcon />
-                  <span className={`inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}`}>
+                  <span
+                    className={`inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out ${
+                      hovered
+                        ? "max-w-[120px] opacity-100"
+                        : "max-w-0 opacity-0"
+                    }`}
+                  >
                     Contact Us
                   </span>
                 </Button>
@@ -159,37 +165,46 @@ export default function Navbar() {
                 >
                   Plan A Project
                   <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
-                    {isHovered ? <GoArrowRight size={18} /> : <GoArrowUpRight size={18} />}
+                    {isHovered ? (
+                      <GoArrowRight size={18} />
+                    ) : (
+                      <GoArrowUpRight size={18} />
+                    )}
                   </span>
                 </Button>
               </div>
             </div>
 
             {/* Centered logo background */}
-       <div
-                className="absolute left-[50%] -translate-x-1/2 -top-22
+            <div
+              className="absolute left-[50%] -translate-x-1/2 -top-22
              w-64 h-48 flex items-center justify-center "
-                style={{
-                  backgroundImage: "url('/LogoBg.png')",
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                }}
-              >
-
+              style={{
+                backgroundImage: "url('/LogoBg.png')",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}
+            >
               <Link href="/">
-                <Image src="/wilmarcs-logo.png" alt="Wilmarcs Logo" width={120} height={20} className="object-contain" />
+                <Image
+                  src="/wilmarcs-logo.png"
+                  alt="Wilmarcs Logo"
+                  width={120}
+                  height={20}
+                  className="object-contain"
+                />
               </Link>
             </div>
           </div>
         </nav>
       )}
 
-     {showScrolledNavbar && (
-  <nav className="bg-black py-4 fixed top-0 left-0 right-0 z-40 border-b border-gray-800">
-    <div className="max-w-7xl mx-auto px-6">
-      <div className="flex items-center justify-between">
-    <Link href="/">
+      {showScrolledNavbar && (
+        <nav className="bg-black py-4 fixed top-0 left-0 right-0 z-40 border-b border-gray-800">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex items-center justify-between">
+              <Link href="/">
                 <Image
                   src="/wilmarcs-logo.png"
                   alt="Wilmarcs Logo"
@@ -199,24 +214,33 @@ export default function Navbar() {
                 />
               </Link>
 
-        <Button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-white hover:text-gray-300 focus:outline-none z-50 relative"
-        >
-          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-            />
-          </svg>
-        </Button>
-      </div>
-    </div>
-  </nav>
-)}
- 
+              <Button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white hover:text-gray-300 focus:outline-none z-50 relative"
+              >
+                <svg
+                  className="h-8 w-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={
+                      mobileMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
+                  />
+                </svg>
+              </Button>
+            </div>
+          </div>
+        </nav>
+      )}
+
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -246,7 +270,9 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`hover:text-gray-400 transition-colors ${pathname === link.href ? "" : ""}`}
+                    className={`hover:text-gray-400 transition-colors ${
+                      pathname === link.href ? "" : ""
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -256,10 +282,15 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
-                transition={{ delay: navLinks.length * 0.1 + 0.3, duration: 0.6 }}
+                transition={{
+                  delay: navLinks.length * 0.1 + 0.3,
+                  duration: 0.6,
+                }}
                 className="pt-2 space-y-6"
               >
-                <button className="block    text-3xl hover:text-gray-400">Contact Us</button>
+                <button className="block    text-3xl hover:text-gray-400">
+                  Contact Us
+                </button>
                 <button className="block   text-3xl hover:text-gray-40 ">
                   Plan A Project
                 </button>
