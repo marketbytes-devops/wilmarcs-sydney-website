@@ -68,12 +68,12 @@ export default function Navbar() {
     <>
 
       {showInitialNavbar && (
-<nav className="bg-black/95 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3 relative overflow-visible">
+<nav className="bg-black/95 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3 py-2 relative overflow-visible">
 
 
           <div className="mx-auto px-6">
             <div className="flex items-center justify-center lg:justify-between">
-              <div className="hidden lg:block"></div>
+         
       <Link href="/">
                   <Image
                     src="/wilmarcs-logo.png"
@@ -185,40 +185,38 @@ export default function Navbar() {
         </nav>
       )}
 
-      {/* Scrolled Navbar - with single hamburger */}
-      {showScrolledNavbar && (
-        <nav className="bg-black py-4 fixed top-0 left-0 right-0 z-40 border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex items-center justify-between">
-              <Link href="/">
+     {showScrolledNavbar && (
+  <nav className="bg-black py-4 fixed top-0 left-0 right-0 z-40 border-b border-gray-800">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="flex items-center justify-between">
+    <Link href="/">
                 <Image
                   src="/wilmarcs-logo.png"
                   alt="Wilmarcs Logo"
                   width={140}
                   height={36}
-                  className="object-contain"
+                  className="object-contain invert brightness-0"
                 />
               </Link>
 
-              <Button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white hover:text-gray-300 focus:outline-none z-50 relative"
-              >
-                <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-                  />
-                </svg>
-              </Button>
-            </div>
-          </div>
-        </nav>
-      )}
-
-      {/* Full-screen menu - covers everything */}
+        <Button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="text-white hover:text-gray-300 focus:outline-none z-50 relative"
+        >
+          <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+            />
+          </svg>
+        </Button>
+      </div>
+    </div>
+  </nav>
+)}
+ 
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -236,7 +234,7 @@ export default function Navbar() {
               ×
             </button>
 
-            <div className="flex flex-col px-30 mt-10 pt-10 h-full space-y-6 text-3xl font-bold text-white">
+            <div className="flex flex-col  px-10 mt-10 pt-10 h-full space-y-6 text-3xl font-bold text-white">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.name}
@@ -248,7 +246,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`hover:text-gray-400 transition-colors ${pathname === link.href ? "text-gray-400" : ""}`}
+                    className={`hover:text-gray-400 transition-colors ${pathname === link.href ? "" : ""}`}
                   >
                     {link.name}
                   </Link>
