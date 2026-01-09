@@ -48,13 +48,13 @@ export default function AboutUsPage() {
       <div
         ref={boxRef}
         className="fixed top-56 left-1/2 -translate-x-1/2
-                   w-20 h-20 bg-orange-500 rounded-xl z-50"
+                   w-20 h-20 bg-orange-500 rounded-xl z-50 pointer-events-none"
       />
 
       {/* SCROLL AREA */}
       <div
         ref={sectionRef}
-        className="relative h-[300vh] overflow-hidden "
+        className="relative h-auto overflow-y-hidden"
       >
         <div className="  ">
           <HeroSection/>
