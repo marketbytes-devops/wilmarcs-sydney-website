@@ -19,7 +19,7 @@ const navLinks = [
   { name: "Home", href: "/", icon: GoHome },
   {
     name: "About",
-    href: "/about",
+    href: "/about-us",
     icon: HiOutlineInformationCircle,
   },
   {
