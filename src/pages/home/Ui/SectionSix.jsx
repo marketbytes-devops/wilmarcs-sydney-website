@@ -82,7 +82,7 @@ const SectionSix = () => {
           ref={leftContentRef}
           className="lg:py-56 py-20 text-center lg:text-left"
         >
-          <p className="leading-tight mb-8">
+          <p className="leading-tight lg:mb-8 mb-4">
             We combine artistry and technical expertise to deliver visually
             stunning films. Every film is custom-made to align with your brand
             and communication goals. Our structured process ensures that you're
@@ -101,7 +101,7 @@ const SectionSix = () => {
           </Button>
         </div>
 
-        <div className="flex items-center justify-center -mt-10 lg:mt-0">
+        <div className="flex items-center justify-center -mt-14 lg:mt-0">
           <Image
             src={sectionSixGif}
             alt="Why Wilmarcs visual"

@@ -202,15 +202,16 @@ const HeroSection = () => {
       {/* DESKTOP */}
       <section
         ref={sectionRef}
-        className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-10 rounded-3xl"
+        className="hidden md:block relative overflow-hidden bg-black min-h-screen mt-10 "
         style={{
           marginLeft: sectionMargin,
           marginRight: sectionMargin,
+          borderRadius: scrollProgress > 0.3 ? "0" : "24px",
           transition: "margin 0.3s ease-out",
         }}
       >
         <div
-          className="absolute top-0 h-[74%] w-[100%]"
+          className="absolute inset-0 w-full h-full"
           style={{
             right: bgRightPosition,
             transition: "right 0.3s ease-out",
@@ -265,7 +266,7 @@ const HeroSection = () => {
                             togglePlayPause(slide.id, video);
                           }}
                         >
-                          <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-md">
+                          <div className="w-14 h-14 bg-black/50 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-md">
                             {playingVideos[slide.id] ? (
                               // Pause icon
                               <div className="flex gap-1">
@@ -300,7 +301,8 @@ const HeroSection = () => {
               <h1 className="font-normal text-white leading-tight">
                 Cinematic Films For{" "}
                 <span
-                  className="text-[] bg-[linear-gradient(180deg,#BBAEB9_0%,#6B41FF_100%)] px-4 py-2 inline-block rounded-2xl"
+                  className="bg-gradient-to-b from-[#BBAEB9] to-[#6B41FF]
+      bg-clip-text text-transparent px-4 py-2 inline-block rounded-2xl"
                 >
                   Brands
                 </span>
