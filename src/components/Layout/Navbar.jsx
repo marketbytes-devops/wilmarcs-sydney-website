@@ -74,7 +74,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const showInitialNavbar = isHomePage && !scrolled;
-  const showScrolledNavbar = isHomePage && scrolled;
+const showScrolledNavbar = scrolled || !isHomePage;
 
   const hoverTransition = {
     duration: 0.45,
