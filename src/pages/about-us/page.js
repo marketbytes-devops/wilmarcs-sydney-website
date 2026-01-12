@@ -7,6 +7,8 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import HeroSection from "./Ui/HeroSection";
 import SectionTwo from "./Ui/SectionTwo";
 import SectionThree from "./Ui/SectionThree";
+import SectionFour from "./Ui/SectionFour";
+import SectionFive from "./Ui/SectionFive";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -60,12 +62,20 @@ export default function AboutUsPage() {
           <HeroSection/>
         </div>
 
-        <div className="mt-12 bg-white text-black text-4xl ">
+        <div className="lg:mt-12 mt-4 bg-white text-black text-4xl ">
           <SectionTwo/>
         </div>
 
-        <div className="mt-12 bg-white text-black  text-4xl">
+        <div className="lg:mt-12 mt-4 bg-white text-black  text-4xl">
           <SectionThree/>
+        </div>
+
+        <div className="lg:mt-12 mt-4 bg-white text-black  text-4xl">
+          <SectionFour/>
+        </div>
+
+        <div className="lg:mt-12 mt-4 bg-white text-black  text-4xl">
+          <SectionFive/>
         </div>
       </div>
     </>
