@@ -45,11 +45,11 @@ export default function SectionFive() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-24">
           <div className="lg:sticky lg:top-20 h-fit">
-            <p className="font-extralight py-4 text-gray-600 leading-relaxed text-center lg:text-left">
+            <p className="font-extralight lg:py-4 py-0 text-gray-600 leading-relaxed text-center lg:text-left">
               We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
             </p>
           </div>
-          <div ref={timelineRef} className="relative pt-3 pb-48">
+          <div ref={timelineRef} className="relative pt-3 lg:pb-48 pb-12">
             <div className="absolute left-2 top-8 bottom-8 w-0.5 bg-gray-300 z-10" />
             <motion.div
               style={{ height }}

@@ -10,16 +10,33 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { RiServiceLine } from "react-icons/ri";
 import { BsDiagram3 } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
+import { FiArrowUpRight } from "react-icons/fi";
 import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
 import ContactIcon from "./../Icons/ContactIcon";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { name: "Home", href: "/", icon: GoHome },
-  { name: "About", href: "/about-us", icon: HiOutlineInformationCircle },
-  { name: "Services", href: "/services", icon: RiServiceLine },
-  { name: "Works", href: "/works", icon: MdOutlineWorkOutline },
-  { name: "Process", href: "/process", icon: BsDiagram3 },
+  {
+    name: "About",
+    href: "/about-us",
+    icon: HiOutlineInformationCircle,
+  },
+  {
+    name: "Services",
+    href: "/services",
+    icon: RiServiceLine,
+  },
+  {
+    name: "Works",
+    href: "/works",
+    icon: MdOutlineWorkOutline,
+  },
+  {
+    name: "Process",
+    href: "/process",
+    icon: BsDiagram3,
+  },
 ];
 
 export default function Navbar() {
@@ -44,6 +61,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -56,7 +74,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const showInitialNavbar = isHomePage && !scrolled;
-  const showScrolledNavbar = !isHomePage || scrolled;
+const showScrolledNavbar = scrolled || !isHomePage;
 
   const hoverTransition = {
     duration: 0.45,
@@ -65,23 +83,12 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Initial Navbar - Visible on Home page when not scrolled */}
       {showInitialNavbar && (
-        <nav className="bg-black/95 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3 py-2 relative overflow-visible">
+        <nav className="bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
           <div className="mx-auto px-6">
-            <div className="flex items-center justify-center lg:justify-between">
-              <Link href="/">
-                <Image
-                  src="/wilmarcs-logo.png"
-                  alt="Wilmarcs Logo"
-                  width={120}
-                  height={20}
-                  className="object-contain"
-                />
-              </Link>
-            </div>
-
-            {/* Desktop navigation */}
-            <div className="hidden lg:flex items-center justify-between mt-2">
+            {/* Desktop View */}
+            <div className="hidden lg:flex items-center justify-between">
               <div className="flex items-center space-x-4 font-geist text-[16px] font-medium">
                 {navLinks.map((link) => {
                   const isHome = link.name === "Home";
@@ -124,7 +131,10 @@ export default function Navbar() {
                         </motion.span>
 
                         <motion.span
-                          variants={{ rest: { x: 0 }, hover: { x: 12 } }}
+                          variants={{
+                            rest: { x: 0 },
+                            hover: { x: 12 },
+                          }}
                           transition={hoverTransition}
                           className="pl-4"
                         >
@@ -136,23 +146,53 @@ export default function Navbar() {
                 })}
               </div>
 
+              {/* Logo Background */}
+              <div
+                className="absolute left-[50%] -translate-x-1/2 -top-22 w-72 h-52 flex items-center justify-center"
+                style={{
+                  backgroundImage: "url('/LogoBg.png')",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
+                <Link href="/">
+                  <Image
+                    src="/wilmarcs-logo.png"
+                    alt="Wilmarcs Logo"
+                    width={120}
+                    height={20}
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
+
+              {/* CTA Buttons */}
               <div className="flex items-center space-x-4">
                 <Button
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
-                  className={`flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px] transition-all duration-[600ms] ease-in-out ${
-                    hovered
-                      ? "gap-8 pr-4 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-                      : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
-                  } shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]`}
+                  className={`
+                    flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px]
+                    transition-all duration-[600ms] ease-in-out
+                    ${
+                      hovered
+                        ? "gap-8 pr-4 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
+                        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
+                    }
+                    shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
+                  `}
                 >
                   <ContactIcon />
                   <span
-                    className={`inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out ${
-                      hovered
-                        ? "max-w-[120px] opacity-100"
-                        : "max-w-0 opacity-0"
-                    }`}
+                    className={`
+                      inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out
+                      ${
+                        hovered
+                          ? "max-w-[120px] opacity-100"
+                          : "max-w-0 opacity-0"
+                      }
+                    `}
                   >
                     Contact Us
                   </span>
@@ -161,7 +201,14 @@ export default function Navbar() {
                 <Button
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  className="text-white px-8 py-2.5 overflow-hidden [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C] bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)] shadow-[inset_0_0_0_5px_rgba(255,255,255,0.5)] transition-[--a,--c1,--c3] duration-700 ease-in-out hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]"
+                  className={`
+                    text-white px-8 py-2.5 overflow-hidden
+                    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
+                    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+                    shadow-[inset_0_0_0_5px_rgba(255,255,255,0.5)]
+                    transition-[--a,--c1,--c3] duration-700 ease-in-out
+                    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
+                  `}
                 >
                   Plan A Project
                   <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
@@ -175,48 +222,20 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Centered logo background */}
-            <div
-              className="absolute left-[50%] -translate-x-1/2 -top-22
-             w-64 h-48 flex items-center justify-center "
-              style={{
-                backgroundImage: "url('/LogoBg.png')",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-              }}
-            >
-              <Link href="/">
-                <Image
-                  src="/wilmarcs-logo.png"
-                  alt="Wilmarcs Logo"
-                  width={120}
-                  height={20}
-                  className="object-contain"
-                />
-              </Link>
-            </div>
-          </div>
-        </nav>
-      )}
-
-      {showScrolledNavbar && (
-        <nav className="bg-black py-4 fixed top-0 left-0 right-0 z-40 border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex items-center justify-between">
-              <Link href="/">
+            {/* Mobile View - Logo + Hamburger */}
+            <div className="lg:hidden flex items-center justify-between py-2">
+              <Link href="/" className="flex-1 flex justify-center">
                 <Image
                   src="/wilmarcs-logo.png"
                   alt="Wilmarcs Logo"
                   width={140}
                   height={36}
-                  className="object-contain invert brightness-0"
+                  className="object-contain"
                 />
               </Link>
-
               <Button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white hover:text-gray-300 focus:outline-none z-50 relative"
+                className="text-white hover:text-gray-300 focus:outline-none z-50"
               >
                 <svg
                   className="h-8 w-8"
@@ -241,6 +260,50 @@ export default function Navbar() {
         </nav>
       )}
 
+      {/* Scrolled Navbar */}
+      {showScrolledNavbar && (
+        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <Link href="/">
+                <Image
+                  src="/wilmarcs-logo.png"
+                  alt="Wilmarcs Logo"
+                  width={140}
+                  height={36}
+                  className="object-contain invert brightness-0"
+                />
+              </Link>
+
+              <Button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white hover:text-gray-300
+                           focus:outline-none z-50 relative "
+              >
+                <svg
+                  className="h-8 w-8"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={
+                      mobileMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
+                  />
+                </svg>
+              </Button>
+            </div>
+          </div>
+        </nav>
+      )}
+
+      {/* Full-Screen Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -248,17 +311,19 @@ export default function Navbar() {
             animate={{ x: "0%" }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed inset-0 bg-black z-50"
+            className="fixed inset-0 bg-black z-40 flex flex-col"
           >
-            {/* Close button */}
+            {/* Close Button */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 focus:outline-none z-60"
+              className="absolute top-8 right-8 text-white text-5xl hover:text-gray-400
+                         focus:outline-none z-50"
             >
               ×
             </button>
 
-            <div className="flex flex-col  px-10 mt-10 pt-10 h-full space-y-6 text-3xl font-bold text-white">
+            {/* Menu Links */}
+            <div className="flex flex-col items-start px-12 pt-32 space-y-10 text-5xl font-bold text-white">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.name}
@@ -270,28 +335,40 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`hover:text-gray-400 transition-colors ${
-                      pathname === link.href ? "" : ""
-                    }`}
+                    className="block"
                   >
-                    {link.name}
+                    <h2
+                      className={`font-bold hover:text-gray-400 transition-colors ${
+                        pathname === link.href ? "text-gray-400" : "text-white"
+                      }`}
+                    >
+                      {link.name}
+                    </h2>
                   </Link>
                 </motion.div>
               ))}
+
+              {/* CTA Section */}
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
                 transition={{
-                  delay: navLinks.length * 0.1 + 0.3,
+                  delay: navLinks.length * 0.1 + 0.4,
                   duration: 0.6,
                 }}
-                className="pt-2 space-y-6"
+                className="pt-12 space-y-10"
               >
-                <button className="block    text-3xl hover:text-gray-400">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-4xl hover:text-gray-400"
+                >
                   Contact Us
                 </button>
-                <button className="block   text-3xl hover:text-gray-40 ">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-4xl hover:text-gray-400"
+                >
                   Plan A Project
                 </button>
               </motion.div>

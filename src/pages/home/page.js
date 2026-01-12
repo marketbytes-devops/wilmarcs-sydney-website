@@ -21,7 +21,7 @@ const HomePage = () => {
       <section className="lg:mt-18 mt-6">
         <SectionThree />
       </section>
-      <section className="mt-5">
+      <section className="lg:mt-5 mt-0">
         <SectionFour />
       </section>
       <section className="mt-0 lg:mt-6">

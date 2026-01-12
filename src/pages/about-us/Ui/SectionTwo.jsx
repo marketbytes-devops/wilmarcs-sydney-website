@@ -8,7 +8,7 @@ const SectionTwo = () => {
 
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
         {/* Left: Dot + Who We Are – centered vertically only on desktop */}
-        <div className="flex items-center lg:justify-start justify-center gap-2 lg:gap-4 lg:h-full">
+        <div className="mt-3 flex items-center lg:justify-start justify-center gap-2 lg:gap-4 lg:h-full">
           <div className="w-5 h-5 bg-indigo-600 rounded-full flex-shrink-0"></div>
           <h6 className="font-semibold text-gray-900 whitespace-nowrap">
             Who We Are
@@ -16,7 +16,7 @@ const SectionTwo = () => {
         </div>
 
         {/* Right: Heading + Paragraph */}
-        <div className="flex flex-col justify-center lg:justify-start">
+        <div className="flex flex-col justify-center lg:justify-start ">
           <h2 className="font-bold text-gray-900 leading-tight text-center lg:text-left">
             We tell stories that move people.
           </h2>
