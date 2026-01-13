@@ -1,9 +1,92 @@
 import React from "react";
 import Image from "next/image";
+import PeopleIcon from "@/components/Icons/PeopleIcon";
+import halfTone from "@/assets/images/home/halftone.png";
+import lastPic1 from "@/assets/images/home/lastpic1.jpg";
+import lastPic2 from "@/assets/images/home/lastpic2.jpg";
+import lastPic3 from "@/assets/images/home/lastpic3.png";
+import Button from "@/components/Button/index";
 
 const Footer = () => {
   return (
     <>
+     <div>
+        <div className="border-t border-gray-300 w-full" />
+        <div className="grid grid-cols-1  lg:grid-cols-12 gap-6 py-3 lg:px-0 px-6">
+          {/* Left Halftone Image */}
+          <div className="hidden lg:block col-span-1  lg:col-span-3 flex items-center">
+            <Image
+              src={halfTone}
+              alt="Halftone background"
+              width={600}
+              height={400}
+              className="object-cover w-full h-full rounded-lg"
+            />
+          </div>
+
+          {/* Center Content */}
+          <div className="col-span-1  lg:col-span-6
+                          flex flex-col justify-center relative lg:-left-32"
+          >
+            <div className="space-y-3 md:space-y-4">
+              <div className="flex items-center gap-3 lg:justify-start justify-center">
+                <div className="w-5 h-5">
+                  <PeopleIcon />
+                </div>
+                <p className=" text-gray-600">Work Together</p>
+              </div>
+              <h5 className="  font-semibold text-center lg:text-left ">
+                Let's talk about your project
+              </h5>
+              <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center mb-2 lg:mb-0 ">
+                <input
+                  type="email"
+                  className="flex-1 px-6 py-4 bg-white border border-gray-300 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#271751]"
+                  placeholder="Your email address"
+                />
+                <Button
+                  className="bg-black  text-white sm:py-4 px-8 py-2
+                            rounded-full font-medium 
+                          hover:bg-gray-800 transition  
+                            bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)] 
+                            hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
+                >
+                  Send enquiry
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Project Images */}
+          <div className="hidden lg:block col-span-1  lg:col-span-3 items-center justify-end relative lg:-left-32">
+            <div className="flex flex-col md:flex-row lg:flex-row w-full gap-1">
+              <Image
+                src={lastPic1}
+                alt="Project 1"
+                width={112}
+                height={128}
+                className="w-full mt-12 md:w-28 lg:w-28 h-32 lg:h-32 rounded-lg shadow-lg object-cover"
+              />
+              <Image
+                src={lastPic2}
+                alt="Project 2"
+                width={183}
+                height={228}
+                className="w-full mt-4 md:w-[183px] lg:w-[183px] h-56 md:h-[228px] lg:h-[228px] rounded-lg shadow-lg object-cover"
+              />
+              <Image
+                src={lastPic3}
+                alt="Project 3"
+                width={128}
+                height={144}
+                className="w-full mt-14 md:w-32 lg:w-32 h-36 lg:h-36 rounded-lg shadow-lg object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-gray-300 w-full" />
+      </div>
+
       <footer className="w-full max-w-[95%] mx-auto">
         <div className="items-center justify-center flex py-5">
           <Image

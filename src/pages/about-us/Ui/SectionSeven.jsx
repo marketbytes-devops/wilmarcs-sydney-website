@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Marquee from "react-fast-marquee";
 
 import comiccon from "@/assets/images/about/comiccon-india.png";
 import samsung from "@/assets/images/about/samsung.png";
@@ -19,26 +20,43 @@ export default function PlacesMentioned() {
     offset: ["start end", "end start"],
   });
 
+  /* MOBILE MARQUEE (react-fast-marquee) */
+  function MobileMarquee({ logos }) {
+    return (
+      <Marquee speed={100} pauseOnHover gradient={false} className="py-2">
+        {logos.map((img, i) => (
+          <div
+            key={i}
+            className="mx-3 flex items-center justify-center h-[80px]"
+          >
+            <Image src={img} alt="brand logo" className="object-contain" />
+          </div>
+        ))}
+      </Marquee>
+    );
+  }
+
   return (
-    <section className="w-full container bg-white py-24">
+    <section className="w-full container bg-white lg:py-24 sm:py-6 py-4">
       <div className="max-w-7xl mx-auto px-6 lg:px-0">
         <div className="grid grid-cols-1 lg:[grid-template-columns:40%_60%] gap-5 items-start">
-
           {/* LEFT */}
           <div>
-            <h2 className="text-5xl font-black uppercase leading-tight">
+            <h2 className="font-black uppercase leading-tight text-center lg:text-left">
               Places we've been <br /> mentioned.
             </h2>
 
-            <p className="mt-6 text-lg text-gray-600 font-extralight max-w-md">
-              We've been recognised by some respected brands and publications for
-              our work. Here are a few that have caught people's attention.
+            <p className="lg:mt-6 mt-2 text-center lg:text-left text-gray-600 font-extralight w-full lg:max-w-md">
+              We've been recognised by some respected brands and publications
+              for our work. Here are a few that have caught people's attention.
             </p>
           </div>
 
           {/* RIGHT GRID */}
-          <div ref={gridRef} className="relative grid grid-cols-3 grid-rows-3">
-
+          <div
+            ref={gridRef}
+            className="relative hidden lg:grid grid-cols-3 grid-rows-3"
+          >
             {/* STATIC LINE + DOTS */}
             <div className="absolute inset-0 pointer-events-none">
               <StaticLineWithDots x="3%" />
@@ -68,6 +86,14 @@ export default function PlacesMentioned() {
             <Logo img={samsung} />
             <Logo img={paytm} />
           </div>
+
+          {/* MOBILE ONLY — MARQUEE */}
+          <div className="block lg:hidden mt-2">
+            <MobileMarquee
+              logos={[comiccon, samsung, paytm, cafe, himalaya, embassy]}
+            />
+          </div>
+
         </div>
       </div>
     </section>
@@ -78,7 +104,7 @@ export default function PlacesMentioned() {
 function StaticLineWithDots({ x }) {
   return (
     <div
-      className="absolute top-0 h-full w-px bg-[#8D8D8D]"
+      className="absolute top-0 h-full w-px  bg-[#1a1a2e]"
       style={{ left: x }}
     >
       <Dot y="1.6%" />
@@ -87,7 +113,6 @@ function StaticLineWithDots({ x }) {
     </div>
   );
 }
-
 
 function AnimatedSegments({ x, progress }) {
   const seg1 = useTransform(progress, [0.1, 0.3], [0, 1]);

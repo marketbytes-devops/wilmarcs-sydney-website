@@ -7,16 +7,16 @@ const SectionThree = () => {
   return (
     <>
     <section className='container'>
-        <div className='flex flex-col lg:flex-row lg:gap-12 gap-4'>
-          <div className='relative w-full lg:w-[30%]'>
+        <div className='flex flex-col lg:flex-row  lg:gap-18 gap-4'>
+          <div className='relative w-full lg:w-[30%] mx-auto'>
            <CurvedCard
           firstName="Kevin"
           lastName="Wilson"
           role="Founder— Director"
           imageSrc={kevin}
         />
-
           </div>
+
           <div className='w-full lg:w-[70%] lg:mt-32 mt-3'>
             <h2 className='font-semibold text-center lg:text-left'>
               Founder-led, disciplined, clarity-driven filmmaking.
@@ -27,7 +27,7 @@ const SectionThree = () => {
               guiding each narrative from start to finish.
             </p>
           </div>
-          <div className='w-[20%]'></div>
+          <div className='lg:w-[20%] hidden'></div>
         </div>
     </section>
     </>
