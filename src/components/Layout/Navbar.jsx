@@ -303,79 +303,82 @@ const showScrolledNavbar = scrolled || !isHomePage;
         </nav>
       )}
 
-      {/* Full-Screen Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: "0%" }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed inset-0 bg-black z-40 flex flex-col"
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="absolute top-8 right-8 text-white text-5xl hover:text-gray-400
-                         focus:outline-none z-50"
+ 
+<AnimatePresence>
+  {mobileMenuOpen && (
+    <motion.div
+      initial={{ x: "-100%" }}
+      animate={{ x: "0%" }}
+      exit={{ x: "-100%" }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      className="fixed inset-0 bg-black z-40 flex flex-col lg:flex-row"
+    >
+      {/* Left side - Navigation links */}
+      <div className="w-full lg:w-1/2 flex flex-col items-start justify-center px-8 sm:px-12 md:px-16 lg:px-20 pt-24 lg:pt-0 lg:pb-0">
+        {/* Close Button - moved to top-right of whole screen */}
+        <button
+          onClick={() => setMobileMenuOpen(false)}
+          className="absolute top-6 right-6 lg:right-10 text-white text-5xl sm:text-6xl hover:text-gray-400 focus:outline-none z-50"
+        >
+          × 
+        </button>
+
+        <div className="flex flex-col space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-12 text-4xl sm:text-5xl md:text-6xl lg:text-4xl font-bold text-white mt-10 lg:mt-0">
+          {navLinks.map((link, index) => (
+            <motion.div
+              key={link.name}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ delay: index * 0.08 + 0.2, duration: 0.5 }}
             >
-              ×
-            </button>
-
-            {/* Menu Links */}
-            <div className="flex flex-col items-start px-12 pt-32 space-y-10 text-5xl font-bold text-white">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 50 }}
-                  transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block"
-                  >
-                    <h2
-                      className={`font-bold hover:text-gray-400 transition-colors ${
-                        pathname === link.href ? "text-gray-400" : "text-white"
-                      }`}
-                    >
-                      {link.name}
-                    </h2>
-                  </Link>
-                </motion.div>
-              ))}
-
-              {/* CTA Section */}
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
-                transition={{
-                  delay: navLinks.length * 0.1 + 0.4,
-                  duration: 0.6,
-                }}
-                className="pt-12 space-y-10"
+              <Link
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block hover:text-gray-300 transition-colors"
               >
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-4xl hover:text-gray-400"
-                >
-                  Contact Us
-                </button>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-4xl hover:text-gray-400"
-                >
-                  Plan A Project
-                </button>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {link.name}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right side - CTA / "Let's talk" area */}
+      <div className="w-full lg:w-1/2 bg-black/95 flex flex-col items-start lg:items-center justify-center px-8 sm:px-12 md:px-16 lg:px-20 py-16 lg:py-0 text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="space-y-8 lg:space-y-12 max-w-md"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+            Let’s talk about
+            <br />
+            your project
+          </h2>
+
+          <div className="flex flex-col sm:flex-row gap-6 pt-6">
+            <Button
+              onClick={() => setMobileMenuOpen(false)}
+              className="bg-white text-black px-8 py-4 text-lg font-medium rounded-full hover:bg-gray-200 transition"
+            >
+              Contact Us
+            </Button>
+
+            <Button
+              onClick={() => setMobileMenuOpen(false)}
+              className="border border-white text-white px-8 py-4 text-lg font-medium rounded-full hover:bg-white/10 transition"
+            >
+              Plan a project
+            </Button>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </>
   );
 }
