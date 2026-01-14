@@ -10,10 +10,10 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { RiServiceLine } from "react-icons/ri";
 import { BsDiagram3 } from "react-icons/bs";
 import { GoHome } from "react-icons/go";
-import { FiArrowUpRight } from "react-icons/fi";
 import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
 import ContactIcon from "./../Icons/ContactIcon";
 import { motion, AnimatePresence } from "framer-motion";
+import menu from "../../assets/images/home/menu.png";
 
 const navLinks = [
   { name: "Home", href: "/", icon: GoHome },
@@ -61,7 +61,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -74,7 +73,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const showInitialNavbar = isHomePage && !scrolled;
-const showScrolledNavbar = scrolled || !isHomePage;
+  const showScrolledNavbar = scrolled || !isHomePage;
 
   const hoverTransition = {
     duration: 0.45,
@@ -83,9 +82,8 @@ const showScrolledNavbar = scrolled || !isHomePage;
 
   return (
     <>
-      {/* Initial Navbar - Visible on Home page when not scrolled */}
       {showInitialNavbar && (
-        <nav className="bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
+        <nav className=" hidden sm:block bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
           <div className="mx-auto px-6">
             {/* Desktop View */}
             <div className="hidden lg:flex items-center justify-between">
@@ -223,14 +221,14 @@ const showScrolledNavbar = scrolled || !isHomePage;
             </div>
 
             {/* Mobile View - Logo + Hamburger */}
-            <div className="lg:hidden flex items-center justify-between py-2">
+            <div className="lg:hidden  flex items-center justify-between py-2">
               <Link href="/" className="flex-1 flex justify-center">
                 <Image
                   src="/wilmarcs-logo.png"
                   alt="Wilmarcs Logo"
                   width={140}
                   height={36}
-                  className="object-contain"
+                  className="object-contain invert"
                 />
               </Link>
               <Button
@@ -262,7 +260,7 @@ const showScrolledNavbar = scrolled || !isHomePage;
 
       {/* Scrolled Navbar */}
       {showScrolledNavbar && (
-        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-b border-gray-800">
+        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50  border-gray-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
               <Link href="/">
@@ -274,111 +272,112 @@ const showScrolledNavbar = scrolled || !isHomePage;
                   className="object-contain invert brightness-0"
                 />
               </Link>
-
               <Button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="text-white hover:text-gray-300
-                           focus:outline-none z-50 relative "
+             focus:outline-none z-50 relative border-white border py-2 px-5
+             flex items-center gap-2"
               >
-                <svg
-                  className="h-8 w-8"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={
-                      mobileMenuOpen
-                        ? "M6 18L18 6M6 6l12 12"
-                        : "M4 6h16M4 12h16M4 18h16"
-                    }
-                  />
-                </svg>
+                <Image
+                  src={menu}
+                  alt="Menu"
+                  width={24}
+                  height={24}
+                  className="object-contain "
+                />
+                Menu
               </Button>
             </div>
           </div>
         </nav>
       )}
 
- 
-<AnimatePresence>
-  {mobileMenuOpen && (
-    <motion.div
-      initial={{ x: "-100%" }}
-      animate={{ x: "0%" }}
-      exit={{ x: "-100%" }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
-      className="fixed inset-0 bg-black z-40 flex flex-col lg:flex-row"
-    >
-      {/* Left side - Navigation links */}
-      <div className="w-full lg:w-1/2 flex flex-col items-start justify-center px-8 sm:px-12 md:px-16 lg:px-20 pt-24 lg:pt-0 lg:pb-0">
-        {/* Close Button - moved to top-right of whole screen */}
-        <button
-          onClick={() => setMobileMenuOpen(false)}
-          className="absolute top-6 right-6 lg:right-10 text-white text-5xl sm:text-6xl hover:text-gray-400 focus:outline-none z-50"
-        >
-          × 
-        </button>
-
-        <div className="flex flex-col space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-12 text-4xl sm:text-5xl md:text-6xl lg:text-4xl font-bold text-white mt-10 lg:mt-0">
-          {navLinks.map((link, index) => (
-            <motion.div
-              key={link.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 40 }}
-              transition={{ delay: index * 0.08 + 0.2, duration: 0.5 }}
-            >
-              <Link
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block hover:text-gray-300 transition-colors"
-              >
-                {link.name}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Right side - CTA / "Let's talk" area */}
-      <div className="w-full lg:w-1/2 bg-black/95 flex flex-col items-start lg:items-center justify-center px-8 sm:px-12 md:px-16 lg:px-20 py-16 lg:py-0 text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 40 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="space-y-8 lg:space-y-12 max-w-md"
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            Let’s talk about
-            <br />
-            your project
-          </h2>
-
-          <div className="flex flex-col sm:flex-row gap-6 pt-6">
-            <Button
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 grid grid-cols-1 bg-white lg:grid-cols-2"
+          >
+            <button
               onClick={() => setMobileMenuOpen(false)}
-              className="bg-white text-black px-8 py-4 text-lg font-medium rounded-full hover:bg-gray-200 transition"
+              className="absolute top-8 right-6 z-[999] bg-white border border-black border-1 px-4 py-2  transition
+    hover:bg-gray-100
+    hover:border-gray-400 rounded-full text-sm flex items-center gap-2"
             >
-              Contact Us
-            </Button>
+              <span className="text-xs font-semibold">×</span>
+              <span className="font-semibold ">Close</span>
+            </button>
 
-            <Button
-              onClick={() => setMobileMenuOpen(false)}
-              className="border border-white text-white px-8 py-4 text-lg font-medium rounded-full hover:bg-white/10 transition"
-            >
-              Plan a project
-            </Button>
-          </div>
-        </motion.div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+            {/* LEFT — BLACK MENU */}
+            <div className="relative bg-black flex flex-col px-10 lg:px-14 w-full">
+              <div className="absolute top-8 left-10 lg:left-14">
+                <img
+                  src="/wilmarcs-logo.png"
+                  alt="wilmarcs motion pictures"
+                  className="h-8 lg:h-10 object-contain invert brightness-0"
+                />
+              </div>
+
+              <div className="flex-1 flex sm:items-center sm:mt-0 mt-26">
+                <div className="sm:space-y-4 space-y-6  text-2xl lg:text-4xl font-bold text-white">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-gray-400 transition"
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT — PROJECT CTA */}
+            <div className="relative hidden lg:block right-10 w-[800] overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: "url('/navbarImg.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "left center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
+
+              <div className="relative z-10 h-full flex items-center px-26">
+                <div className="max-w-md space-y-10 text-black">
+                  <h2 className="text-6xl font-bold leading-tight">
+                    Let's talk about
+                    <br />
+                    your project
+                  </h2>
+
+                  <div className="flex gap-6">
+                    <button className="bg-black text-white px-8 py-3 rounded-full">
+                      Contact Us
+                    </button>
+
+                    <button className="border border-black px-8 py-3 rounded-full">
+                      Plan a project
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
