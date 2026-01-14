@@ -30,20 +30,20 @@ export default function AboutUsPage() {
   scrollTrigger: {
     trigger: section,
     start: "top top",
-    end: "50% bottom", // till SectionFour
+    end: "bottom bottom", // till SectionFour
     scrub: 1,
   },
   motionPath: {
-    path: [
-      { xPercent: -30, yPercent: 0 },
-      { xPercent: 30, yPercent: 25 },
-      { xPercent: -25, yPercent: 50 },
-      { xPercent: 20, yPercent: 75 },
-      { xPercent: 0, yPercent: 100 },
-    ],
-    curviness: 1.8,
-    autoRotate: true,
-  },
+  path: [
+    { x: -100, y: 0 },
+    { x: 120, y: 400 },
+    { x: -80, y: 900 },
+    { x: 60, y: 1400 },
+    { x: 0, y: 2000 },
+  ],
+  curviness: 1.5,
+},
+
   ease: "none",
 });
 
@@ -56,7 +56,7 @@ export default function AboutUsPage() {
       {/* MOVING BOX */}
       <div
         ref={boxRef}
-        className="absolute top-56 left-1/2 -translate-x-1/2
+        className="fixed top-56 left-1/2 -translate-x-1/2
                    z-0 pointer-events-none"
       >
         <Pointer />
@@ -68,27 +68,27 @@ export default function AboutUsPage() {
           <HeroSection />
         </div>
 
-        <div className="lg:mt-12 mt-4 bg-white text-black">
+        <div className="lg:mt-12 mt-4 ">
           <SectionTwo />
         </div>
 
-        <div className="lg:mt-12 mt-4 bg-white text-black">
+        <div className="lg:mt-12 mt-4 ">
           <SectionThree />
         </div>
 
-        <div className="lg:mt-12 mt-6 bg-white text-black">
+        <div className="lg:mt-12 mt-6 ">
           <SectionFour />
         </div>
 
-        <div className="lg:mt-12 mt-4 bg-white text-black">
+        <div className="lg:mt-12 mt-4 ">
           <SectionFive />
         </div>
 
-        <div className="lg:mt-12 mt-4 bg-white text-black">
+        <div className="lg:mt-12 mt-4 ">
           <SectionSix />
         </div>
 
-        <div className="lg:mt-12 mt-4 bg-white text-black">
+        <div className="lg:mt-12 mt-4 ">
           <SectionSeven />
         </div>
       </div>

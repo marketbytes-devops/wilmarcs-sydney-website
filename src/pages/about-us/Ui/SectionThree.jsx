@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
+
 import CurvedCard from '@/components/CurvedCard';
 import kevin from './../../../assets/images/about/kevin.png'
 

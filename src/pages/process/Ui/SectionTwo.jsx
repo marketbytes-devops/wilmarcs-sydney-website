@@ -54,7 +54,7 @@ export default function ProcessStack() {
 
   useEffect(() => {
     const cards = cardsRef.current;
-    const cardGap = 73;
+    const cardGap = 82;
 
     cards.forEach((card, index) => {
       ScrollTrigger.create({
@@ -81,12 +81,14 @@ export default function ProcessStack() {
           <div
             key={i}
             ref={(el) => (cardsRef.current[i] = el)}
-            className="min-h-screen"
+            className="md:pb-10 lg:pb-20 pb-12"
             style={{ zIndex: i + 1 }}
           >
             <div className="container ">
               <div
-                className={`rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] px-6 sm:px-8 lg:px-14 py-8 sm:py-12 lg:py-0 grid grid-cols-1 lg:grid-cols-[60%_40%] items-center gap-6 sm:gap-8 ${
+                className={`rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] px-6 sm:px-8
+                          lg:px-10 py-8 sm:py-12 lg:py-0 grid grid-cols-1 lg:grid-cols-[60%_40%] 
+                          items-center gap-6 sm:gap-8 ${
                   isLastCard ? "text-white" : "text-black"
                 }`}
                 style={{
@@ -98,7 +100,8 @@ export default function ProcessStack() {
                 {/* LEFT */}
                 <div className="max-w-xl px-2 lg:-mt-26">
                   <span
-                    className={`inline-block border-2 rounded-full px-6 sm:px-12 lg:px-18 py-1 text-sm sm:text-base ${
+                    className={`inline-block border-2 rounded-full px-6 sm:px-12 lg:px-18
+                              py-1 text-sm sm:text-base ${
                       isLastCard
                         ? "border-white text-white"
                         : "border-black text-black"
@@ -107,10 +110,10 @@ export default function ProcessStack() {
                     {item.step}
                   </span>
 
-                  <h1 className="text-4xl sm:text-5xl lg:text-[72px] mt-4 sm:mt-6">{item.title}</h1>
+                  <h1 className="mt-4 sm:mt-6 leading-tight">{item.title}</h1>
 
                   <p
-                    className={`text-base sm:text-lg mt-3 sm:mt-4 leading-relaxed ${
+                    className={`mt-3 sm:mt-4 leading-relaxed ${
                       isLastCard ? "text-white/80" : "text-gray-600"
                     }`}
                   >
