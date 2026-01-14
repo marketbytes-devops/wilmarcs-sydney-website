@@ -1,5 +1,5 @@
 import React from 'react'
-import ProcessPage from '@/pages/process/Ui/page'
+import ProcessPage from '@/pages/process/page'
 const page = () => {
   return (
     <div>
