@@ -1,0 +1,39 @@
+import React from 'react'
+import HeroSection from '../services/Ui/HeroSection'
+import SectionTwo from '../services/Ui/SectionTwo'
+import SectionThree from '../services/Ui/SectionThree'
+import SectionFour from '../services/Ui/SectionFour'
+import SectionFive from '../services/Ui/SectionFive'
+import SectionSix from '../services/Ui/SectionSix'
+
+const page = () => {
+  return (
+    <>
+    <section>
+        <HeroSection/>
+    </section>
+
+    <section className='lg:mt-18 mt-6'>
+        <SectionTwo/>
+    </section>
+
+     <section className='lg:mt-18 mt-6'>
+        <SectionThree/>
+    </section>
+
+     <section className='lg:mt-18 mt-6'>
+        <SectionFour/>
+    </section>
+
+     <section className='lg:mt-18 mt-6'>
+        <SectionFive/>
+    </section>
+
+     <section className='lg:mt-18 mt-6'>
+        <SectionSix/>
+    </section>
+    </>
+  )
+}
+
+export default page
