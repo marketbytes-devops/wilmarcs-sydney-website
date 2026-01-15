@@ -79,9 +79,18 @@ export default function Navbar() {
     duration: 0.45,
     ease: "easeInOut",
   };
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+  return () => window.removeEventListener("resize", checkMobile);
+}, []);
 
   return (
     <>
+    
       {showInitialNavbar && (
         <nav className=" hidden sm:block bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
           <div className="mx-auto px-6">
@@ -258,39 +267,37 @@ export default function Navbar() {
         </nav>
       )}
 
-      {/* Scrolled Navbar */}
-      {showScrolledNavbar && (
-        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50  border-gray-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <Link href="/">
-                <Image
-                  src="/wilmarcs-logo.png"
-                  alt="Wilmarcs Logo"
-                  width={140}
-                  height={36}
-                  className="object-contain invert brightness-0"
-                />
-              </Link>
-              <Button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-white hover:text-gray-300
-             focus:outline-none z-50 relative border-white border py-2 px-5
-             flex items-center gap-2"
-              >
-                <Image
-                  src={menu}
-                  alt="Menu"
-                  width={24}
-                  height={24}
-                  className="object-contain "
-                />
-                Menu
-              </Button>
-            </div>
-          </div>
-        </nav>
-      )}
+  {(showScrolledNavbar || isMobile) && (
+  <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between">
+        <Link href="/">
+          <Image
+            src="/wilmarcs-logo.png"
+            alt="Wilmarcs Logo"
+            width={140}
+            height={36}
+            className="object-contain invert brightness-0"
+          />
+        </Link>
+
+        <Button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="text-white hover:text-gray-300 focus:outline-none z-50 relative border-white border py-2 px-5 flex items-center gap-2"
+        >
+          <Image
+            src={menu}
+            alt="Menu"
+            width={24}
+            height={24}
+            className="object-contain"
+          />
+          Menu
+        </Button>
+      </div>
+    </div>
+  </nav>
+)}
 
       <AnimatePresence>
         {mobileMenuOpen && (
