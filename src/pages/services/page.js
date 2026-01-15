@@ -5,6 +5,8 @@ import SectionThree from '../services/Ui/SectionThree'
 import SectionFour from '../services/Ui/SectionFour'
 import SectionFive from '../services/Ui/SectionFive'
 import SectionSix from '../services/Ui/SectionSix'
+import SectionSeven from '../services/Ui/SectionSeven'
+
 
 const page = () => {
   return (
@@ -13,24 +15,28 @@ const page = () => {
         <HeroSection/>
     </section>
 
-    <section className='lg:mt-18 mt-6'>
+    <section className='lg:mt-24 mt-6'>
         <SectionTwo/>
     </section>
 
-     <section className='lg:mt-18 mt-6'>
+     <section className='lg:mt-24 mt-6'>
         <SectionThree/>
     </section>
 
-     <section className='lg:mt-18 mt-6'>
+     <section className='lg:mt-24 mt-6'>
         <SectionFour/>
     </section>
 
-     <section className='lg:mt-18 mt-6'>
+     <section className='lg:mt-24 mt-6'>
         <SectionFive/>
     </section>
 
-     <section className='lg:mt-18 mt-6'>
+     <section className='lg:mt-24 mt-6'>
         <SectionSix/>
+    </section>
+
+    <section className='lg:mt-24 mt-6'>
+        <SectionSeven/>
     </section>
     </>
   )

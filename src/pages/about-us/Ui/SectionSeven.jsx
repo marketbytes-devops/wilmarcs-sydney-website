@@ -58,7 +58,7 @@ export default function PlacesMentioned() {
             className="relative hidden lg:grid grid-cols-3 grid-rows-3"
           >
             {/* STATIC LINE + DOTS */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none ">
               <StaticLineWithDots x="3%" />
               <StaticLineWithDots x="33.333%" />
               <StaticLineWithDots x="68.666%" />
@@ -104,10 +104,10 @@ export default function PlacesMentioned() {
 function StaticLineWithDots({ x }) {
   return (
     <div
-      className="absolute top-0 h-full w-px  bg-[#1a1a2e]"
+      className="absolute top-0 h-full w-[2px]  bg-[#E0E0E0]"
       style={{ left: x }}
     >
-      <Dot y="1.6%" />
+      <Dot y="1%" />
       <Dot y="50%" />
       <Dot y="83.3%" />
     </div>
@@ -146,7 +146,7 @@ function AnimatedSegments({ x, progress }) {
 function Dot({ y }) {
   return (
     <span
-      className="absolute left-1/2 w-4 h-4 bg-[#8D8D8D] rounded-full -translate-x-1/2 -translate-y-1/2"
+      className="absolute left-1/2 w-4 h-4 bg-[#1a1a2e] rounded-full -translate-x-1/2 -translate-y-1/2"
       style={{ top: y }}
     />
   );
