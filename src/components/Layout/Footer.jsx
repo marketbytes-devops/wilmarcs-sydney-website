@@ -131,7 +131,7 @@ const Footer = () => {
         <div className="border-t border-gray-300 w-full mt-4"></div>
       </div>
 
-      <div className="flex justify-center h-auto py-6 sm:py-10 px-4 sm:px-0">
+      <div className="flex justify-center h-auto py-6 sm:py-18 px-4 sm:px-0">
         <p className="font-kumbh  -mt-5 text-center text-gray-600">
           &copy; {new Date().getFullYear()} Wilmarcs Motion Pictures. All rights
           reserved.

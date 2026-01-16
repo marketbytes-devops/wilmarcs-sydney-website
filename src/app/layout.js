@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop/inedx";
 
 
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <ScrollToTop/>
         <Navbar />
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content">

@@ -31,7 +31,7 @@ export default function SectionFive() {
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start end", "end start"]
+    offset: ["start 80%", "end 30%"]
   });
 
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -49,7 +49,7 @@ export default function SectionFive() {
               We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
             </p>
           </div>
-          <div ref={timelineRef} className="relative pt-3 lg:pb-48 pb-12">
+          <div ref={timelineRef} className="relative pt-3  overflow-hidden">
             <div className="absolute left-2 top-8 bottom-8 w-0.5 bg-gray-300 z-10" />
             <motion.div
               style={{ height }}

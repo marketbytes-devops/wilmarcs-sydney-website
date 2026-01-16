@@ -29,8 +29,8 @@ export default function AboutUsPage() {
    gsap.to(box, {
   scrollTrigger: {
     trigger: section,
-    start: "top top",
-    end: "bottom bottom", // till SectionFour
+     start: "top 80%",
+    end: "bottom 20%", // till SectionFour
     scrub: 1,
   },
   motionPath: {
