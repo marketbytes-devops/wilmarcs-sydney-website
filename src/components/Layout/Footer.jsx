@@ -10,7 +10,7 @@ import Button from "@/components/Button/index";
 const Footer = () => {
   return (
     <>
-     <div>
+     <div className="pb-8">
         <div className="border-t border-gray-300 w-full" />
         <div className="grid grid-cols-1  lg:grid-cols-12 gap-6 py-3 lg:px-0 px-6">
           {/* Left Halftone Image */}
@@ -128,9 +128,9 @@ const Footer = () => {
             Help
           </li>
         </ul>
-        <div className="border-t border-gray-300 w-full mt-4"></div>
+       
       </div>
-
+ <div className="border-t border-gray-300 w-full mt-4"></div>
       <div className="flex justify-center h-auto py-6 sm:py-18 px-4 sm:px-0">
         <p className="font-kumbh  -mt-5 text-center text-gray-600">
           &copy; {new Date().getFullYear()} Wilmarcs Motion Pictures. All rights

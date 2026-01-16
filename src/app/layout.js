@@ -8,10 +8,16 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import ScrollToTop from "@/components/ScrollToTop/inedx";
+import { usePathname } from "next/navigation";
 
 
 
 export default function RootLayout({ children }) {
+
+  const pathname = usePathname();
+
+  const hideLayout = pathname === "/thank-you";
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -33,13 +39,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ScrollToTop/>
-        <Navbar />
+         {!hideLayout && <Navbar />}
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content">
             <main className="sm:mt-10 mt-2 ">
               {children}
             </main>
-            <Footer />
+             {!hideLayout && <Footer />}
           </div>
         </div>
       </body>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ContactForm from "@/components/Form";
+import ContactForm from "@/components/Form/ContactForm";
 import React from "react";
 import contactus from "@/assets/videos/contact-us/contactus.gif";
 
@@ -14,7 +14,6 @@ const page = () => {
           max-w-[1400px]  
           aspect-[16/9]"
           >
-           
             <div className="absolute inset-0">
               <Image
                 src={contactus}
@@ -28,50 +27,85 @@ const page = () => {
 
       <section className="container">
         <div className="w-full flex lg:flex-row flex-col">
-              <div className="lg:w-[80%] w-full mt-18">
-            <span className="font-geist font-bold text-[100px] text-[#26164F] uppercase leading-tight">
-                Let’s talk about your project.
+          <div className="lg:w-[80%] w-full md:mt-18 mt-6">
+            <span
+              className="font-geist font-extrabold
+                            text-[22px] md:text-[72px] lg:text-[100px] text-[#26164F]
+                            uppercase leading-tight"
+            >
+              Let’s talk about your project.
             </span>
+          </div>
+          <div className="lg:w-[20%] w-full"></div>
         </div>
-        <div className="lg:w-[20%] w-full"></div>
+
+        <div className="border border-[#454545] mt-3 md:mt-0" />
+        <div>
+          <p className="font-extralight opacity-60 mt-2 md:mt-0">Share a few details.</p>
         </div>
-        
-        <div className="border border-[#454545]"/>
         <ContactForm />
       </section>
 
-<div className="pb-20">
-      <section className="container bg-black rounded-3xl text-white p-8">
-        <h5 className="uppercase">Direct contact</h5>
+      <div className="lg:pb-20 pb-12">
+        <section className="container bg-black rounded-3xl text-white px-6 py-10 md:p-8 lg:p-12">
+          <h5 className="uppercase tracking-wider text-sm md:text-base font-medium mb-8 md:mb-10">
+            Direct contact
+          </h5>
 
-        <div className="grid grid-cols-3 gap-18 mt-10">
-            <div className="flex items-end gap-10 ">
-                <div className="mb-5">
-                    <p>Email</p>
-                    <h6>hello@wilmarcs.com</h6>
-                </div>
-                 <div className="w-px h-48 bg-[#8D8D8D]"></div>
+          <div
+            className="
+      grid 
+      grid-cols-1 
+      md:grid-cols-3 
+      gap-10 
+      md:gap-8 
+      lg:gap-12
+    "
+          >
+            {/* Email */}
+            <div className="flex md:items-end gap-6 md:gap-10">
+              <div className="space-y-1 md:mb-5">
+                <p className="text-gray-400 text-sm uppercase tracking-wide">
+                  Email
+                </p>
+                <h6 className="text-lg md:text-xl font-medium">
+                  hello@wilmarcs.com
+                </h6>
+              </div>
+
+              {/* Vertical line - hidden on mobile, shown from md+ */}
+              <div className="hidden md:block w-px h-40 lg:h-48 bg-[#8D8D8D] self-end" />
             </div>
 
-             <div className="flex items-end gap-10">
-                <div className="mb-5">
-                    <p>location</p>
-                    <h6>Sydney NSW, Australia</h6>
-                </div>
-                 <div className="w-px h-48 bg-[#8D8D8D]"></div>
+            {/* Location */}
+            <div className="flex md:items-end gap-6 md:gap-10">
+              <div className="space-y-1 md:mb-5">
+                <p className="text-gray-400 text-sm uppercase tracking-wide">
+                  Location
+                </p>
+                <h6 className="text-lg md:text-xl font-medium">
+                  Sydney NSW, Australia
+                </h6>
+              </div>
+
+              {/* Vertical line - hidden on mobile, shown from md+ */}
+              <div className="hidden md:block w-px h-40 lg:h-48 bg-[#8D8D8D] self-end" />
             </div>
 
-             <div className="flex items-end  gap-10">
-                <div className="mb-5">
-                    <p>Phone</p>
-                    <h6>+61 (update number)</h6>
-                </div>
-                 
+            {/* Phone */}
+            <div className="flex md:items-end gap-6 md:gap-10">
+              <div className="space-y-1 md:mb-5">
+                <p className="text-gray-400 text-sm uppercase tracking-wide">
+                  Phone
+                </p>
+                <h6 className="text-lg md:text-xl font-medium">
+                  +61 (update number)
+                </h6>
+              </div>
             </div>
-        </div>
-
-      </section>
-</div>
+          </div>
+        </section>
+      </div>
     </>
   );
 };
