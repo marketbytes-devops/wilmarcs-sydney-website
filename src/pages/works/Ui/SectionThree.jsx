@@ -33,20 +33,20 @@ export default function FAQAccordion() {
   };
 
   return (
-    <div className="min-h-screen container py-16 px-4 ">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-18">
+    <div className="container sm:py-16   ">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2  lg:gap-18">
         {/* Left Section */}
         <div className="lg:pr-8">
-          <h1 className="text-5xl lg:text-6xl font-semibold text-[#26164F] mb-6 leading-tight">
+          <h1 className="text-5xl lg:text-6xl text-center sm:text-start font-semibold text-[#26164F] sm:mb-6 leading-tight">
             FREQUENTLY ASKED<br />QUESTIONS
           </h1>
-          <p className="text-gray-600 text-lg font-extralight">
+          <p className="text-gray-600 sm:mt-0 mt-2 sm:text-start text-center text-lg font-extralight">
             This is different we get that, you may have questions, here are some answers.
           </p>
         </div>
 
         {/* Right Section - FAQ Items */}
-        <div className="space-y-3 py-8  ">
+        <div className="sm:space-y-3 space-y-2 sm:py-8 py-2  ">
           {faqs.map((faq, index) => (
             <div 
               key={index}
@@ -56,7 +56,7 @@ export default function FAQAccordion() {
                 onClick={() => toggleFAQ(index)}
                 className="w-full flex items-center justify-between text-left group"
               >
-                <span className="text-xl lg:text-xl font-semibold text-gray-900 pr-4">
+                <span className="text-lg lg:text-xl font-semibold text-gray-900 pr-4">
                   {faq.question}
                 </span>
                 <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">

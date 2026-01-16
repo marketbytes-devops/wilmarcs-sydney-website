@@ -18,8 +18,11 @@ export default function ProcessPreview() {
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
 
+  // We no longer need mobileItemsRef since we're removing the animation
+
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Desktop animation only — keep as it was
       gsap.from(itemsRef.current, {
         y: -60,
         opacity: 0,
@@ -32,16 +35,18 @@ export default function ProcessPreview() {
           scrub: true,
         },
       });
+      // → Removed the mobile animation block completely
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="container">
+    <section ref={containerRef} className="container px-4">
       <h3 className="font-semibold text-[#24144C] mb-4">PROCESS PREVIEW</h3>
 
-      <div className="flex items-start justify-center gap-24 max-w-5xl mx-auto mb-8">
+      {/* DESKTOP LAYOUT - Hidden on mobile */}
+      <div className="hidden md:flex items-start justify-center gap-24 max-w-5xl mx-auto mb-8">
         {steps.map((step, i) => (
           <div
             key={step}
@@ -59,10 +64,37 @@ export default function ProcessPreview() {
 
             {/* ADD LINE ONLY AFTER DELIVERY */}
             {i === steps.length - 1 && (
-              <div className="h-44 w-px bg-gray-400 mt-10 " />
+              <div className="h-44 w-px bg-gray-400 mt-10" />
             )}
           </div>
         ))}
+      </div>
+
+      {/* MOBILE LAYOUT - Hidden on desktop - now static (no refs/animation) */}
+      <div className="md:hidden flex mb-6 sm:mb-0">
+        <div className="relative flex">
+          {/* Big Vertical Line */}
+          <div className="w-px bg-[#8D8D8D] absolute left-0 top-0 bottom-0" />
+
+          {/* Steps List */}
+          <div className="flex flex-col gap-6 pl-8">
+            {steps.map((step, i) => (
+              <div
+                key={step}
+                // Removed ref — no longer needed
+                className="flex items-center gap-3"
+              >
+                {/* Small horizontal line connecting to main line */}
+                <div className="w-4 h-px bg-[#8D8D8D] absolute left-0" />
+                
+                {/* Number and text */}
+                <span className="font-medium text-[#26164F]">
+                  {i + 1}. {step}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

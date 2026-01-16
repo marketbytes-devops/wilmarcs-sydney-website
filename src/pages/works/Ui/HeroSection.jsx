@@ -35,9 +35,9 @@ export default function HeroSection() {
         <div className="absolute inset-0 pointer-events-none lg:mt-40 mt-4">
         
 
-         <div className="text-white w-full flex flex-col  text-left justify-center">
+         <div className="text-white w-full sm:flex sm:flex-col  sm:text-left text-center ">
             <h3 className="leading-tight mt-8 font-bold">Featured Projects</h3>
-            <p className="w-fit leading-tight bg-white text-black p-2  ">
+            <p className="sm:w-fit  sm:leading-tight   text-center bg-white text-black p-2  ">
                 creativity, skill, innovation
             </p>
           </div>
