@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import FormUpIcon from "../Icons/FormUpIcon";
-import FormDownIcon from "../Icons/FormDownIcon";
+import emailjs from "emailjs-com";
+
+import FormUpIcon from "../../components/Icons/FormUpIcon";
+
 
 export default function ContactForm() {
   const router = useRouter();
@@ -33,7 +35,6 @@ export default function ContactForm() {
 
     if (!formData.projectType)
       newErrors.projectType = "Please select project type";
-
     if (!formData.budget) newErrors.budget = "Please select budget";
 
     setErrors(newErrors);
@@ -42,32 +43,37 @@ export default function ContactForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Form submitted with data:", formData);
+    if (!validateForm()) return;
 
-    if (!validateForm()) {
-      console.log("Validation failed. Errors:", errors);
-      return;
-    }
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      projectType: formData.projectType,
+      budget: formData.budget,
+      message: formData.message,
+    };
 
-    console.log("Validation passed → Simulating successful submission...");
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
 
-    // === Simulate successful submission (NO backend call) ===
-    setTimeout(() => {
-      // 1. Clear the form
+      // Clear form
       setFormData({
         name: "",
         email: "",
@@ -77,24 +83,23 @@ export default function ContactForm() {
         budget: "",
         message: "",
       });
-      setErrors({});
 
-      // 2. Show success feedback (optional)
-      alert("Thank you! Your message has been sent (simulated).");
-
-      // 3. Redirect to thank you page
+      // Redirect
       router.push("/thank-you");
-    }, 800); // small delay to feel more natural
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      alert("Something went wrong. Please try again later.");
+    }
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-5 py-12 md:py-16">
+    <div className="w-full max-w-6xl mx-auto px-5 py-2 md:py-16">
       <div className="-ml-18 -mb-12">
         <FormUpIcon />
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-9">
-        {/* Name */}
+        {/* FORM FIELDS SAME AS YOUR CODE */}
         <div>
           <input
             type="text"
@@ -102,7 +107,8 @@ export default function ContactForm() {
             placeholder="Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 
+            required
+            className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5
                        text-lg placeholder:text-black/50 text-black focus:placeholder:text-black
                        focus:border-black focus:outline-none transition-colors"
           />
@@ -111,7 +117,6 @@ export default function ContactForm() {
           )}
         </div>
 
-        {/* Email + Phone */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
           <div>
             <input
@@ -120,7 +125,8 @@ export default function ContactForm() {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 
+              required
+              className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5
                          text-lg placeholder:text-black/50 text-black focus:placeholder:text-black
                          focus:border-black focus:outline-none transition-colors"
             />
@@ -136,7 +142,7 @@ export default function ContactForm() {
               placeholder="Phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 
+              className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5
                          text-lg placeholder:text-black/50 text-black focus:placeholder:text-black
                          focus:border-black focus:outline-none transition-colors"
             />
@@ -146,7 +152,6 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Company */}
         <div>
           <input
             type="text"
@@ -154,7 +159,7 @@ export default function ContactForm() {
             placeholder="Company"
             value={formData.company}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 
+            className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5
                        text-lg placeholder:text-black/50 text-black focus:placeholder:text-black
                        focus:border-black focus:outline-none transition-colors"
           />
@@ -163,31 +168,36 @@ export default function ContactForm() {
           )}
         </div>
 
-        {/* Project Type + Budget */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
           <div className="relative">
             <select
               name="projectType"
               value={formData.projectType}
               onChange={handleChange}
+              required
               className={`w-full bg-transparent border-b pb-3.5 text-lg appearance-none
                 ${formData.projectType === "" ? "text-black/50" : "text-black"}
                 focus:border-black focus:outline-none transition-colors`}
             >
-              <option value="" disabled hidden>Project Type</option>
+              <option value="" disabled hidden>
+                Project Type
+              </option>
               <option value="website">Website</option>
               <option value="app">Mobile App</option>
               <option value="branding">Branding</option>
               <option value="ecommerce">E-commerce</option>
               <option value="other">Other</option>
             </select>
-            {/* dropdown arrow */}
             <svg
               className="absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 pointer-events-none"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
             {errors.projectType && (
               <p className="text-red-600 text-sm mt-1">{errors.projectType}</p>
@@ -203,7 +213,9 @@ export default function ContactForm() {
                 ${formData.budget === "" ? "text-black/50" : "text-black"}
                 focus:border-black focus:outline-none transition-colors`}
             >
-              <option value="" disabled hidden>Budget</option>
+              <option value="" disabled hidden>
+                Budget
+              </option>
               <option value="5-10">$5K - $10K</option>
               <option value="10-25">$10K - $25K</option>
               <option value="25-50">$25K - $50K</option>
@@ -215,7 +227,11 @@ export default function ContactForm() {
               viewBox="0 0 20 20"
               fill="currentColor"
             >
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
             {errors.budget && (
               <p className="text-red-600 text-sm mt-1">{errors.budget}</p>
@@ -229,7 +245,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           rows={1}
-          className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 
+          className="w-full bg-transparent border-b border-[#7D7D7D] pb-3.5
                      text-lg placeholder:text-black/50 text-black focus:placeholder:text-black
                      focus:border-black focus:outline-none transition-colors resize-none"
         />
@@ -237,7 +253,7 @@ export default function ContactForm() {
         <div className="mt-4 flex justify-center">
           <button
             type="submit"
-            className="px-14 py-3 w-full md:w-auto bg-black text-white text-base font-medium 
+            className="px-14 py-3 lg:w-auto w-full bg-black text-white text-base font-medium
                        rounded-full hover:bg-zinc-800 transition-colors"
           >
             Submit
@@ -245,9 +261,6 @@ export default function ContactForm() {
         </div>
       </form>
 
-      <div className="flex justify-end -mr-20 -mt-12">
-        <FormDownIcon />
-      </div>
     </div>
   );
 }
