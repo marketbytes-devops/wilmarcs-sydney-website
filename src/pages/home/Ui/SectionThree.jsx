@@ -101,9 +101,9 @@ export default function SelectedWork() {
         {/* Header */}
         <div
           className="flex flex-col md:flex-row justify-between items-start md:items-center
-                        md:mb-12 mb-6"
+                        md:mb-12 mb-6 w-full"
         >
-          <div>
+          <div className="lg:w-[80%] md:w-[70%] w-full">
             <p
               className="text-[#000000] text-center md:text-left font-extralight
                          uppercase tracking-wider mb-2"
@@ -115,12 +115,12 @@ export default function SelectedWork() {
             </h2>
           </div>
 
-         <Link href="">
+         <Link href="" className="lg:w-[20%] md:w-[30%] w-full">
           <Button
             className="bg-black  text-white sm:py-4 px-8 py-2
-                            rounded-full font-medium ml-6 sm:ml-0
+                            rounded-full font-medium w-full md:w-auto
                           hover:bg-gray-800 transition items-center justify-center 
-                            gap-3 mt-4 md:mt-0 inline-flex whitespace-nowrap
+                            gap-3 mt-4 md:mt-0 flex md:inline-flex whitespace-nowrap
                             bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)] 
                             hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
           >

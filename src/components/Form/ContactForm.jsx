@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import emailjs from "emailjs-com";
 
 import FormUpIcon from "../../components/Icons/FormUpIcon";
+import FormDownIcon from "../Icons/FormDownIcon";
 
 
 export default function ContactForm() {
@@ -260,6 +261,10 @@ export default function ContactForm() {
           </button>
         </div>
       </form>
+
+      <div className="flex justify-end -mr-20 -mt-12">
+        <FormDownIcon />
+      </div>
 
     </div>
   );
