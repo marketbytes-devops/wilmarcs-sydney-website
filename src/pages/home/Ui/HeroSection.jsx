@@ -14,7 +14,7 @@ const HeroSection = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  // Track playing state for each slide video (true = playing, false = paused)
+
   const [playingVideos, setPlayingVideos] = useState({});
 
   useEffect(() => {
@@ -114,7 +114,6 @@ const HeroSection = () => {
   const sectionMargin = scrollProgress > 0.3 ? "0px" : "24px";
   const bgRightPosition = scrollProgress > 0.3 ? "0px" : "-24px";
 
-  // Toggle play/pause for a specific video
   const togglePlayPause = (id, videoRef) => {
     if (!videoRef) return;
 
@@ -340,7 +339,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* CENTER LARGE VIDEO PREVIEW (Auto-plays as before) */}
+           
               <div
                 className="absolute top-[40%] left-1/2 pointer-events-none rounded-2xl overflow-hidden"
                 style={{

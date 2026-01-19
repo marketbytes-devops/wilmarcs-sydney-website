@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import QuoteIcon from "../../../components/Icons/Quotes";
+import { useState, useRef, useEffect } from "react";
 import worksimg from "../../../assets/images/works/worksimg.png";
 import Image from "next/image";
+import QuoteIcon from "../../../components/Icons/Quotes";
 
 export default function TestimonialCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const testimonials = [
     {
@@ -32,90 +33,197 @@ export default function TestimonialCarousel() {
     },
   ];
 
-  // Calculate how many slides we need (showing 2 cards per slide)
-  const totalSlides = Math.ceil(testimonials.length / 2);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
+  const totalSlides = isMobile
+    ? testimonials.length
+    : Math.ceil(testimonials.length / 2);
 
   const goToSlide = (index) => {
-    setCurrentSlide(index);
+    setCurrentSlide(Math.max(0, Math.min(totalSlides - 1, index)));
   };
 
-  // Get testimonials for current slide
-  const getTestimonialsForSlide = (slideIndex) => {
-    const startIndex = slideIndex * 2;
-    return testimonials.slice(startIndex, startIndex + 2);
-  };
+  const containerRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const startTranslate = useRef(0);
+  const prevTranslate = useRef(0);
+  const animationID = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let currentTranslate = 0;
+
+    const getPositionX = (e) =>
+      e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
+
+    const touchStart = (e) => {
+      isDragging.current = true;
+      startX.current = getPositionX(e);
+      startTranslate.current = -currentSlide * container.offsetWidth;
+      prevTranslate.current = startTranslate.current;
+
+      container.style.transition = "none";
+      cancelAnimationFrame(animationID.current);
+    };
+
+    const touchMove = (e) => {
+      if (!isDragging.current) return;
+      const currentPosition = getPositionX(e);
+      currentTranslate =
+        prevTranslate.current + currentPosition - startX.current;
+
+      container.style.transform = `translateX(${currentTranslate}px)`;
+    };
+
+    const touchEnd = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+
+      const movedBy = currentTranslate - startTranslate.current;
+      const slideWidth = container.offsetWidth;
+      const threshold = slideWidth * 0.25;
+
+      let newIndex = currentSlide;
+      if (movedBy < -threshold && currentSlide < totalSlides - 1) {
+        newIndex = currentSlide + 1;
+      }
+      if (movedBy > threshold && currentSlide > 0) {
+        newIndex = currentSlide - 1;
+      }
+
+      container.style.transition = "transform 500ms ease-in-out";
+      container.style.transform = `translateX(-${newIndex * 100}%)`;
+
+      setCurrentSlide(newIndex);
+
+      currentTranslate = -newIndex * slideWidth;
+      prevTranslate.current = currentTranslate;
+    };
+
+    container.addEventListener("mousedown", touchStart);
+    container.addEventListener("touchstart", touchStart);
+
+    window.addEventListener("mousemove", touchMove);
+    window.addEventListener("touchmove", touchMove, { passive: false });
+
+    window.addEventListener("mouseup", touchEnd);
+    window.addEventListener("mouseleave", touchEnd);
+    window.addEventListener("touchend", touchEnd);
+
+    return () => {
+      container.removeEventListener("mousedown", touchStart);
+      container.removeEventListener("touchstart", touchStart);
+      window.removeEventListener("mousemove", touchMove);
+      window.removeEventListener("touchmove", touchMove);
+      window.removeEventListener("mouseup", touchEnd);
+      window.removeEventListener("mouseleave", touchEnd);
+      window.removeEventListener("touchend", touchEnd);
+    };
+  }, [currentSlide, totalSlides]);
 
   return (
-    <div className="bg-white container ">
-      <div className="mb-12">
-        <h2 className="text-xl sm:text-2xl font-bold text-[#26164F] uppercase tracking-tight">
+    <div className="bg-white container">
+      <div className="mb-12 sm:mb-1 container">
+        <h2 className=" sm:text-start text-center  font-bold text-[#26164F] uppercase tracking-tight">
           WHAT CLIENTS SAY ABOUT THE TOOL
         </h2>
       </div>
 
-      {/* Carousel Container */}
       <div className="relative">
         <div className="overflow-hidden">
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            ref={containerRef}
+            className="flex transition-transform duration-500 ease-in-out select-none cursor-grab active:cursor-grabbing"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
-            {[...Array(totalSlides)].map((_, slideIndex) => {
-              const slideTestimonials = getTestimonialsForSlide(slideIndex);
+            {isMobile
+              ? testimonials.map((testimonial) => (
+                  <div
+                    key={testimonial.id}
+                    className="w-full flex-shrink-0 px-2"
+                  >
+                    <div className="bg-white rounded-2xl mb-4 shadow-xl p-2  flex flex-col">
+                      
 
-              return (
-                <div key={slideIndex} className="w-full flex-shrink-0 px-2 ">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {slideTestimonials.map((testimonial) => (
-                      <div
-                        key={testimonial.id}
-                        className=" bg-white rounded-2xl shadow-xl
-  p-10 md:p-12
-  min-h-[380px] md:min-h-[440px]
-  border border-gray-100
-  flex flex-col"
-                      >
-                        <div className="relative w-14 h-12">
-                          <QuoteIcon className="absolute top-0 left-0 w-12 h-10 md:w-14 md:h-12" />
-                        </div>
-
-                        <span className="text-gray-700 text-[23px]  mb-8 leading-relaxed">
-                          {testimonial.text}
-                        </span>
-                        <div className="flex items-center">
-                          <Image
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            className="w-12 h-12 rounded-full mr-4 bg-gray-200"
-                          />
-                          <div>
-                            <p className="font-bold text-gray-900">
-                              {testimonial.name}
-                            </p>
-                            <p className="text-gray-500 text-sm">
-                              {testimonial.role}
-                            </p>
-                          </div>
+                      <span className="text-gray-700 p-4 text-center justify-start text-sm mb-3 leading-relaxed">
+                        {testimonial.text}
+                      </span>
+                      <div className="flex items-center ">
+                        <Image
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-12 h-12 rounded-full mr-4  bg-gray-200"
+                        />
+                        <div>
+                          <p className="font-bold text-gray-900">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-gray-500 text-sm">
+                            {testimonial.role}
+                          </p>
                         </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                ))
+              : [...Array(totalSlides)].map((_, slideIndex) => {
+                  const slideTestimonials = testimonials.slice(
+                    slideIndex * 2,
+                    slideIndex * 2 + 2
+                  );
+
+                  return (
+                    <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {slideTestimonials.map((testimonial) => (
+                          <div
+                            key={testimonial.id}
+                            className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
+                          >
+                            <div className=" relative">
+                              <QuoteIcon
+                                className="  text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20"
+                              />
+                            </div>
+
+                            <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
+                              {testimonial.text}
+                            </span>
+                            <div className="flex items-center">
+                              <Image
+                                src={testimonial.image}
+                                alt={testimonial.name}
+                                className="w-12 h-12 rounded-full mr-4 bg-gray-200"
+                              />
+                              <div>
+                                <p className="font-bold text-gray-900">
+                                  {testimonial.name}
+                                </p>
+                                <p className="text-gray-500 text-sm">
+                                  {testimonial.role}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
           </div>
         </div>
 
-        {/* Navigation Dots */}
-        <div className="flex justify-center items-center mt-8 space-x-2">
+        <div className="flex justify-center items-center mt-3 sm:mt-6 mb-8 space-x-2">
           {[...Array(totalSlides)].map((_, index) => (
             <button
               key={index}
@@ -129,50 +237,6 @@ export default function TestimonialCarousel() {
             />
           ))}
         </div>
-
-        {/* Arrow Navigation */}
-        {totalSlides > 1 && (
-          <>
-            <button
-              onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors hidden md:block"
-              aria-label="Previous slide"
-            >
-              <svg
-                className="w-6 h-6 text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-50 transition-colors hidden md:block"
-              aria-label="Next slide"
-            >
-              <svg
-                className="w-6 h-6 text-gray-800"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </>
-        )}
       </div>
     </div>
   );
