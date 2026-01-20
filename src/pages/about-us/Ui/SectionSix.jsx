@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "../../../components/Button";
-
+import ModalForm from "@/components/Form/ModalForm";
+import { createPortal } from "react-dom";
 import sectionsixabout from "@/assets/images/about/sectionsixabout.png";
 
 const contentItems = [
@@ -27,9 +28,12 @@ const contentItems = [
   },
 ];
 
+
 export default function OperatingModelSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const currentItem = contentItems[activeIndex];
+  const [openPlanModal, setOpenPlanModal] = useState(false);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,7 +44,10 @@ export default function OperatingModelSection() {
   }, []);
 
   return (
-    <section className="container rounded-3xl bg-[#C7D5D8] lg:py-14 py-6 px-5 sm:px-10 md:px-14  flex items-center">
+    <section
+      className="container rounded-3xl bg-[#C7D5D8] lg:py-14 py-6 px-5 sm:px-10 md:px-14 
+                        flex items-center"
+    >
       <div
         className="
   max-w-7xl mx-auto w-full
@@ -83,6 +90,7 @@ export default function OperatingModelSection() {
           </div>
 
           <Button
+            onClick={() => setOpenPlanModal(true)}
             className="bg-black px-12 py-4 text-white mt-2 w-full lg:w-auto
                        transition-all duration-300 bg-gradient-to-r from-[#000000] to-[#666666]"
           >
@@ -108,19 +116,52 @@ export default function OperatingModelSection() {
             />
           </div>
 
-          {/* Carousel dots (optional - you can remove if not needed) */}
-          <div className="  flex gap-3 mt-4 justify-center">
+          {/* Carousel dots */}
+          <div className="flex items-center justify-center gap-3 mt-5 lg:mt-6">
             {contentItems.map((_, i) => (
-              <div
+              <button
                 key={i}
-                className={`w-2.5 h-2.5  rounded-full transition-all duration-300 ${
-                  i === activeIndex ? " bg-[#5D5D5D] px-4 " : "bg-[#5D5D5D] "
-                }`}
+                type="button"
+                onClick={() => setActiveIndex(i)}
+                className={`
+        w-3 h-3 rounded-full transition-all duration-300 ease-in-out
+        
+        ${
+          i === activeIndex
+            ? "bg-[#2B1A56] scale-125"
+            : "bg-[#9CA3AF] hover:bg-gray-500"
+        }
+      `}
+                aria-label={`Slide ${i + 1} of ${contentItems.length}`}
               />
             ))}
           </div>
         </div>
       </div>
+
+     {openPlanModal &&
+             createPortal(
+               <div
+                 className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+                 onClick={() => setOpenPlanModal(false)} // optional: close on backdrop click
+               >
+                 {/* Modal content – stop propagation so clicks inside don't close */}
+                 <div
+                   className="bg-white w-[95%] max-w-5xl max-h-[90vh] p-8 rounded-2xl relative overflow-y-auto"
+                   onClick={(e) => e.stopPropagation()}
+                 >
+                   <button
+                     onClick={() => setOpenPlanModal(false)}
+                     className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+                   >
+                     ×
+                   </button>
+     
+                   <ModalForm closeModal={() => setOpenPlanModal(false)} />
+                 </div>
+               </div>,
+               document.body,
+             )}
     </section>
   );
 }

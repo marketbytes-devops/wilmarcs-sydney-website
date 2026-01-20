@@ -318,7 +318,7 @@ export default function Navbar() {
     hover:bg-gray-100
     hover:border-gray-400 rounded-full text-sm flex items-center gap-2"
             >
-              <span className="text-xs font-semibold">×</span>
+              <span className="text-2xl font-semibold ">×</span>
               <span className="font-semibold ">Close</span>
             </button>
 
@@ -422,7 +422,7 @@ export default function Navbar() {
             {/* Close Button */}
             <button
               onClick={() => setOpenPlanModal(false)}
-              className="absolute top-4 right-4 text-xl font-bold cursor-pointer"
+              className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
             >
               ×
             </button>

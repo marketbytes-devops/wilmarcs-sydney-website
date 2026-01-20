@@ -103,15 +103,17 @@ const SelectedWork = () => {
       
         <div className="sm:flex sm:justify-between sm:items-start sm:mb-6">
           <div>
-            <span className="hidden sm:block mt-8 md:text-8xl text-[#26164F] font-black tracking-tight">
+            <span className="hidden sm:block font-geist mt-8 md:text-8xl text-[#26164F] font-black tracking-tight">
               SELECTED <br /> WORK
             </span>
-            <span className="text-3xl text-center sm:hidden block text-[#26164F] font-black tracking-tight">
+            <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] font-black tracking-tight">
               SELECTED WORK
             </span>
           </div>
           <div className="sm:text-right sm:text-xs sm:mt-24 text-gray-600 sm:max-w-xs leading-relaxed">
-            <p className="block sm:hidden mt-2">Whitworth Media Proudly is a dedicated film studio specializing </p>
+            <p className="block sm:hidden mt-2 text-center">
+              Whitworth Media Proudly is a dedicated film studio specializing
+            </p>
             <p className="sm:block hidden">Whitworth Media </p>
             <p className="sm:block hidden">Proudly is a dedicated</p>
             <p className="sm:block hidden">film studio specializing</p>

@@ -8,7 +8,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { createPortal } from "react-dom";
 
+import ModalForm from "@/components/Form/ModalForm";
 import card1 from "@/assets/images/about/card1.png";
 import card2 from "@/assets/images/about/card2.png";
 import card3 from "@/assets/images/about/card3.png";
@@ -19,6 +21,7 @@ const SectionFive = () => {
   const [hovered, setHovered] = useState(false);
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
+  const [openPlanModal, setOpenPlanModal] = useState(false);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -69,7 +72,7 @@ const SectionFive = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    centerMode:true,
+    centerMode: true,
     centerPadding: "8px",
   };
 
@@ -86,6 +89,7 @@ const SectionFive = () => {
           </div>
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-end ">
             <Button
+              onClick={() => setOpenPlanModal(true)}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
               className={`flex items-center overflow-hidden whitespace-nowrap text-white
@@ -147,6 +151,30 @@ const SectionFive = () => {
           </div>
         </Slider>
       </section>
+
+      {openPlanModal &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+            onClick={() => setOpenPlanModal(false)} // optional: close on backdrop click
+          >
+            {/* Modal content – stop propagation so clicks inside don't close */}
+            <div
+              className="bg-white w-[95%] max-w-5xl max-h-[90vh] p-8 rounded-2xl relative overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setOpenPlanModal(false)}
+                className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+              >
+                ×
+              </button>
+
+              <ModalForm closeModal={() => setOpenPlanModal(false)} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 };

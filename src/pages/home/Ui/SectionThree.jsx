@@ -115,7 +115,7 @@ export default function SelectedWork() {
             </h2>
           </div>
 
-         <Link href="" className="lg:w-[20%] md:w-[30%] w-full">
+         <Link href="/works" className="lg:w-[20%] md:w-[30%] w-full">
           <Button
             className="bg-black  text-white sm:py-4 px-8 py-2
                             rounded-full font-medium w-full md:w-auto
