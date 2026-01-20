@@ -72,7 +72,7 @@ export default function ProcessStack() {
   }, []);
 
   return (
-    <section className="relative" style={{ paddingBottom: "100vh" }}>
+    <section className="relative  pb-[90vh] sm:pb-[100vh]">
       {data.map((item, i) => {
        
         const isLastCard = i === data.length - 1;
@@ -81,7 +81,7 @@ export default function ProcessStack() {
           <div
             key={i}
             ref={(el) => (cardsRef.current[i] = el)}
-            className="md:pb-10 lg:pb-20 pb-12"
+            className="md:pb-10 lg:pb-20 pb-0"
             style={{ zIndex: i + 1 }}
           >
             <div className="container ">
