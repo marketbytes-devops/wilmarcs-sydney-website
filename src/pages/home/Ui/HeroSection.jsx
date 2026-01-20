@@ -140,7 +140,8 @@ const HeroSection = () => {
         >
           <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
         </video>
-        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5 text-black">
+        <div className="absolute inset-0 bg-black/70 z-0"></div>
+        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5 text-white">
           {/* SLIDER */}
           <div className="mb-4">
             <Slider {...mobileSettings}>
@@ -156,7 +157,7 @@ const HeroSection = () => {
                         if (ref && playingVideos[slide.id] === false) ref.pause();
                       }}
                     >
-                      <source src={slide.video} type="video/mp4" />
+                      <source src={slide.video} type="video/mp4"/>
                     </video>
 
                     {/* Play / Pause Button Overlay */}
@@ -190,7 +191,7 @@ const HeroSection = () => {
           <span className="font-bold text-center mb-4">
             Cinematic films for brands that value clear communication.
           </span>
-          <p className="text-center text-sm opacity-80">
+          <p className="text-center  ">
             You'll only receive updates on new templates.
             <br />
             No spam, just what you signed up for.
@@ -226,6 +227,7 @@ const HeroSection = () => {
           >
             <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
           </video>
+           <div className="absolute inset-0 bg-black/80 z-0"></div>
 
           {/* VERTICAL SLIDER */}
           <div

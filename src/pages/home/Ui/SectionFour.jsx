@@ -105,9 +105,17 @@ const SectionFour = () => {
                     rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <p className="block sm:hidden text-white text-sm font-medium">
               Films
-            </Button>
+            </p>
+            <div className="hidden sm:block">
+              <Button
+                className="text-white border-3 border-white px-4 sm:px-14 py-2
+               rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Films
+              </Button>
+            </div>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -155,9 +163,17 @@ const SectionFour = () => {
                      p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+           <p className="block sm:hidden text-black text-sm font-medium">
               Films
-            </Button>
+            </p>
+            <div className="hidden sm:block">
+              <Button
+                className="text-black border-3 border-black px-4 sm:px-14 py-2
+               rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Films
+              </Button>
+            </div>
             <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -186,9 +202,11 @@ const SectionFour = () => {
                             flex items-center gap-8 group transition-all duration-300"
               >
                 See More
-                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300
+                <RightArrow
+                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300
                                        group-hover:translate-x-3"
-                            color="black" />
+                  color="black"
+                />
               </Link>
             </div>
           </div>
@@ -201,9 +219,17 @@ const SectionFour = () => {
                    rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Films
-            </Button>
+            <p className="block sm:hidden text-white text-sm font-medium">
+              Stories
+            </p>
+            <div className="hidden sm:block">
+              <Button
+                className="text-white border-3 border-white px-4 sm:px-14 py-2
+               rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Stories
+              </Button>
+            </div>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -245,9 +271,17 @@ const SectionFour = () => {
                     shadow-2xl flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Films
-            </Button>
+            <p className="block sm:hidden text-white text-sm font-medium">
+              Stories
+            </p>
+            <div className="hidden sm:block">
+              <Button
+                className="text-white border-3 border-white px-4 sm:px-14 py-2
+               rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Stories
+              </Button>
+            </div>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -284,9 +318,17 @@ const SectionFour = () => {
           className="w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Films
-            </Button>
+           <p className="block sm:hidden text-white text-sm font-medium">
+              Social
+            </p>
+            <div className="hidden sm:block">
+              <Button
+                className="text-white border-3 border-white px-4 sm:px-14 py-2
+               rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Social
+              </Button>
+            </div>
             <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -309,7 +351,7 @@ const SectionFour = () => {
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-               <Link
+              <Link
                 href=""
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
@@ -321,8 +363,10 @@ const SectionFour = () => {
           </div>
 
           {/* Short Films */}
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-right block
-                           text-white mb-6 md:mb-8">
+          <span
+            className="text-4xl sm:text-5xl md:text-[100px] uppercase text-right block
+                           text-white mb-6 md:mb-8"
+          >
             Short Films
           </span>
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8 mt-3 pb-4 md:pb-8">
@@ -331,15 +375,16 @@ const SectionFour = () => {
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
-               <Link
+              <Link
                 href=""
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
                 See More
-                <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 
+                <RightArrow
+                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 
                                       group-hover:translate-x-3"
-                 />
+                />
               </Link>
             </div>
             <Image
@@ -352,7 +397,6 @@ const SectionFour = () => {
             />
           </div>
         </div>
-
       </div>
     </div>
   );

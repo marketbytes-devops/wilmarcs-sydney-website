@@ -14,6 +14,7 @@ import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
 import ContactIcon from "./../Icons/ContactIcon";
 import { motion, AnimatePresence } from "framer-motion";
 import menu from "../../assets/images/home/menu.png";
+import ModalForm from "../Form/ModalForm";
 
 const navLinks = [
   { name: "Home", href: "/", icon: GoHome },
@@ -46,6 +47,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [openPlanModal, setOpenPlanModal] = useState(false);
 
   useEffect(() => {
     if (!isHomePage) {
@@ -79,18 +81,17 @@ export default function Navbar() {
     duration: 0.45,
     ease: "easeInOut",
   };
-const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-useEffect(() => {
-  const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
-  return () => window.removeEventListener("resize", checkMobile);
-}, []);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <>
-    
       {showInitialNavbar && (
         <nav className=" hidden sm:block bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-2xl mx-6 mt-3">
           <div className="mx-auto px-6">
@@ -191,7 +192,8 @@ useEffect(() => {
                   `}
                 >
                   <ContactIcon />
-                  <span
+                  <Link
+                    href="/contact-us"
                     className={`
                       inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out
                       ${
@@ -202,10 +204,11 @@ useEffect(() => {
                     `}
                   >
                     Contact Us
-                  </span>
+                  </Link>
                 </Button>
 
                 <Button
+                  onClick={() => setOpenPlanModal(true)}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                   className={`
@@ -226,6 +229,7 @@ useEffect(() => {
                     )}
                   </span>
                 </Button>
+                
               </div>
             </div>
 
@@ -267,37 +271,37 @@ useEffect(() => {
         </nav>
       )}
 
-  {(showScrolledNavbar || isMobile) && (
-  <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between">
-        <Link href="/">
-          <Image
-            src="/wilmarcs-logo.png"
-            alt="Wilmarcs Logo"
-            width={140}
-            height={36}
-            className="object-contain invert brightness-0"
-          />
-        </Link>
+      {(showScrolledNavbar || isMobile) && (
+        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <Link href="/">
+                <Image
+                  src="/wilmarcs-logo.png"
+                  alt="Wilmarcs Logo"
+                  width={140}
+                  height={36}
+                  className="object-contain invert brightness-0"
+                />
+              </Link>
 
-        <Button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-white hover:text-gray-300 focus:outline-none z-50 relative border-white border py-2 px-5 flex items-center gap-2"
-        >
-          <Image
-            src={menu}
-            alt="Menu"
-            width={24}
-            height={24}
-            className="object-contain"
-          />
-          Menu
-        </Button>
-      </div>
-    </div>
-  </nav>
-)}
+              <Button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-white hover:text-gray-300 focus:outline-none z-50 relative border-white border py-2 px-5 flex items-center gap-2"
+              >
+                <Image
+                  src={menu}
+                  alt="Menu"
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                />
+                Menu
+              </Button>
+            </div>
+          </div>
+        </nav>
+      )}
 
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -346,6 +350,23 @@ useEffect(() => {
                       </Link>
                     </motion.div>
                   ))}
+                  <div className="mt-10 flex flex-col gap-4 lg:hidden -mx-10 w-screen">
+                    <button
+                      onClick={() => setOpenPlanModal(true)}
+                      className="w-full border border-white text-white py-3 rounded-full"
+                    >
+                      Plan a Project
+                    </button>
+                    <Link
+                      href="/contact-us"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block w-full text-center border border-white text-white
+                                 py-3 rounded-full"
+                    >
+                      Contact Us
+                    </Link>
+                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -371,11 +392,20 @@ useEffect(() => {
                   </h2>
 
                   <div className="flex gap-6">
-                    <button className="bg-black text-white px-8 py-3 rounded-full">
-                      Contact Us
-                    </button>
-
-                    <button className="border border-black px-8 py-3 rounded-full">
+                    <Link
+                      href="/contact-us"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <button className="bg-black text-white px-8 py-3 rounded-full cursor-pointer">
+                        Contact Us
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setOpenPlanModal(true);
+                      }}
+                      className="border border-black px-8 py-3 rounded-full cursor-pointer"
+                    >
                       Plan a project
                     </button>
                   </div>
@@ -385,6 +415,23 @@ useEffect(() => {
           </motion.div>
         )}
       </AnimatePresence>
+      {openPlanModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70">
+          {/* Modal Box */}
+          <div className="bg-white w-[95%] max-w-5xl max-h-[90vh] p-8 rounded-2xl relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setOpenPlanModal(false)}
+              className="absolute top-4 right-4 text-xl font-bold cursor-pointer"
+            >
+              ×
+            </button>
+
+            {/* YOUR FORM COMPONENT */}
+            <ModalForm closeModal={() => setOpenPlanModal(false)} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
