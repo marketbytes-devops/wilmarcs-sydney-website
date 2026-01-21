@@ -158,7 +158,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href=""
+                href="/services"
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
@@ -187,12 +187,12 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 Films
               </Button>
             </div>
-            <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-black leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[90px] uppercase text-black leading-none mb-6 md:mb-8">
             Documentary Films
           </span>
 
@@ -210,7 +210,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href=""
+                href="/services"
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
@@ -236,14 +236,14 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               Stories
             </p>
             <div className="hidden sm:block">
-              <Button
+              <Button onClick={() => setOpenPlanModal(true)}
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
@@ -266,7 +266,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href=""
+                href="/services"
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
@@ -288,14 +288,14 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               Stories
             </p>
             <div className="hidden sm:block">
-              <Button
+              <Button onClick={() => setOpenPlanModal(true)}
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
@@ -314,7 +314,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href=""
+                href="/services"
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
@@ -335,14 +335,14 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               Social
             </p>
             <div className="hidden sm:block">
-              <Button
+              <Button onClick={() => setOpenPlanModal(true)}
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Social
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
@@ -365,7 +365,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href=""
+                href="/services"
                 className="font-jakarta font-medium self-start text-sm md:text-[20px] 
                             flex items-center gap-8 group transition-all duration-300"
               >
