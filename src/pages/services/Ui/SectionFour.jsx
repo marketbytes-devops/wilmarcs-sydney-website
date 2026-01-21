@@ -41,12 +41,11 @@ const SectionFour = () => {
               <div className=" w-full grid grid-cols-1 sm:grid-cols-3 text-left pb-4">
                 {/* Stat 1 */}
                 <div className="relative px-4">
-                  <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
-
-                  <p className="font-bold text-gray-900 mt-3">
+          
+                  <p className="font-bold text-gray-900 sm:mt-3 mt-0">
                     Deliverables
                   </p>
-                  <p className="mt-4 py-2  text-gray-600 leading-relaxed">
+                  <p className="sm:mt-4 mt-0 py-2  text-gray-600 leading-relaxed">
                     Wilmarcs Motion Pictures is a dedicated film studio
                     specializing in structured and intentional storytelling.
                   </p>
@@ -54,12 +53,11 @@ const SectionFour = () => {
 
                 {/* Stat 2 */}
                <div className="relative px-4">
-                  <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
-
-                  <p className=" font-bold text-gray-900 mt-3">
+                
+                  <p className=" font-bold text-gray-900 sm:mt-3 mt-0">
                     Add‑ons
                   </p>
-                  <p className="mt-4 py-2  text-gray-600 leading-relaxed">
+                  <p className="sm:mt-4 mt-0 py-2  text-gray-600 leading-relaxed">
                     Wilmarcs Motion Pictures is a dedicated film studio
                     specializing in structured and intentional storytelling.
                   </p>
@@ -67,12 +65,11 @@ const SectionFour = () => {
 
                 {/* Stat 3 */}
                <div className="relative px-4">
-                  <div className="absolute left-1 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
 
-                  <p className=" font-bold text-gray-900 mt-3">
+                  <p className=" font-bold text-gray-900 sm:mt-3 mt-0">
                     Budget
                   </p>
-                  <p className="mt-4 py-2  text-gray-600 leading-relaxed">
+                  <p className="sm:mt-4 mt-0 py-2  text-gray-600 leading-relaxed">
                     Wilmarcs Motion Pictures is a dedicated film studio
                     specializing in structured and intentional storytelling.
                   </p>
