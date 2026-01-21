@@ -11,19 +11,19 @@ const HeroSection = () => {
                          bg-clip-text text-transparent md:mb-4 mb-2 text-center md:text-left">
         About
       </span>
-      <span className="text-xl md:text-5xl font-semibold  
+      <span className="text-xl md:text-5xl font-semibold  font-geist
                       bg-[linear-gradient(94.04deg,#25154E_12.92%,#5530B4_98.63%)]
                       bg-clip-text text-transparent  md:mb-4 mb-2 text-center md:text-left">
         Wilmarcs Motion Pictures
       </span>
-      <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl text-center md:text-left">
+      <p className="text-lg md:text-xl text-black mb-12 max-w-3xl text-center md:text-left">
         Sydney-based studio for corporate, CSR, and event films.
       </p>   
       </div>
       
 
      
-      <div className=" rounded-2xl overflow-hidden -mt-8 md:mt-0 ">
+      <div className=" rounded-2xl overflow-hidden -mt-8 md:-mt-6 ">
         <Image
           src={banner} 
           alt="Wilmarcs Motion Pictures team"

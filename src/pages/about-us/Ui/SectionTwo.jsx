@@ -29,13 +29,13 @@ const SectionTwo = () => {
 
        <div className="mt-2 w-full flex flex-col lg:flex-row">
         <div className='lg:w-[22%] w-0'></div>
-        <div className="lg:w-[78%] w-full grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-0 text-left">
+        <div className="lg:w-[78%] w-full grid grid-cols-1 lg:[grid-template-columns:30%_30%_30%_10%] gap-3 lg:gap-0 text-left">
           {/* Stat 1 */}
           <div className="relative px-6 lg:px-4">
              <div className="absolute -left-1 top-1 w-5 h-5 bg-[#8D8D8D] rounded-full"></div>
             <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
             
-            <h6 className=" font-bold text-gray-900 mt-2 md:mt-4">
+            <h6 className=" font-extrabold text-gray-900 mt-2 md:mt-4">
               A top creative company
             </h6>
             <p className="mt-2 md:mt-10 lg:mt-20 py-2 lg:py-5 text-gray-600 leading-relaxed">
@@ -61,12 +61,16 @@ const SectionTwo = () => {
             <div className="absolute -left-1 top-1 w-5 h-5 bg-[#8D8D8D] rounded-full"></div>
             <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D]"></div>
             
-            <h6 className="font-bold text-gray-900 mt-2 md:mt-4">
+            <h6 className="font-extrabold text-gray-900 mt-2 md:mt-4">
               80M+ client
             </h6>
             <p className="mt-2 md:mt-10 lg:mt-24 py-4 lg:py-8 text-gray-600 leading-relaxed">
               Wilmarcs Motion Pictures is a dedicated film studio specializing in structured and intentional storytelling.
             </p>
+          </div>
+          <div className="relative px-6 lg:px-4 hidden lg:block">
+             <div className="absolute -left-1 top-1 w-5 h-5 bg-[#8D8D8D] rounded-full"></div>
+            <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ export default function PlacesMentioned() {
   return (
     <section className="w-full container bg-white lg:py-24 sm:py-6 py-4">
       <div className="max-w-7xl mx-auto px-6 lg:px-0">
-        <div className="grid grid-cols-1 lg:[grid-template-columns:40%_60%] gap-5 items-start">
+        <div className="grid grid-cols-1 lg:[grid-template-columns:40%_60%] items-start">
           {/* LEFT */}
           <div>
             <h2 className="font-black uppercase leading-tight text-center lg:text-left">

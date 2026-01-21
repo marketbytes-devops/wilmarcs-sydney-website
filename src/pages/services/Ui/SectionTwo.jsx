@@ -77,7 +77,7 @@ const SectionTwo = () => {
 
                 <div className="mt-4">
                   <Button onClick={() => setOpenPlanModal(true)} 
-                          className="uppercase lg:w-auto px-10 py-2 border-4 w-full">
+                          className="uppercase lg:w-auto px-10 py-2 border-4 w-full hover:bg-gray-200">
                     plan a project
                   </Button>
                 </div>

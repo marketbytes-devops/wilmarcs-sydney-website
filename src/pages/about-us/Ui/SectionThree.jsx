@@ -18,7 +18,8 @@ const SectionThree = () => {
               className="rounded-3xl lg:h-[400px] lg:w-[356px] w-full h-auto"
             />
 
-            <div className="absolute rounded-3xl inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/60" />
+            <div className="absolute rounded-3xl inset-0 
+                            bg-gradient-to-b from-black/0 via-black/0 to-black/60" />
 
             {/* TEXT */}
             <div className="absolute bottom-4 right-18 left-18 text-center text-white z-10">
@@ -27,11 +28,11 @@ const SectionThree = () => {
             </div>
           </div>
 
-          <div className="w-full lg:w-[70%] lg:mt-32 mt-2">
+          <div className="w-full lg:w-[70%] lg:mt-40 mt-2">
             <h2 className="font-semibold text-center lg:text-left">
               Founder-led, disciplined, clarity-driven filmmaking.
             </h2>
-            <p className="mt-3 text-center lg:text-left font-thin leading-relaxed">
+            <p className="mt-3 text-center lg:text-left font-thin text-black/90 leading-relaxed">
               Kevin Wilson, the founder of Wilmarcs Motion Pictures, brings
               years of industry experience to every project. With a disciplined
               approach, Kevin ensures clarity-driven filmmaking, guiding each

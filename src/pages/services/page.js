@@ -19,15 +19,15 @@ const page = () => {
         <SectionTwo/>
     </section>
 
-     <section className='lg:mt-24 mt-6'>
+     <section className='lg:mt-24 mt-2'>
         <SectionThree/>
     </section>
 
-     <section className='lg:mt-24 mt-6'>
+     <section className='lg:mt-24 mt-2'>
         <SectionFour/>
     </section>
 
-     <section className='lg:mt-24 mt-6'>
+     <section className='lg:mt-24 mt-2'>
         <SectionFive/>
     </section>
 
@@ -35,7 +35,7 @@ const page = () => {
         <SectionSix/>
     </section>
 
-    <section className='lg:mt-24 mt-6'>
+    <section className='lg:mt-24 mt-3'>
         <SectionSeven/>
     </section>
     </>

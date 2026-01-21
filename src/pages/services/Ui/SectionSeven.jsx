@@ -18,8 +18,6 @@ export default function ProcessPreview() {
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
 
-  // We no longer need mobileItemsRef since we're removing the animation
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Desktop animation only — keep as it was
@@ -27,7 +25,7 @@ export default function ProcessPreview() {
         y: -60,
         opacity: 0,
         ease: "power3.out",
-        stagger: 0.25,
+        stagger: 0.15,
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 70%",
@@ -43,7 +41,9 @@ export default function ProcessPreview() {
 
   return (
     <section ref={containerRef} className="container px-4">
-      <h3 className="font-semibold text-[#24144C] mb-4">PROCESS PREVIEW</h3>
+      <h4 className="font-semibold text-[#24144C] mb-4 text-center md:text-left uppercase">
+        PROCESS PREVIEW
+      </h4>
 
       {/* DESKTOP LAYOUT - Hidden on mobile */}
       <div className="hidden md:flex items-start justify-center gap-24 max-w-5xl mx-auto mb-8">
