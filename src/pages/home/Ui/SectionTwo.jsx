@@ -5,10 +5,24 @@ import { useState, useEffect } from "react";
 import SectionTwoGif from "../../../assets/videos/home/gif.gif";
 import Image from "next/image";
 import Button from "./../../../components/Button/index";
+import ModalForm from "../../../components/Form/ModalForm";
+import { createPortal } from "react-dom";
 
 const SectionTwo = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
-
+ const [openPlanModal, setOpenPlanModal] = useState(false);
+ useEffect(() => {
+   if (openPlanModal) {
+     document.body.style.overflow = "hidden";
+   } else {
+     document.body.style.overflow = "";
+   }
+ 
+   return () => {
+     document.body.style.overflow = "";
+   };
+ }, [openPlanModal]);
+ 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -99,15 +113,45 @@ const SectionTwo = () => {
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
-        <Button
+        <Button onClick={() => setOpenPlanModal(true)}
           className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium transition
              bg-[conic-gradient(from_90deg_at_50%_50%,#201147_0deg,#7356BC_360deg)]
              hover:bg-[conic-gradient(from_360deg_at_50%_50%,#7356BC_0deg,#201147_90deg)]"
         >
           Plan A Project
         </Button>
+        
       </motion.div>
+        
+          {openPlanModal &&
+                        createPortal(
+                          <div
+                            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+                            onClick={() => setOpenPlanModal(false)} 
+                          >
+       <div
+        className="bg-white w-full max-w-5xl h-[90vh]
+                   p-6 md:p-8
+                   rounded-2xl relative
+                   overflow-hidden flex items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+      
+      
+                              <button
+                                onClick={() => setOpenPlanModal(false)}
+                                className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+                              >
+                                ×
+                              </button>
+                
+                              <ModalForm closeModal={() => setOpenPlanModal(false)} />
+                            </div>
+                          </div>,
+                          document.body,
+                        )}
     </div>
+    
   );
 };
 
