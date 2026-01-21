@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState } from "react";
 import Image from "next/image";
 import img1 from "../../../assets/images/home/section4_2.png";
 import sectionFourImg from "../../../assets/images/home/section4.jpg";
@@ -9,13 +9,26 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Button from "./../../../components/Button/index";
 import RightArrow from "@/components/Icons/RightArrow";
 import Link from "next/link";
-
+import ModalForm from "../../../components/Form/ModalForm";
+import { createPortal } from "react-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const SectionFour = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
-
+const [openPlanModal, setOpenPlanModal] = useState(false);
+ useEffect(() => {
+   if (openPlanModal) {
+     document.body.style.overflow = "hidden";
+   } else {
+     document.body.style.overflow = "";
+   }
+ 
+   return () => {
+     document.body.style.overflow = "";
+   };
+ }, [openPlanModal]);
+ 
   useEffect(() => {
     const cards = cardsRef.current;
 
@@ -116,7 +129,7 @@ const SectionFour = () => {
                 Films
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
@@ -398,6 +411,33 @@ const SectionFour = () => {
           </div>
         </div>
       </div>
+      {openPlanModal &&
+                              createPortal(
+                                <div
+                                  className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+                                  onClick={() => setOpenPlanModal(false)} 
+                                >
+             <div
+              className="bg-white w-full max-w-5xl h-[90vh]
+                         p-6 md:p-8
+                         rounded-2xl relative
+                         overflow-hidden flex items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+            
+            
+                                    <button
+                                      onClick={() => setOpenPlanModal(false)}
+                                      className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+                                    >
+                                      ×
+                                    </button>
+                      
+                                    <ModalForm closeModal={() => setOpenPlanModal(false)} />
+                                  </div>
+                                </div>,
+                                document.body,
+                              )}
     </div>
   );
 };
