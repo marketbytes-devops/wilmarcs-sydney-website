@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import emailjs from 'emailjs-com';
+import { Listbox, Transition } from '@headlessui/react';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import FormUpIcon from "../../components/Icons/FormUpIcon";
 import FormDownIcon from "../Icons/FormDownIcon";
+
 export default function ContactFormSection() {
   const router = useRouter();
 
@@ -40,7 +43,7 @@ export default function ContactFormSection() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target || e;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     if (errors[name]) {
@@ -71,7 +74,6 @@ export default function ContactFormSection() {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
-
       setFormData({
         name: '',
         email: '',
@@ -90,17 +92,15 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-5 sm:py-8 py-2 md:py-2">
-      
-      <div className="w-full flex lg:flex-row flex-col gap-2 lg:gap-12">
-      
+  <section className="w-full max-w-6xl mx-auto px-5 sm:py-8 py-2 md:py-10 overflow-x-hidden">
+
+      <div className="w-full flex lg:flex-row flex-col gap-2 lg:gap-4">
 
         {/* Left side - Heading */}
-        <div className="lg:w-[45%] w-full flex flex-col ">
-
-          <h1 className="font-extrabold text-4xl sm:mt-20  text-[#26164F] uppercase leading-tight">
+        <div className="lg:w-[48%] w-full flex flex-col ">
+          <span className="font-extrabold sm:text-6xl text-2xl sm:mt-12  text-[#26164F] uppercase leading-tight">
             LET'S TALK ABOUT YOUR PROJECT.
-          </h1>
+          </span>
           <p className="font-light text-gray-600 mt-4 text-lg">
             Share a few details.
           </p>
@@ -108,12 +108,11 @@ export default function ContactFormSection() {
 
         {/* Right side - Form */}
         <div className="lg:w-[55%] w-full">
-             <div className="-ml-18 sm:-mb-12 -mb-23">
-        <FormUpIcon />
-      </div>
+ 
+
+
           <div className="flex flex-col gap-2 md:gap-4">
-              
-      
+            
             {/* Name */}
             <div>
               <input
@@ -175,71 +174,115 @@ export default function ContactFormSection() {
               )}
             </div>
 
-            {/* Project Type and Budget */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-              <div className="relative">
-                <select
-                  name="projectType"
-                  value={formData.projectType}
-                  onChange={handleChange}
-                  className={`w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 text-lg appearance-none ${formData.projectType === '' ? 'text-black/50' : 'text-black'} focus:border-black focus:outline-none transition-colors`}
-                >
-                  <option value="" disabled hidden>
-                    Project Type
-                  </option>
-                  <option value="website">Website</option>
-                  <option value="app">Mobile App</option>
-                  <option value="branding">Branding</option>
-                  <option value="ecommerce">E-commerce</option>
-                  <option value="other">Other</option>
-                </select>
-                <svg
-                  className="absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 pointer-events-none"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {errors.projectType && (
-                  <p className="text-red-600 text-sm mt-1">{errors.projectType}</p>
-                )}
-              </div>
+            {/* Project Type and Budget - CUSTOM DROPDOWNS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
+              {/* Project Type */}
+              <Listbox
+                value={formData.projectType}
+                onChange={(value) => handleChange({ name: 'projectType', value })}
+              >
+                <div className="relative">
+                  <Listbox.Button className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors">
+                    <span className={`block truncate ${!formData.projectType ? 'text-black/50' : 'text-black'}`}>
+                      {formData.projectType || 'Project Type'}
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronUpDownIcon className="h-5 w-5 text-gray-600" aria-hidden="true" />
+                    </span>
+                  </Listbox.Button>
 
-              <div className="relative">
-                <select
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className={`w-full bg-transparent border-b border-[#7D7D7D] pb-3.5 text-lg appearance-none ${formData.budget === '' ? 'text-black/50' : 'text-black'} focus:border-black focus:outline-none transition-colors`}
-                >
-                  <option value="" disabled hidden>
-                    Budget
-                  </option>
-                  <option value="5-10">$5K - $10K</option>
-                  <option value="10-25">$10K - $25K</option>
-                  <option value="25-50">$25K - $50K</option>
-                  <option value="50+">$50K+</option>
-                  <option value="custom">Custom / Not sure</option>
-                </select>
-                <svg
-                  className="absolute right-1 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600 pointer-events-none"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {errors.budget && (
-                  <p className="text-red-600 text-sm mt-1">{errors.budget}</p>
-                )}
-              </div>
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                      {['Website', 'Mobile App', 'Branding', 'E-commerce', 'Other'].map((type) => (
+                        <Listbox.Option
+                          key={type}
+                          value={type}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                              active ? 'bg-purple-100 text-purple-900' : 'text-gray-900'
+                            }`
+                          }
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                {type}
+                              </span>
+                              {selected && (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600">
+                                  ✓
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+
+              {/* Budget */}
+              <Listbox
+                value={formData.budget}
+                onChange={(value) => handleChange({ name: 'budget', value })}
+              >
+                <div className="relative">
+                  <Listbox.Button className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors">
+                    <span className={`block truncate ${!formData.budget ? 'text-black/50' : 'text-black'}`}>
+                      {formData.budget || 'Budget'}
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronUpDownIcon className="h-5 w-5 text-gray-600" aria-hidden="true" />
+                    </span>
+                  </Listbox.Button>
+
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                      {[
+                        '$5K - $10K',
+                        '$10K - $25K',
+                        '$25K - $50K',
+                        '$50K+',
+                        'Custom / Not sure'
+                      ].map((option) => (
+                        <Listbox.Option
+                          key={option}
+                          value={option}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                              active ? 'bg-purple-100 text-purple-900' : 'text-gray-900'
+                            }`
+                          }
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                {option}
+                              </span>
+                              {selected && (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600">
+                                  ✓
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
             </div>
 
             {/* Message */}
@@ -253,19 +296,18 @@ export default function ContactFormSection() {
             />
 
             {/* Submit Button */}
-            <div className="mt-2 flex justify-end">
+            <div className="mt-2 flex justify-start sm:items-start">
               <button
                 onClick={handleSubmit}
-                className="px-14 py-3 lg:w-auto w-full bg-black text-white text-base font-medium rounded-full hover:bg-zinc-800 transition-colors"
+                className="px-14 py-3 lg:w-auto w-full bg-black text-white text-base font-medium rounded-full justify-start sm:items-start hover:bg-zinc-800 transition-colors"
               >
                 Submit
               </button>
             </div>
         
           </div>
-            <div className="flex justify-end -mr-20 -mt-12">
-        <FormDownIcon />
-      </div>
+  
+
         </div>
       </div>
     </section>

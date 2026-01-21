@@ -13,6 +13,8 @@
     "@fontsource/jost": "^5.2.8",
     "@fontsource/kumbh-sans": "^5.2.7",
     "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
     "@radix-ui/react-portal": "^1.1.10",
     "aos": "^2.3.4",
     "emailjs-com": "^3.2.0",

@@ -5,19 +5,31 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "../../../components/Button";
-
+import Link from "next/link";
+import ModalForm from "../../../components/Form/ModalForm";
+import { createPortal } from "react-dom";
 const HeroSection = () => {
   const sectionRef = useRef(null);
   const sliderRef = useRef(null);
   const scrollTimeoutRef = useRef(null);
-
+ const [openPlanModal, setOpenPlanModal] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [playingVideos, setPlayingVideos] = useState({});
+useEffect(() => {
+  if (openPlanModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
 
- 
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [openPlanModal]);
+
   useEffect(() => {
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 768);
@@ -27,7 +39,6 @@ const HeroSection = () => {
     return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
- 
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -51,7 +62,7 @@ const HeroSection = () => {
 
       const progress = Math.min(
         Math.max((scrollY - sectionTop) / (sectionHeight * 0.5), 0),
-        1
+        1,
       );
 
       setScrollProgress(progress);
@@ -103,7 +114,6 @@ const HeroSection = () => {
     { id: 3, video: "/videos/home/slider1.mp4" },
     { id: 4, video: "/videos/home/slider2.mp4" },
   ];
-
 
   const extendedSlides = [...slides, ...slides, ...slides];
 
@@ -160,7 +170,8 @@ const HeroSection = () => {
                       playsInline
                       className="w-full h-full object-cover"
                       ref={(ref) => {
-                        if (ref && playingVideos[slide.id] === false) ref.pause();
+                        if (ref && playingVideos[slide.id] === false)
+                          ref.pause();
                       }}
                     >
                       <source src={slide.video} type="video/mp4" />
@@ -253,7 +264,8 @@ const HeroSection = () => {
                         playsInline
                         className="w-full h-full object-cover"
                         ref={(ref) => {
-                          if (ref && playingVideos[slide.id] === false) ref.pause();
+                          if (ref && playingVideos[slide.id] === false)
+                            ref.pause();
                         }}
                       >
                         <source src={slide.video} type="video/mp4" />
@@ -266,7 +278,8 @@ const HeroSection = () => {
                       <div
                         className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/20 transition-opacity hover:bg-black/30"
                         onClick={(e) => {
-                          const video = e.currentTarget.previousSibling.previousSibling;
+                          const video =
+                            e.currentTarget.previousSibling.previousSibling;
                           togglePlayPause(slide.id, video);
                         }}
                       >
@@ -301,9 +314,7 @@ const HeroSection = () => {
             >
               <h1 className="font-normal text-white leading-tight">
                 Cinematic Films For{" "}
-                <span
-                  className="bg-gradient-to-b from-[#BBAEB9] to-[#6B41FF] bg-clip-text text-transparent px-4 py-2 inline-block rounded-2xl"
-                >
+                <span className="bg-gradient-to-b from-[#BBAEB9] to-[#6B41FF] bg-clip-text text-transparent px-4 py-2 inline-block rounded-2xl">
                   Brands
                 </span>
                 <br />
@@ -331,12 +342,14 @@ const HeroSection = () => {
                   no spam, just what you signed up for.
                 </p>
                 <div className="flex gap-5">
-                  <Button className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
+                  <Button onClick={() => setOpenPlanModal(true)}  className="text-black bg-white rounded-3xl py-2 px-8 font-semibold">
                     Plan a Project
                   </Button>
-                  <Button className="text-white bg-black rounded-3xl py-2 px-8 font-semibold border border-white">
-                    Watch Work
-                  </Button>
+                  <Link href="/works">
+                    <Button className="text-white bg-black rounded-3xl py-2 px-8 font-semibold border border-white">
+                      Watch Work
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -345,7 +358,8 @@ const HeroSection = () => {
                 style={{
                   opacity: centerImageOpacity,
                   transform: `translate(-50%, -50%) scale(${centerImageScale})`,
-                  transition: "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
+                  transition:
+                    "opacity 0.2s ease, transform 0.10s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
                 <div className="relative w-[500px] h-[340px]">
@@ -357,14 +371,46 @@ const HeroSection = () => {
                     playsInline
                     className="w-full h-full object-cover"
                   >
-                    <source src={slides[currentSlideIndex % slides.length].video} type="video/mp4" />
+                    <source
+                      src={slides[currentSlideIndex % slides.length].video}
+                      type="video/mp4"
+                    />
                   </video>
                 </div>
               </div>
             </div>
           </div>
         </div>
+  
       </section>
+     
+    {openPlanModal &&
+                  createPortal(
+                    <div
+                      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+                      onClick={() => setOpenPlanModal(false)} 
+                    >
+ <div
+  className="bg-white w-full max-w-5xl h-[90vh]
+             p-6 md:p-8
+             rounded-2xl relative
+             overflow-hidden flex items-center"
+  onClick={(e) => e.stopPropagation()}
+>
+
+
+                        <button
+                          onClick={() => setOpenPlanModal(false)}
+                          className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+                        >
+                          ×
+                        </button>
+          
+                        <ModalForm closeModal={() => setOpenPlanModal(false)} />
+                      </div>
+                    </div>,
+                    document.body,
+                  )}
     </>
   );
 };
