@@ -33,11 +33,11 @@ export default function FAQAccordion() {
   };
 
   return (
-    <div className="container sm:py-16   ">
+    <div className="container sm:py-16 ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2  lg:gap-18">
         {/* Left Section */}
         <div className="lg:pr-8">
-          <h1 className="text-5xl lg:text-6xl text-center sm:text-start font-semibold text-[#26164F] sm:mb-6 leading-tight">
+          <h1 className="text-center sm:text-start font-semibold text-[#26164F] sm:mb-6 leading-tight">
             FREQUENTLY ASKED<br />QUESTIONS
           </h1>
           <p className="text-gray-600 sm:mt-0 mt-2 sm:text-start text-center text-lg font-extralight">

@@ -72,7 +72,7 @@ export default function ProcessStack() {
   }, []);
 
   return (
-    <section className="relative  pb-[90vh] sm:pb-[100vh]">
+    <section className="relative  pb-[90vh] xl:pb-[100vh] ">
       {data.map((item, i) => {
        
         const isLastCard = i === data.length - 1;

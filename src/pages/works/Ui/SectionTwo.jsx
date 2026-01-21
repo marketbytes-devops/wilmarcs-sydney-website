@@ -110,7 +110,7 @@ const SelectedWork = () => {
               SELECTED WORK
             </span>
           </div>
-          <div className="sm:text-right sm:text-xs sm:mt-24 text-gray-600 sm:max-w-xs leading-relaxed">
+          <div className="sm:text-right sm:mt-32 text-gray-600 sm:max-w-xs leading-relaxed">
             <p className="block sm:hidden mt-2 text-center">
               Whitworth Media Proudly is a dedicated film studio specializing
             </p>

@@ -35,7 +35,7 @@ const page = () => {
         <SectionSix/>
     </section>
 
-    <section className='lg:mt-24 mt-3'>
+    <section className='lg:mt-24 mt-0'>
         <SectionSeven/>
     </section>
     </>

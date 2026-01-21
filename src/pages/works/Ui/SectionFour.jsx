@@ -133,8 +133,8 @@ export default function TestimonialCarousel() {
 
   return (
     <div className="bg-white container">
-      <div className="mb-12 sm:mb-1 container">
-        <h2 className=" sm:text-start text-center  font-bold text-[#26164F] uppercase tracking-tight">
+      <div className="mb-1 ">
+        <h2 className=" sm:text-left text-center font-bold text-[#26164F] uppercase tracking-tight">
           WHAT CLIENTS SAY ABOUT THE TOOL
         </h2>
       </div>

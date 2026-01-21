@@ -6,16 +6,16 @@ const HeroSection = () => {
   return (
     <>
       <section className="bg-black mt-14">
-        <div className="flex flex-col lg:flex-row container py-32  w-full">
+        <div className="flex flex-col lg:flex-row container lg:py-32 py-10  w-full">
 
-          <div className="text-white w-full lg:w-[50%] py-16 ">
+          <div className="text-white w-full lg:w-[50%] lg:py-16 py-8 ">
             <h3 className="leading-tight font-bold text-center lg:text-left">Our Workflow</h3>
             <p className="mt-2 w-fit leading-tight bg-white text-black p-2  text-center lg:text-left">
                 A structured process for clarity and predictability.
             </p>
           </div>
 
-          <div className="relative w-full mt-12 lg:w-[50%] lg:h-auto h-[200px] overflow-hidden rounded-2xl">
+          <div className="relative w-full mt-2 lg:mt-12 lg:w-[50%] lg:h-auto h-[200px] overflow-hidden rounded-2xl">
             <video
               src='/videos/process/heroSection.mp4'
               autoPlay

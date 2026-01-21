@@ -14,7 +14,7 @@ const ProcessPage = () => {
      <section className="lg:mt-18 md:mt-10 mt-6">
         <SectionTwo />
       </section>
-      <section className=" lg:-mt-23  md:-mt-56 mt-0 lg:mb-18 md:mb-10 mb-6">
+      <section className=" lg:-mt-32  md:-mt-40 !-mt-44 lg:mb-18 md:mb-10 mb-6">
         <SectionThree />
       </section>
       
