@@ -48,7 +48,7 @@ const SectionFour = () => {
             </p>
           </div>
         </div>
-        <div className="border border-gray-500 mx-8"></div>
+        <div className="border border-[#838383] mx-8"></div>
 
         {/* Mobile Slider (below lg only) */}
         <div className="lg:hidden px-4 py-3">

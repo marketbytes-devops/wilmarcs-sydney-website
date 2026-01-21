@@ -59,8 +59,8 @@ export default function OperatingModelSection() {
 "
       >
         {/* LEFT - Text Content */}
-        <div className="space-y-2 md:space-y-4">
-          <h5 className=" font-bold text-gray-900 tracking-tight text-center lg:text-left">
+        <div className="">
+          <h5 className=" font-bold text-gray-900 tracking-tight text-center lg:text-left ">
             OPERATING MODEL
           </h5>
 
@@ -91,7 +91,7 @@ export default function OperatingModelSection() {
 
           <Button
             onClick={() => setOpenPlanModal(true)}
-            className="bg-black px-12 py-4 text-white mt-2 w-full lg:w-auto
+            className="bg-black px-12 py-4 text-white mt-6 w-full lg:w-auto
                        transition-all duration-300 bg-gradient-to-r from-[#000000] to-[#666666]"
           >
             {" "}

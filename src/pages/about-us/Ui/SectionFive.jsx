@@ -156,7 +156,7 @@ const SectionFive = () => {
         createPortal(
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
-            onClick={() => setOpenPlanModal(false)} // optional: close on backdrop click
+            onClick={() => setOpenPlanModal(false)} 
           >
             {/* Modal content – stop propagation so clicks inside don't close */}
             <div
