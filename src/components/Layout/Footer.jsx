@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Image from "next/image";
 import PeopleIcon from "@/components/Icons/PeopleIcon";
 import halfTone from "@/assets/images/home/halftone.png";
@@ -7,10 +9,33 @@ import lastPic2 from "@/assets/images/home/lastpic2.jpg";
 import lastPic3 from "@/assets/images/home/lastpic3.png";
 import Button from "@/components/Button/index";
 
+import emailjs from "emailjs-com";
+
 const Footer = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_mbspbh6",
+      "template_kqn2u88",
+      form.current,
+      "M5AmlhBeTtXIh5YCQ"
+    )
+    .then(() => {
+      alert("Enquiry sent successfully!");
+      form.current.reset();
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    });
+  };
+
   return (
     <>
-     <div className="pb-8">
+      <div className="pb-8">
         <div className="border-t border-gray-300 w-full" />
         <div className="grid grid-cols-1  lg:grid-cols-12 gap-6 py-3 lg:px-0 px-6">
           {/* Left Halftone Image */}
@@ -25,7 +50,8 @@ const Footer = () => {
           </div>
 
           {/* Center Content */}
-          <div className="col-span-1  lg:col-span-6
+          <div
+            className="col-span-1  lg:col-span-6
                           flex flex-col justify-center relative lg:-left-32"
           >
             <div className="space-y-3 md:space-y-4">
@@ -38,13 +64,22 @@ const Footer = () => {
               <h5 className="  font-semibold text-center lg:text-left ">
                 Let's talk about your project
               </h5>
-              <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center mb-2 lg:mb-0 ">
+
+              {/* FORM START */}
+              <form
+                ref={form}
+                onSubmit={sendEmail}
+                className="flex flex-col md:flex-row gap-4 items-stretch md:items-center mb-2 lg:mb-0 "
+              >
                 <input
                   type="email"
+                  name="user_email"
                   className="flex-1 px-6 py-4 bg-white border border-gray-300 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:border-[#271751]"
                   placeholder="Your email address"
+                  required
                 />
                 <Button
+                  type="submit"
                   className="bg-black  text-white sm:py-4 px-8 py-2
                             rounded-full font-medium 
                           hover:bg-gray-800 transition  
@@ -53,7 +88,9 @@ const Footer = () => {
                 >
                   Send enquiry
                 </Button>
-              </div>
+              </form>
+              {/* FORM END */}
+
             </div>
           </div>
 
@@ -128,11 +165,11 @@ const Footer = () => {
             Help
           </li>
         </ul>
-       
       </div>
- <div className="border-t border-gray-300 w-full mt-4"></div>
+
+      <div className="border-t border-gray-300 w-full mt-4"></div>
       <div className="flex justify-center h-auto py-6 sm:py-18 px-4 sm:px-0">
-        <p className="font-kumbh  -mt-5 text-center text-gray-600">
+        <p className="font-kumbh -mt-5 text-center text-gray-600">
           &copy; {new Date().getFullYear()} Wilmarcs Motion Pictures. All rights
           reserved.
         </p>
