@@ -119,10 +119,13 @@ export default function SelectedWork() {
           <Button
             className="bg-black  text-white sm:py-4 px-8 py-2
                             rounded-full font-medium w-full md:w-auto
-                          hover:bg-gray-800 transition items-center justify-center 
+                          items-center justify-center 
                             gap-3 mt-4 md:mt-0 flex md:inline-flex whitespace-nowrap
-                            bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)] 
-                            hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
+                            transition-[background-position] duration-700 ease-in-out
+    bg-[length:200%_200%] bg-[position:0%_50%]
+    hover:bg-[position:100%_50%]
+    bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)]
+    hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
           >
             Watch work
             <Play className="w-5 h-5" />

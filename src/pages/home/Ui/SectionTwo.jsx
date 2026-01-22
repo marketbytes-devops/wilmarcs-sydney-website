@@ -112,7 +112,9 @@ const SectionTwo = () => {
         transition={{ duration: 0.6 }}
       >
         <Button onClick={() => setOpenPlanModal(true)}
-          className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium transition
+          className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium 
+                    transition-[background-position] duration-700 ease-in-out
+                     bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-[position:100%_50%]
              bg-[conic-gradient(from_90deg_at_50%_50%,#201147_0deg,#7356BC_360deg)]
              hover:bg-[conic-gradient(from_360deg_at_50%_50%,#7356BC_0deg,#201147_90deg)]"
         >

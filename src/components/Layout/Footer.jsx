@@ -17,20 +17,21 @@ const Footer = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(
-      "service_mbspbh6",
-      "template_kqn2u88",
-      form.current,
-      "M5AmlhBeTtXIh5YCQ"
-    )
-    .then(() => {
-      alert("Enquiry sent successfully!");
-      form.current.reset();
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    });
+    emailjs
+      .sendForm(
+        "service_mbspbh6",
+        "template_kqn2u88",
+        form.current,
+        "M5AmlhBeTtXIh5YCQ",
+      )
+      .then(() => {
+        alert("Enquiry sent successfully!");
+        form.current.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+      });
   };
 
   return (
@@ -80,17 +81,20 @@ const Footer = () => {
                 />
                 <Button
                   type="submit"
-                  className="bg-black  text-white sm:py-4 px-8 py-2
-                            rounded-full font-medium 
-                          hover:bg-gray-800 transition  
-                            bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)] 
-                            hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
+                  className="
+    bg-black text-white sm:py-4 px-8 py-2
+    rounded-full font-medium
+    transition-[background-position] duration-700 ease-in-out
+    bg-[length:200%_200%] bg-[position:0%_50%]
+    hover:bg-[position:100%_50%]
+    bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)]
+    hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]
+  "
                 >
                   Send enquiry
                 </Button>
               </form>
               {/* FORM END */}
-
             </div>
           </div>
 
@@ -136,8 +140,10 @@ const Footer = () => {
           />
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-y-6 md:gap-y-0">
-          <ul className="font-kumbh flex gap-x-4 sm:gap-x-6 md:gap-x-8 sm:text-[16px] text-[14px]
-                         px-4 sm:px-6 md:px-10 list-none justify-center md:justify-start">
+          <ul
+            className="font-kumbh flex gap-x-4 sm:gap-x-6 md:gap-x-8 sm:text-[16px] text-[14px]
+                         px-4 sm:px-6 md:px-10 list-none justify-center md:justify-start"
+          >
             <li className="cursor-pointer hover:text-blue-600">Facebook</li>
             <li className="cursor-pointer hover:text-pink-600">Instagram</li>
             <li className="cursor-pointer hover:text-red-600">Youtube</li>

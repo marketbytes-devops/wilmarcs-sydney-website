@@ -181,27 +181,24 @@ export default function Navbar() {
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                   className={`
-                    flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px]
-                    transition-all duration-[600ms] ease-in-out
-                    ${
-                      hovered
-                        ? "gap-8 pr-4 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-                        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
-                    }
-                    shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
-                  `}
+    flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px]
+    transition-all transition-[background-position] duration-[600ms] ease-in-out
+    bg-[length:200%_200%] bg-[position:0%_50%]
+    ${
+      hovered
+        ? "gap-8 pr-4 bg-[position:100%_50%] bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
+        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
+    }
+    shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
+  `}
                 >
                   <ContactIcon />
                   <Link
                     href="/contact-us"
                     className={`
-                      inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out
-                      ${
-                        hovered
-                          ? "max-w-[120px] opacity-100"
-                          : "max-w-0 opacity-0"
-                      }
-                    `}
+      inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out
+      ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}
+    `}
                   >
                     Contact Us
                   </Link>
@@ -212,13 +209,17 @@ export default function Navbar() {
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                   className={`
-                    text-white px-8 py-2.5 overflow-hidden
-                    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
-                    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
-                    shadow-[inset_0_0_0_5px_rgba(255,255,255,0.5)]
-                    transition-[--a,--c1,--c3] duration-700 ease-in-out
-                    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
-                  `}
+    text-white px-8 py-2.5 overflow-hidden
+    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
+    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+    bg-[length:200%_200%]
+    bg-[position:0%_50%]
+    shadow-[inset_0_0_0_5px_rgba(255,255,255,0.5)]
+    transition-[background-position,--a,--c1,--c3]
+    duration-700 ease-in-out
+    hover:bg-[position:100%_50%]
+    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
+  `}
                 >
                   Plan A Project
                   <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
@@ -229,7 +230,6 @@ export default function Navbar() {
                     )}
                   </span>
                 </Button>
-                
               </div>
             </div>
 
@@ -366,7 +366,6 @@ export default function Navbar() {
                       Contact Us
                     </Link>
                   </div>
-                  
                 </div>
               </div>
             </div>
