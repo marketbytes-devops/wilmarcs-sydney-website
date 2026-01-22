@@ -3,7 +3,7 @@
 import { useState, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import emailjs from 'emailjs-com';
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption, Transition } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import FormUpIcon from "../../components/Icons/FormUpIcon";
 import FormDownIcon from "../Icons/FormDownIcon";
@@ -92,7 +92,7 @@ export default function ContactFormSection() {
   };
 
   return (
-  <section className="w-full max-w-6xl mx-auto px-5 sm:py-8 py-2 md:py-10 overflow-x-hidden">
+    <section className="w-full max-w-6xl mx-auto px-5 sm:py-8 py-2 md:py-10">
 
       <div className="w-full flex lg:flex-row flex-col gap-2 lg:gap-4">
 
@@ -108,11 +108,11 @@ export default function ContactFormSection() {
 
         {/* Right side - Form */}
         <div className="lg:w-[55%] w-full">
- 
+
 
 
           <div className="flex flex-col gap-2 md:gap-4">
-            
+
             {/* Name */}
             <div>
               <input
@@ -177,112 +177,90 @@ export default function ContactFormSection() {
             {/* Project Type and Budget - CUSTOM DROPDOWNS */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
               {/* Project Type */}
-              <Listbox
-                value={formData.projectType}
-                onChange={(value) => handleChange({ name: 'projectType', value })}
-              >
-                <div className="relative">
-                  <Listbox.Button className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors">
+              <div className="relative">
+                <Listbox
+                  value={formData.projectType}
+                  onChange={(value) => handleChange({ name: 'projectType', value })}
+                >
+                  <ListboxButton type="button" className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors data-open:border-black">
                     <span className={`block truncate ${!formData.projectType ? 'text-black/50' : 'text-black'}`}>
                       {formData.projectType || 'Project Type'}
                     </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <ChevronUpDownIcon className="h-5 w-5 text-gray-600" aria-hidden="true" />
                     </span>
-                  </Listbox.Button>
+                  </ListboxButton>
 
-                  <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
+                  <ListboxOptions
+                    transition
+                    className="absolute left-0 top-full z-[1000] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-2xl ring-1 ring-black/5 focus:outline-none sm:text-sm transition duration-200 ease-in-out data-closed:opacity-0 data-closed:translate-y-1"
                   >
-                    <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                      {['Website', 'Mobile App', 'Branding', 'E-commerce', 'Other'].map((type) => (
-                        <Listbox.Option
-                          key={type}
-                          value={type}
-                          className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                              active ? 'bg-purple-100 text-purple-900' : 'text-gray-900'
-                            }`
-                          }
-                        >
-                          {({ selected }) => (
-                            <>
-                              <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                                {type}
-                              </span>
-                              {selected && (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600">
-                                  ✓
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </div>
-              </Listbox>
+                    {[
+                      'Website',
+                      'Mobile App',
+                      'Branding',
+                      'E-commerce',
+                      'Other'
+                    ].map((type) => (
+                      <ListboxOption
+                        key={type}
+                        value={type}
+                        className="group relative cursor-pointer select-none py-3 pl-10 pr-4 hover:bg-black hover:text-white text-gray-900 transition-colors"
+                      >
+                        <span className="block truncate group-data-selected:font-semibold font-normal">
+                          {type}
+                        </span>
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-black group-hover:text-white group-data-selected:visible invisible">
+                          ✓
+                        </span>
+                      </ListboxOption>
+                    ))}
+                  </ListboxOptions>
+                </Listbox>
+              </div>
 
               {/* Budget */}
-              <Listbox
-                value={formData.budget}
-                onChange={(value) => handleChange({ name: 'budget', value })}
-              >
-                <div className="relative">
-                  <Listbox.Button className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors">
+              <div className="relative">
+                <Listbox
+                  value={formData.budget}
+                  onChange={(value) => handleChange({ name: 'budget', value })}
+                >
+                  <ListboxButton type="button" className="relative w-full border-b border-[#7D7D7D] pb-3.5 text-left text-lg cursor-default focus:border-black focus:outline-none transition-colors data-open:border-black">
                     <span className={`block truncate ${!formData.budget ? 'text-black/50' : 'text-black'}`}>
                       {formData.budget || 'Budget'}
                     </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <ChevronUpDownIcon className="h-5 w-5 text-gray-600" aria-hidden="true" />
                     </span>
-                  </Listbox.Button>
+                  </ListboxButton>
 
-                  <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
+                  <ListboxOptions
+                    transition
+                    className="absolute left-0 top-full z-[1000] mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-2xl ring-1 ring-black/5 focus:outline-none sm:text-sm transition duration-200 ease-in-out data-closed:opacity-0 data-closed:translate-y-1"
                   >
-                    <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                      {[
-                        '$5K - $10K',
-                        '$10K - $25K',
-                        '$25K - $50K',
-                        '$50K+',
-                        'Custom / Not sure'
-                      ].map((option) => (
-                        <Listbox.Option
-                          key={option}
-                          value={option}
-                          className={({ active }) =>
-                            `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                              active ? 'bg-purple-100 text-purple-900' : 'text-gray-900'
-                            }`
-                          }
-                        >
-                          {({ selected }) => (
-                            <>
-                              <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                                {option}
-                              </span>
-                              {selected && (
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600">
-                                  ✓
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </div>
-              </Listbox>
+                    {[
+                      '$5K - $10K',
+                      '$10K - $25K',
+                      '$25K - $50K',
+                      '$50K+',
+                      'Custom / Not sure'
+                    ].map((option) => (
+                      <ListboxOption
+                        key={option}
+                        value={option}
+                        className="group relative cursor-pointer select-none py-3 pl-10 pr-4 hover:bg-black hover:text-white text-gray-900 transition-colors"
+                      >
+                        <span className="block truncate group-data-selected:font-semibold font-normal">
+                          {option}
+                        </span>
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-black group-hover:text-white group-data-selected:visible invisible">
+                          ✓
+                        </span>
+                      </ListboxOption>
+                    ))}
+                  </ListboxOptions>
+                </Listbox>
+              </div>
             </div>
 
             {/* Message */}
@@ -304,9 +282,9 @@ export default function ContactFormSection() {
                 Submit
               </button>
             </div>
-        
+
           </div>
-  
+
 
         </div>
       </div>

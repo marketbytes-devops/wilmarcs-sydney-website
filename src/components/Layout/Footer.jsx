@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import PeopleIcon from "@/components/Icons/PeopleIcon";
 import halfTone from "@/assets/images/home/halftone.png";
 import lastPic1 from "@/assets/images/home/lastpic1.jpg";
@@ -13,24 +14,25 @@ import emailjs from "emailjs-com";
 
 const Footer = () => {
   const form = useRef();
+  const router = useRouter();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs.sendForm(
-      "service_mbspbh6",
-      "template_kqn2u88",
+      process.env.NEXT_PUBLIC_EMAILJS_FOOTER_SERVICE_ID,
+      process.env.NEXT_PUBLIC_EMAILJS_FOOTER_TEMPLATE_ID,
       form.current,
-      "M5AmlhBeTtXIh5YCQ"
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
     )
-    .then(() => {
-      alert("Enquiry sent successfully!");
-      form.current.reset();
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
-    });
+      .then(() => {
+        form.current.reset();
+        router.push("/thank-you");
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+      });
   };
 
   return (
