@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import img1 from "../../../assets/images/home/section4_2.png";
 import sectionFourImg from "../../../assets/images/home/section4.jpg";
@@ -16,19 +16,19 @@ gsap.registerPlugin(ScrollTrigger);
 const SectionFour = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
-const [openPlanModal, setOpenPlanModal] = useState(false);
- useEffect(() => {
-   if (openPlanModal) {
-     document.body.style.overflow = "hidden";
-   } else {
-     document.body.style.overflow = "";
-   }
- 
-   return () => {
-     document.body.style.overflow = "";
-   };
- }, [openPlanModal]);
- 
+  const [openPlanModal, setOpenPlanModal] = useState(false);
+  useEffect(() => {
+    if (openPlanModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openPlanModal]);
+
   useEffect(() => {
     const cards = cardsRef.current;
 
@@ -36,6 +36,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
       scale: 1,
       opacity: 1,
       transformOrigin: "center top",
+      top: "65px",
     });
 
     cards.forEach((card, index) => {
@@ -91,11 +92,11 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto pb-260">
-      <div className="w-full flex flex-col lg:flex-row mb-12 md:mb-16  md:pt-20 gap-6 lg:gap-0">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto pb-285">
+      <div className="w-full flex flex-col lg:flex-row -mb-10 md:mb-12 md:pt-20 gap-6 lg:gap-0">
         <div className="w-full lg:w-[50%]"></div>
-        <div className="w-full lg:w-[50%] text-center lg:text-right  ">
-          <h3 className="text-[#24144C] font-semibold leading-tight ">
+        <div className="w-full lg:w-[50%] text-center lg:text-right">
+          <h3 className="text-[#24144C] font-semibold leading-tight">
             WHAT WE DO
           </h3>
           <p className="mt-3 font-extralight text-[#404040] justify-center">
@@ -114,8 +115,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
         {/* Card 1 - Corporate Films */}
         <div
           ref={(el) => (cardsRef.current[0] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] 
-                    rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
+          className="sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -135,8 +135,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
           </div>
 
           <span
-            className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none
-                           mb-6 md:mb-8 font-jakarta font-medium"
+            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8 font-jakarta font-medium"
           >
             Corporate Films
           </span>
@@ -147,20 +146,18 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               alt="Corporate Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
+              className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
             />
             <div
-              className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 
-                            lg:order-2"
+              className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2"
             >
               <p className="font-normal  mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href="/services"
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
@@ -172,11 +169,10 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
-          className="sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl 
-                     p-4 sm:p-6 md:p-16 flex flex-col"
+          className="sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-           <p className="block sm:hidden text-black text-sm font-medium">
+            <p className="block sm:hidden text-black text-sm font-medium">
               Films
             </p>
             <div className="hidden sm:block">
@@ -187,12 +183,12 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 Films
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[90px] uppercase text-black leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-black leading-none mb-6 md:mb-8">
             Documentary Films
           </span>
 
@@ -202,7 +198,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               alt="Documentary Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-black order-2">
               <p className="mb-4 md:mb-6">
@@ -210,14 +206,12 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href="/services"
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow
-                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300
-                                       group-hover:translate-x-3"
+                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3"
                   color="black"
                 />
               </Link>
@@ -228,7 +222,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
         {/* Card 3 - Commercial Films */}
         <div
           ref={(el) => (cardsRef.current[2] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] 
+          className="sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] 
                    rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
@@ -236,19 +230,19 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               Stories
             </p>
             <div className="hidden sm:block">
-              <Button onClick={() => setOpenPlanModal(true)}
+              <Button
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8">
             Commercial Films
           </span>
 
@@ -258,7 +252,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               alt="Commercial Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -266,9 +260,8 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href="/services"
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
@@ -288,25 +281,25 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               Stories
             </p>
             <div className="hidden sm:block">
-              <Button onClick={() => setOpenPlanModal(true)}
+              <Button
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8">
             Event Coverage
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-[50%] w-full md:w-full lg:w-[45%]">
-              <Image src={img1} alt="Event Coverage" width={800} className="" />
+            <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]">
+              <Image src={img1} alt="Event Coverage" width={800} className="h-full w-full object-cover rounded-2xl md:rounded-3xl shadow-2xl" />
             </div>
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -314,9 +307,8 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href="/services"
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
@@ -331,24 +323,24 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
           className="w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl"
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-           <p className="block sm:hidden text-white text-sm font-medium">
+            <p className="block sm:hidden text-white text-sm font-medium">
               Social
             </p>
             <div className="hidden sm:block">
-              <Button onClick={() => setOpenPlanModal(true)}
+              <Button
                 className="text-white border-3 border-white px-4 sm:px-14 py-2
                rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Social
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
           {/* Music Videos */}
-          <span className="text-4xl sm:text-5xl md:text-[100px] uppercase text-white leading-none mb-6  md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6  md:mb-8">
             Music Videos
           </span>
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8 mb-12 md:mb-16 mt-3">
@@ -357,7 +349,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               alt="Music Videos"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px]  w-full md:w-full lg:w-[45%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -365,9 +357,8 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
                 meaningful and impactful films that tell your story
               </p>
               <Link
-                href="/services"
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                href=""
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
@@ -377,8 +368,7 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
 
           {/* Short Films */}
           <span
-            className="text-4xl sm:text-5xl md:text-[100px] uppercase text-right block
-                           text-white mb-6 md:mb-8"
+            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-right block text-white mb-6 md:mb-8"
           >
             Short Films
           </span>
@@ -390,13 +380,11 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               </p>
               <Link
                 href=""
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] 
-                            flex items-center gap-8 group transition-all duration-300"
+                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
               >
                 See More
                 <RightArrow
-                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 
-                                      group-hover:translate-x-3"
+                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3"
                 />
               </Link>
             </div>
@@ -405,39 +393,37 @@ const [openPlanModal, setOpenPlanModal] = useState(false);
               alt="Short Films"
               width={800}
               height={500}
-              className="h-[200px] sm:h-[250px] md:h-[400px]  w-full md:w-full lg:w-[45%]
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]
                         object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-2"
             />
           </div>
         </div>
       </div>
       {openPlanModal &&
-                              createPortal(
-                                <div
-                                  className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
-                                  onClick={() => setOpenPlanModal(false)} 
-                                >
-             <div
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+            onClick={() => setOpenPlanModal(false)}
+          >
+            <div
               className="bg-white w-full max-w-5xl h-[90vh]
                          p-6 md:p-8
                          rounded-2xl relative
                          overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
-            
-            
-                                    <button
-                                      onClick={() => setOpenPlanModal(false)}
-                                      className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
-                                    >
-                                      ×
-                                    </button>
-                      
-                                    <ModalForm closeModal={() => setOpenPlanModal(false)} />
-                                  </div>
-                                </div>,
-                                document.body,
-                              )}
+              <button
+                onClick={() => setOpenPlanModal(false)}
+                className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+              >
+                ×
+              </button>
+
+              <ModalForm closeModal={() => setOpenPlanModal(false)} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };

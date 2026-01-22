@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -51,46 +51,63 @@ const data = [
 
 export default function ProcessStack() {
   const cardsRef = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const cards = cardsRef.current;
-    const cardGap = 82;
 
-    cards.forEach((card, index) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: `top top+=${80 + index * cardGap}`,
-        endTrigger: cards[cards.length - 1],
-        end: `bottom top+=${80 + index * cardGap}`,
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
+    // Only apply scroll trigger on desktop
+    if (!isMobile && cards.length > 0) {
+      const cardGap = 82;
+
+      cards.forEach((card, index) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top top+=${80 + index * cardGap}`,
+          endTrigger: cards[cards.length - 1],
+          end: `bottom top+=${80 + index * cardGap}`,
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
       });
-    });
+    }
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, []);
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [isMobile]);
 
   return (
-    <section className="relative  pb-[90vh] xl:pb-[100vh] ">
+    <section className={`relative ${isMobile ? 'pb-0' : 'pb-[90vh] sm:pb-[100vh]'}`}>
       {data.map((item, i) => {
-       
+
         const isLastCard = i === data.length - 1;
 
         return (
           <div
             key={i}
             ref={(el) => (cardsRef.current[i] = el)}
-            className="md:pb-10 lg:pb-20 pb-0"
+            className={`${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-20 pb-0'}`}
             style={{ zIndex: i + 1 }}
           >
-            <div className="container ">
+            <div className="container">
               <div
-                className={`rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] px-6 sm:px-8
-                          lg:px-10 py-8 sm:py-12 lg:py-0 grid grid-cols-1 lg:grid-cols-[60%_40%] 
-                          items-center gap-6 sm:gap-8 ${
-                  isLastCard ? "text-white" : "text-black"
-                }`}
+                className={`rounded-[20px] sm:rounded-[28px] md:rounded-[36px] lg:rounded-[48px] 
+                          px-4 sm:px-6 md:px-8 lg:px-10 
+                          py-8 sm:py-10 md:py-12 lg:py-16
+                          grid grid-cols-1 lg:grid-cols-[60%_40%] 
+                          items-center gap-6 sm:gap-8 lg:gap-10 ${isLastCard ? "text-white" : "text-black"
+                  }`}
                 style={{
                   background: isLastCard
                     ? "linear-gradient( 135deg, #694DAB 0%, #2F1E5B 100%)"
@@ -98,31 +115,30 @@ export default function ProcessStack() {
                 }}
               >
                 {/* LEFT */}
-                <div className="max-w-xl px-2 lg:-mt-26">
+                <div className="max-w-xl px-2 lg:px-4 order-2 lg:order-1 lg:-mt-20">
                   <span
-                    className={`inline-block border-2 rounded-full px-6 sm:px-12 lg:px-18
-                              py-1 text-sm sm:text-base ${
-                      isLastCard
+                    className={`inline-block border-2 rounded-full 
+                              px-4 sm:px-8 md:px-12 lg:px-18
+                              py-1 sm:py-1.5 text-xs sm:text-sm md:text-base ${isLastCard
                         ? "border-white text-white"
                         : "border-black text-black"
-                    }`}
+                      }`}
                   >
                     {item.step}
                   </span>
 
-                  <h1 className="mt-4 sm:mt-6 leading-tight">{item.title}</h1>
+                  <h1 className="mt-3 sm:mt-4 md:mt-5 lg:mt-6 leading-tight">{item.title}</h1>
 
                   <p
-                    className={`mt-3 sm:mt-4 leading-relaxed ${
-                      isLastCard ? "text-white/80" : "text-gray-600"
-                    }`}
+                    className={`mt-2 sm:mt-3 md:mt-4 leading-relaxed ${isLastCard ? "text-white/80" : "text-gray-600"
+                      }`}
                   >
                     {item.para}
                   </p>
                 </div>
 
                 {/* RIGHT */}
-                <div className="w-full max-w-[390px] mx-auto lg:mx-0 lg:w-[390px]">
+                <div className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[390px] mx-auto lg:mx-0 lg:w-[390px] order-1 lg:order-2">
                   <img src={item.gif.src} alt={item.title} className="w-full h-auto" />
                 </div>
               </div>

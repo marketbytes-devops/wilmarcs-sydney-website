@@ -350,7 +350,7 @@ export default function Navbar() {
                       </Link>
                     </motion.div>
                   ))}
-                  <div className="mt-10 flex flex-col gap-4 lg:hidden -mx-10 w-screen">
+                  <div className="mt-10 flex flex-col gap-4 lg:hidden -mx-10 px-8 w-screen">
                     <button
                       onClick={() => setOpenPlanModal(true)}
                       className="w-full border border-white text-white py-3 rounded-full"

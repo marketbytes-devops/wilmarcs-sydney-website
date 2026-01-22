@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
-import ScrollToTop from "@/components/ScrollToTop/inedx"; // ← typo? probably "index"
+import ScrollToTop from "@/components/ScrollToTop/index";
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ScrollToTop />
-        
+
         {!hideLayout && <Navbar />}
 
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
             <main className={isThankYou ? "mt-0" : "sm:mt-10 mt-2"}>
               {children}
             </main>
-            
+
             {!hideLayout && <Footer />}
           </div>
         </div>
