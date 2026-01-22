@@ -92,8 +92,8 @@ const SectionFour = () => {
   }, []);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto pb-260">
-      <div className="w-full flex flex-col lg:flex-row mb-6 md:mb-12 md:pt-20 gap-6 lg:gap-0">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto pb-285">
+      <div className="w-full flex flex-col lg:flex-row -mb-10 md:mb-12 md:pt-20 gap-6 lg:gap-0">
         <div className="w-full lg:w-[50%]"></div>
         <div className="w-full lg:w-[50%] text-center lg:text-right">
           <h3 className="text-[#24144C] font-semibold leading-tight">
@@ -146,7 +146,7 @@ const SectionFour = () => {
               alt="Corporate Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
+              className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
             />
             <div
               className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2"
@@ -198,7 +198,7 @@ const SectionFour = () => {
               alt="Documentary Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-black order-2">
               <p className="mb-4 md:mb-6">
@@ -252,7 +252,7 @@ const SectionFour = () => {
               alt="Commercial Films"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -298,7 +298,7 @@ const SectionFour = () => {
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%]">
+            <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]">
               <Image src={img1} alt="Event Coverage" width={800} className="h-full w-full object-cover rounded-2xl md:rounded-3xl shadow-2xl" />
             </div>
             <div className="flex-1 flex flex-col justify-center text-white order-2">
@@ -349,7 +349,7 @@ const SectionFour = () => {
               alt="Music Videos"
               width={800}
               height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -393,7 +393,7 @@ const SectionFour = () => {
               alt="Short Films"
               width={800}
               height={500}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[500px] w-full md:w-full lg:w-[35%]
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]
                         object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-2"
             />
           </div>
