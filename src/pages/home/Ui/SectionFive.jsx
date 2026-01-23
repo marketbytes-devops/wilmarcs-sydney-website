@@ -37,7 +37,7 @@ export default function SectionFive() {
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className=" container mx-auto ">
+    <div className=" container mx-auto">
       <h3 className=" text-[#24144C] text-center lg:text-left
                     font-semibold leading-tight mb-5 tracking-tight">
         PROCESS PREVIEW
@@ -59,7 +59,7 @@ export default function SectionFive() {
               {processes.map((process, index) => (
                 <div key={index} className="flex gap-8 items-start mb-0 lg:mb-12 last:mb-0">
                   <div className="w-4 h-4 bg-[#1a1a2e] rounded-full shrink-0 mt-2 relative z-30" />
-                  <div className="flex-1">
+                  <div className="flex-1 mb-4">
                     <h6 className=" font-semibold text-gray-900 mb-4">
                       {process.title}
                     </h6>

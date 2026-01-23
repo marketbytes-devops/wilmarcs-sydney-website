@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef,useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import sectionSixGif from "../../../assets/videos/home/section-six.gif";
 import gsap from "gsap";
@@ -15,19 +15,19 @@ const SectionSix = () => {
   const itemsRef = useRef([]);
   const leftContentRef = useRef(null);
   const titleRef = useRef(null);
- const [openPlanModal, setOpenPlanModal] = useState(false);
- useEffect(() => {
-   if (openPlanModal) {
-     document.body.style.overflow = "hidden";
-   } else {
-     document.body.style.overflow = "";
-   }
- 
-   return () => {
-     document.body.style.overflow = "";
-   };
- }, [openPlanModal]);
- 
+  const [openPlanModal, setOpenPlanModal] = useState(false);
+  useEffect(() => {
+    if (openPlanModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openPlanModal]);
+
   useEffect(() => {
     gsap.fromTo(
       titleRef.current,
@@ -117,13 +117,13 @@ const SectionSix = () => {
           </Button>
         </div>
 
-        <div className="flex items-center justify-center -mt-14 lg:mt-0">
+        <div className="flex items-center justify-center -mt-14 -mb-6 sm:-mb-0 lg:mt-0">
           <Image
             src={sectionSixGif}
             alt="Why Wilmarcs visual"
             width={551}
             height={900}
-            className="w-full  h-auto lg:h-[700px] object-cover rounded-2xl shadow-2xl"
+            className="w-full h-auto lg:h-[700px] object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
@@ -147,33 +147,32 @@ const SectionSix = () => {
           ))}
         </div>
       </div>
-       {openPlanModal &&
-                              createPortal(
-                                <div
-                                  className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
-                                  onClick={() => setOpenPlanModal(false)} 
-                                >
-             <div
+      {openPlanModal &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+            onClick={() => setOpenPlanModal(false)}
+          >
+            <div
               className="bg-white w-full max-w-5xl h-[90vh]
                          p-6 md:p-8
                          rounded-2xl relative
                          overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
-            
-            
-                                    <button
-                                      onClick={() => setOpenPlanModal(false)}
-                                      className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
-                                    >
-                                      ×
-                                    </button>
-                      
-                                    <ModalForm closeModal={() => setOpenPlanModal(false)} />
-                                  </div>
-                                </div>,
-                                document.body,
-                              )}
+
+              <button
+                onClick={() => setOpenPlanModal(false)}
+                className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+              >
+                ×
+              </button>
+
+              <ModalForm closeModal={() => setOpenPlanModal(false)} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };

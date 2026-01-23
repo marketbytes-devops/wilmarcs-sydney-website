@@ -157,7 +157,7 @@ useEffect(() => {
           <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/70 z-0"></div>
-        <div className="relative z-10 flex flex-col justify-center h-[600px] px-5 text-white">
+        <div className="relative z-10 flex flex-col justify-center h-[560px] px-5 text-white">
           {/* SLIDER */}
           <div className="mb-4">
             <Slider {...mobileSettings}>
@@ -185,7 +185,7 @@ useEffect(() => {
                         togglePlayPause(slide.id, video);
                       }}
                     >
-                      <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
+                      <div className="w-20 h-20 bg-black/60 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
                         {playingVideos[slide.id] ? (
                           <div className="flex gap-1">
                             <div className="w-3 h-8 bg-black rounded"></div>

@@ -18,8 +18,7 @@ const SectionThree = () => {
               className="rounded-3xl lg:h-[400px] lg:w-[356px] w-full h-auto"
             />
 
-            <div className="absolute rounded-3xl inset-0 
-                            bg-gradient-to-b from-black/0 via-black/0 to-black/60" />
+            <div className="absolute rounded-3xl inset-0" />
 
             {/* TEXT */}
             <div className="absolute bottom-4 right-18 left-18 text-center text-white z-10">
