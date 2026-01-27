@@ -9,10 +9,10 @@ const WorksPage = () => {
     <section>
         <HeroSection/>
     </section>
-     <section className='mt-0 md:mt-4 lg:mt-16'>
+     <section className='mt-2 md:mt-4 lg:mt-16'>
         <SectionTwo/>
     </section>
-      <section className='mt-0 md:mt-4 lg:mt-16'>
+      <section className='mt-2 md:mt-4 lg:mt-16'>
         <SectionThree/>
     </section>
        <section className='mt-2 md:mt-4'>

@@ -37,14 +37,15 @@ export default function SectionFive() {
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className=" container mx-auto">
-      <h3 className=" text-[#24144C] text-center lg:text-left
+    <div className="container mx-auto">
+      
+      <div className=" mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-16">
+          <div className="lg:top-20 h-fit ">
+            <h4 className=" text-[#24144C] text-center lg:text-left
                     font-semibold leading-tight mb-5 tracking-tight">
         PROCESS PREVIEW
-      </h3>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-24">
-          <div className="lg:sticky lg:top-20 h-fit">
+      </h4>
             <p className="font-extralight lg:py-4 py-0 text-gray-600 leading-relaxed text-center lg:text-left">
               We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
             </p>
