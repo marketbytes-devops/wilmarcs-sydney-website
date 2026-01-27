@@ -17,6 +17,8 @@ const SectionFour = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
   const [openPlanModal, setOpenPlanModal] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (openPlanModal) {
       document.body.style.overflow = "hidden";
@@ -30,69 +32,52 @@ const SectionFour = () => {
   }, [openPlanModal]);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const cards = cardsRef.current;
 
-    gsap.set(cards, {
-      scale: 1,
-      opacity: 1,
-      transformOrigin: "center top",
-      top: "65px",
-    });
+    if (cards.length > 0) {
+      const cardGap = 22;
 
-    cards.forEach((card, index) => {
-      if (!card) return;
+      cards.forEach((card, index) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top top+=${80 + index * cardGap}`,
+          endTrigger: cards[cards.length - 1],
+          end: `bottom top+=${50 + index * cardGap}`,
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
 
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top top",
-        end: "+=1000",
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-        onEnter: () => {
+        if (index < cards.length - 1) {
           gsap.to(card, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
+            scale: 0.95,
+            ease: "none",
+            scrollTrigger: {
+              trigger: cards[index + 1],
+              start: `top top+=${50 + (index + 1) * cardGap}`,
+              end: `top top+=${50 + index * cardGap}`,
+              scrub: true,
+            },
           });
-        },
-        onLeave: () => {
-          gsap.to(card, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(card, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(card, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        },
+        }
       });
-    });
-
-    ScrollTrigger.refresh();
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
+      window.removeEventListener("resize", checkMobile);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto pb-285">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
       <div className="w-full flex flex-col lg:flex-row -mb-10 md:mb-12 md:pt-20 gap-6 lg:gap-0">
         <div className="w-full lg:w-[50%]"></div>
         <div className="w-full lg:w-[50%] text-center lg:text-right">
@@ -108,14 +93,12 @@ const SectionFour = () => {
         </div>
       </div>
 
-      <div
-        ref={containerRef}
-        className="flex flex-col gap-[4vh] md:gap-[40vh] lg:gap-[50vh]"
-      >
+      <section className={`relative ${isMobile ? 'pb-0' : 'pb-[680vh] sm:pb-[100vh] lg:pb-[180vh] md:pb-[60vh]'}`}>
         {/* Card 1 - Corporate Films */}
         <div
           ref={(el) => (cardsRef.current[0] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
+          className={`sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-8 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+          style={{ zIndex: 1 }}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -135,7 +118,7 @@ const SectionFour = () => {
           </div>
 
           <span
-            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8 font-jakarta font-medium"
+            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium"
           >
             Corporate Films
           </span>
@@ -169,7 +152,8 @@ const SectionFour = () => {
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
-          className="sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
+          className={`sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+          style={{ zIndex: 2 }}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-black text-sm font-medium">
@@ -222,8 +206,9 @@ const SectionFour = () => {
         {/* Card 3 - Commercial Films */}
         <div
           ref={(el) => (cardsRef.current[2] = el)}
-          className="sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] 
-                   rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col"
+          className={`sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] 
+                   rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+          style={{ zIndex: 3 }}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -273,8 +258,9 @@ const SectionFour = () => {
         {/* Card 4 - Event Coverage */}
         <div
           ref={(el) => (cardsRef.current[3] = el)}
-          className="sm:h-screen sm:w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16
-                    shadow-2xl flex flex-col"
+          className={`sm:h-screen sm:w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16
+                    shadow-2xl flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+          style={{ zIndex: 4 }}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -320,7 +306,8 @@ const SectionFour = () => {
         {/* Card 5 - Music Videos + Short Films */}
         <div
           ref={(el) => (cardsRef.current[4] = el)}
-          className="w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl"
+          className={`w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+          style={{ zIndex: 5 }}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -398,7 +385,8 @@ const SectionFour = () => {
             />
           </div>
         </div>
-      </div>
+      </section>
+
       {openPlanModal &&
         createPortal(
           <div

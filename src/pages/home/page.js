@@ -24,7 +24,7 @@ const HomePage = () => {
       <section className="lg:mt-5 mt-0">
         <SectionFour />
       </section>
-      <section className="-mt-12 lg:mt-6">
+      <section className="-mt-12 lg:mt-16">
         <SectionFive />
       </section>
       <section className="mt-5 md:mt-22">
