@@ -105,21 +105,11 @@ const HeroSection = () => {
 
   const extendedSlides = [...slides, ...slides, ...slides];
 
-  const togglePlayPause = (id, videoRef) => {
-    if (!videoRef) return;
-    if (videoRef.paused) {
-      videoRef.play();
-      setPlayingVideos((p) => ({ ...p, [id]: true }));
-    } else {
-      videoRef.pause();
-      setPlayingVideos((p) => ({ ...p, [id]: false }));
-    }
-  };
 
   return (
     <>
       {/* MOBILE */}
-      <section className="md:hidden relative mt-4 sm:mt-0 overflow-hidden">
+      <section className="md:hidden relative mt-4 sm:mt-0 overflow-hidden ">
         <video
           autoPlay
           muted
@@ -148,25 +138,6 @@ const HeroSection = () => {
                     >
                       <source src={slide.video} type="video/mp4" />
                     </video>
-
-                    <div
-                      className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/30 transition-opacity hover:bg-black/40"
-                      onClick={(e) => {
-                        const video = e.currentTarget.previousSibling;
-                        togglePlayPause(slide.id, video);
-                      }}
-                    >
-                      <div className="w-20 h-20 bg-black/60 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg">
-                        {playingVideos[slide.id] ? (
-                          <div className="flex gap-1">
-                            <div className="w-3 h-8 bg-black rounded"></div>
-                            <div className="w-3 h-8 bg-black rounded"></div>
-                          </div>
-                        ) : (
-                          <div className="w-0 h-0 border-l-[24px] border-l-white border-y-[16px] border-y-transparent border-solid ml-2"></div>
-                        )}
-                      </div>
-                    </div>
                   </div>
                 </div>
               ))}

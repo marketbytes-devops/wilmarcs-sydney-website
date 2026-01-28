@@ -110,7 +110,7 @@ export default function SelectedWork() {
             >
               Crafting Stories That Inspire, Engage and Transform.
             </p>
-            <h2 className="font-semibold text-[#0E0E0F] text-center md:text-left">
+            <h2 className="font-semibold lg:!text-[62px] !text-[24px] text-[#0E0E0F] text-center md:text-left">
               SELECTED WORK
             </h2>
           </div>

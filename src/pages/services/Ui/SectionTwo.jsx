@@ -43,13 +43,23 @@ const SectionTwo = () => {
       <section className="container ">
         <div className="flex lg:flex-row flex-col gap-4 w-full h-auto">
           <div className="lg:w-[40%] w-full">
-            <Image
+            {/* <Image
               src={services}
               alt="services"
               height={445}
               width={552}
               className="object-cover w-full  rounded-3xl h-[460px]"
-            />
+            /> */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-[460px] object-cover rounded-3xl"
+            >
+              <source src="/videos/home/New.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div className="lg:w-[60%] w-full">
