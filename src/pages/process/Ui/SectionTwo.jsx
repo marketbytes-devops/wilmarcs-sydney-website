@@ -51,55 +51,102 @@ const data = [
 
 export default function ProcessStack() {
   const cardsRef = useRef([]);
-  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef(null);
 
- useEffect(() => {
-  const checkMobile = () => {
-    setIsMobile(window.innerWidth < 1024);
-  };
+  // Only run GSAP on desktop
+  useEffect(() => {
+    // Quick mobile check (you can also use matchMedia)
+    if (window.innerWidth >= 1024) {
+      const cards = cardsRef.current.filter(Boolean); // remove nulls
 
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
+      if (cards.length === 0) return;
 
-  const cards = cardsRef.current;
+      const cardGap = 82;
 
-  if (cards.length > 0) {
-    const cardGap = 82;
+      cards.forEach((card, index) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top top+=${80 + index * cardGap}`,
+          endTrigger: cards[cards.length - 1],
+          end: `bottom top+=${80 + index * cardGap}`,
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        });
 
-    cards.forEach((card, index) => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: `top top+=${80 + index * cardGap}`,
-        endTrigger: cards[cards.length - 1],
-        end: `bottom top+=${80 + index * cardGap}`,
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
+        if (index < cards.length - 1) {
+          gsap.to(card, {
+            scale: 0.95,
+            ease: "none",
+            scrollTrigger: {
+              trigger: cards[index + 1],
+              start: `top top+=${80 + (index + 1) * cardGap}`,
+              end: `top top+=${80 + index * cardGap}`,
+              scrub: true,
+            },
+          });
+        }
       });
 
-      if (index < cards.length - 1) {
-        gsap.to(card, {
-          scale: 0.95,
-          ease: "none",
-          scrollTrigger: {
-            trigger: cards[index + 1],
-            start: `top top+=${80 + (index + 1) * cardGap}`,
-            end: `top top+=${80 + index * cardGap}`,
-            scrub: true,
-          },
-        });
-      }
-    });
-  }
-
-  return () => {
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-    window.removeEventListener("resize", checkMobile);
-  };
-}, [isMobile]);
+      // Better cleanup
+      return () => {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+      };
+    }
+  }, []); // empty deps → runs once
 
   return (
-    <section className={`relative ${isMobile ? 'pb-0' : 'pb-[680vh] sm:pb-[80vh] lg:pb-[100vh] md:pb-[60vh]'}`}>
+    <>
+    
+      {/* MOBILE VIEW*/}
+    
+      <div className="lg:hidden space-y-6 sm:space-y-8  px-4 sm:px-6">
+        {data.map((item, i) => {
+          const isLastCard = i === data.length - 1;
+
+          return (
+            <div
+              key={i}
+              className={`rounded-[20px] sm:rounded-[28px] 
+                        px-5 sm:px-7 py-8 sm:py-10
+                        ${isLastCard ? "text-white" : "text-black"}`}
+              style={{
+                background: isLastCard
+                  ? "linear-gradient(135deg, #694DAB 0%, #2F1E5B 100%)"
+                  : "#ECECEC",
+              }}
+            >
+              <div className="grid grid-cols-1 gap-6">
+                
+                <div className="px-2">
+                  <span
+                    className={`inline-block border-2 rounded-full 
+                              px-6 sm:px-8 py-1.5 text-sm sm:text-base
+                              ${isLastCard ? "border-white text-white" : "border-black text-black"}`}
+                  >
+                    {item.step}
+                  </span>
+
+                  <h1 className="mt-4 leading-tight text-3xl sm:text-4xl font-bold">
+                    {item.title}
+                  </h1>
+
+                  <p
+                    className={`mt-3 leading-relaxed text-base sm:text-lg
+                              ${isLastCard ? "text-white/80" : "text-gray-600"}`}
+                  >
+                    {item.para}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop */}
+
+    <section className={`hidden lg:block relative  pb-[680vh] sm:pb-[80vh] lg:pb-[100vh] md:pb-[60vh]`}>
       {data.map((item, i) => {
         const isLastCard = i === data.length - 1;
 
@@ -107,7 +154,7 @@ export default function ProcessStack() {
           <div
             key={i}
             ref={(el) => (cardsRef.current[i] = el)}
-            className={`${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
+            className={`md:pb-10 lg:pb-4 pb-0`}
             style={{ zIndex: i + 1 }}
           >
             <div className="container ">
@@ -164,5 +211,7 @@ export default function ProcessStack() {
         );
       })}
     </section>
+
+    </>
   );
 }
