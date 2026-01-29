@@ -1,10 +1,19 @@
-"use client";
-
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-
-export default function SectionFive() {
-  const processes = [
+'use client';
+ 
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+ 
+gsap.registerPlugin(ScrollTrigger);
+ 
+export default function ProcessPreview() {
+  const sectionRef = useRef(null);
+  const leftContentRef = useRef(null);
+  const rightContentRef = useRef(null);
+  const indicatorRef = useRef(null);
+  const stepsRef = useRef([]);
+ 
+  const steps = [
     {
       title: "Discovery",
       description: "The journey begins with understanding your brand, your goals, and the story you want to tell. We take the time to collaborate with you, ensuring we grasp the essence of your message."
@@ -26,46 +35,139 @@ export default function SectionFive() {
       description: "Once the film is complete, we deliver the final product in the format you need. Whether it's for social media, a website, or an event presentation, we ensure it's optimized for your distribution channels."
     }
   ];
-
-  const timelineRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start 80%", "end 30%"]
-  });
-
-  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
+ 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Pin the left content
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: 'bottom bottom',
+        pin: leftContentRef.current,
+        pinSpacing: false,
+      });
+ 
+      // Animate indicator and dots based on scroll
+      stepsRef.current.forEach((step, index) => {
+        if (!step) return;
+ 
+        ScrollTrigger.create({
+          trigger: step,
+          start: 'top center',
+          end: 'bottom center',
+          onEnter: () => {
+            gsap.to(indicatorRef.current, {
+              y: index * 180,           // ← using 180px consistently (you had 480 earlier – probably typo?)
+              duration: 0.5,
+              ease: 'power2.out'
+            });
+ 
+            stepsRef.current.forEach((s, i) => {
+              const dot = s.querySelector('.dot');
+              if (i === index) {
+                gsap.to(dot, {
+                  scale: 1.25,
+                  backgroundColor: '#111827',
+                  borderColor: '#111827',
+                  duration: 0.3
+                });
+              } else {
+                gsap.to(dot, {
+                  scale: 1,
+                  backgroundColor: '#ffffff',
+                  borderColor: '#d1d5db',
+                  duration: 0.3
+                });
+              }
+            });
+          },
+          onEnterBack: () => {
+            gsap.to(indicatorRef.current, {
+              y: index * 180,
+              duration: 0.5,
+              ease: 'power2.out'
+            });
+ 
+            stepsRef.current.forEach((s, i) => {
+              const dot = s.querySelector('.dot');
+              if (i === index) {
+                gsap.to(dot, {
+                  scale: 1.25,
+                  backgroundColor: '#111827',
+                  borderColor: '#111827',
+                  duration: 0.3
+                });
+              } else {
+                gsap.to(dot, {
+                  scale: 1,
+                  backgroundColor: '#ffffff',
+                  borderColor: '#d1d5db',
+                  duration: 0.3
+                });
+              }
+            });
+          }
+        });
+      });
+    }, sectionRef);
+ 
+    return () => ctx.revert();
+  }, []);
+ 
   return (
-    <div className="container mx-auto">
-      
-      <div className=" mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-16">
-          <div className="lg:top-20 h-fit ">
-            <h4 className=" text-[#24144C] text-center lg:text-left
-                    font-semibold leading-tight mb-5 tracking-tight">
-        PROCESS PREVIEW
-      </h4>
-            <p className="font-extralight lg:py-4 py-0 text-gray-600 leading-relaxed text-center lg:text-left">
-              We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
-            </p>
+    <div ref={sectionRef} className="relative min-h-screen bg-white py-16 lg:py-20">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-0">
+          {/* Fixed Left Side */}
+          <div
+            ref={leftContentRef}
+            className="w-full lg:w-1/2 lg:h-screen flex items-center justify-center lg:justify-start lg:pr-10"
+          >
+            <div className="max-w-lg">
+              <h1 className="text-4xl lg:text-5xl font-bold text-[#24144C] mb-6 leading-tight">
+                PROCESS PREVIEW
+              </h1>
+              <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+                We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
+              </p>
+            </div>
           </div>
-          <div ref={timelineRef} className="relative pt-3  overflow-hidden">
-            <div className="absolute left-2 top-8 bottom-8 w-0.5 bg-gray-300 z-10" />
-            <motion.div
-              style={{ height }}
-              className="absolute left-2 top-8 w-0.5 bg-[#1a1a2e] origin-top z-20"
-            />
-            <div className="relative z-30">
-              {processes.map((process, index) => (
-                <div key={index} className="flex gap-8 items-start mb-0 lg:mb-12 last:mb-0">
-                  <div className="w-4 h-4 bg-[#1a1a2e] rounded-full shrink-0 mt-2 relative z-30" />
-                  <div className="flex-1 mb-4">
-                    <h6 className=" font-semibold text-gray-900 mb-4">
-                      {process.title}
+ 
+          {/* Scrollable Right Side – aligned to start at same top position */}
+          <div
+            ref={rightContentRef}
+            className="w-full lg:w-1/2 lg:pl-12"
+          >
+            <div className="relative lg:pt-0 pt-4">
+              {/* Vertical Line */}
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+             
+              {/* Active Indicator Line */}
+              <div
+                ref={indicatorRef}
+                className="absolute left-0 top-0 w-px bg-gray-900 h-[180px]"
+                style={{ transformOrigin: 'top' }}
+              ></div>
+ 
+              {/* Steps */}
+              {steps.map((step, index) => (
+                <div
+                  key={index}
+                  ref={el => (stepsRef.current[index] = el)}
+                  className="relative mb-10 lg:mb-20 pl-8"
+                >
+                  {/* Dot */}
+                  <div
+                    className="dot absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 border-gray-300 bg-white transition-all duration-300"
+                  ></div>
+ 
+                  {/* Content */}
+                  <div className="pl-10 lg:pl-12">
+                    <h6 className="text-xl lg:text-2xl font-bold text-[#1A0F37] mb-4">
+                      {step.title}
                     </h6>
-                    <p className="font-extralight text-gray-600 leading-relaxed">
-                      {process.description}
+                    <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+                      {step.description}
                     </p>
                   </div>
                 </div>
@@ -77,3 +179,4 @@ export default function SectionFive() {
     </div>
   );
 }
+ 
