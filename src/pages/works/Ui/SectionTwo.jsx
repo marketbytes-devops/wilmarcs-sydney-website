@@ -98,25 +98,29 @@ const SelectedWork = () => {
   }, []);
 
   return (
-    <div className=" bg-white px-6 py-4 md:px-12 lg:px-15">
-      <div className="max-w-7xl mx-auto">
+    <div className=" bg-white container ">
+      <div className="mx-auto">
       
-        <div className="sm:flex sm:justify-between sm:items-start sm:mb-6">
+        <div className="sm:flex sm:justify-between ">
           <div>
-            <span className="hidden sm:block font-geist mt-8 md:text-8xl text-[#26164F] font-black tracking-tight">
+            <span className="hidden sm:block font-geis text-[76px] lg:text-8xl text-[#26164F]
+                              font-black leading-tight">
               SELECTED <br /> WORK
             </span>
-            <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] font-black tracking-tight">
+            <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] font-black
+                             tracking-tight">
               SELECTED WORK
             </span>
           </div>
-          <div className="sm:text-right sm:mt-32 text-gray-600 sm:max-w-xs leading-relaxed">
+          <div className="opacity-80">
             <p className="block sm:hidden mt-2 text-center">
               Whitworth Media Proudly is a dedicated film studio specializing
             </p>
-            <p className="sm:block hidden">Whitworth Media </p>
-            <p className="sm:block hidden">Proudly is a dedicated</p>
-            <p className="sm:block hidden">film studio specializing</p>
+            <div className="sm:block hidden lg:mt-38 mt-24">
+            <p >Whitworth Media </p>
+            <p >Proudly is a dedicated</p>
+            <p >film studio specializing</p>
+           </div>
           </div>
         </div>
 

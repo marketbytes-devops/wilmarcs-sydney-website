@@ -2,7 +2,8 @@
 
 export default function HeroSection() {
   return (
-    <div className="relative w-full bg-black mt-16 overflow-hidden">
+    <div className="md:py-4 py-0">
+    <div className="relative w-full  mt-8 overflow-hidden ">
       {/* 1. Main container with desired aspect ratio + max height */}
       <div 
         className="
@@ -11,42 +12,25 @@ export default function HeroSection() {
           aspect-[16/9]          
         "
       >
-        {/* 2. Video wrapper – contains video with object-contain */}
-        <div className="absolute inset-0 bg-black">
+
+        <div className="absolute inset-0 ">
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="
+            className=" md:rounded-3xl rounded-none
               absolute inset-0 
-              w-full h-full 
-              object-contain    
-              opacity-40
+              w-full h-full  
               "
           >
-            <source src="/videos/works/spotlight.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
+            <source src="/videos/works/Work.mp4" type="video/mp4" />
           </video>
         </div>
 
-        {/* 3. Overlay UI – camera recording style (position absolute) */}
-        <div className="absolute inset-0 pointer-events-none lg:mt-40 mt-4">
-        
-
-         <div className="text-white w-full sm:flex sm:flex-col  sm:text-left text-center ">
-            <h3 className="leading-tight mt-8 font-bold">Featured Projects</h3>
-            <p className="sm:w-fit  sm:leading-tight   text-center bg-white text-black p-2  ">
-                creativity, skill, innovation
-            </p>
-          </div>
-
-
-
-          
-        </div>
       </div>
+    </div>
     </div>
   )
 }

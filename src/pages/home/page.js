@@ -1,5 +1,6 @@
 "use client";
 import HeroSection from "./Ui/HeroSection";
+import NewSection from "./Ui/NewSection";
 import SectionFive from "./Ui/SectionFive";
 import SectionFour from "./Ui/SectionFour";
 import SectionSeven from "./Ui/SectionSeven";
@@ -15,6 +16,9 @@ const HomePage = () => {
       <header>
         <HeroSection />
       </header>
+      <section className="lg:mt-20 sm:mt-10 mt-6">
+        <NewSection />
+      </section>
       <section className="lg:mt-20 sm:mt-10 mt-6">
         <SectionTwo />
       </section>

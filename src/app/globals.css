@@ -24,10 +24,18 @@
  
 @theme {
   --font-family-geist: "Geist Sans", sans-serif;
+  --font-geist: var(--font-family-geist);    
+
   --font-family-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-jakarta: var(--font-family-jakarta);
+
   --font-family-jost: "Jost", sans-serif;
+  --font-jost: var(--font-family-jost);
+
   --font-family-kumbh: "Kumbh Sans", sans-serif;
+  --font-kumbh: var(--font-family-kumbh);
 }
+
 .container{
   max-width: 90%;
   margin: 0 auto;

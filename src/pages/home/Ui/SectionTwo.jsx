@@ -12,6 +12,7 @@ const SectionTwo = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [openPlanModal, setOpenPlanModal] = useState(false);
+
   useEffect(() => {
     if (openPlanModal) {
       document.body.style.overflow = "hidden";
@@ -24,7 +25,7 @@ const SectionTwo = () => {
     };
   }, [openPlanModal]);
 
-  // Detect if screen is desktop size (lg breakpoint = 1024px)
+  // Detect desktop (lg = 1024px)
   useEffect(() => {
     const checkIsDesktop = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -32,10 +33,10 @@ const SectionTwo = () => {
 
     checkIsDesktop();
     window.addEventListener("resize", checkIsDesktop);
-
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
+  // Scroll detection (only used on desktop)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
@@ -55,26 +56,38 @@ const SectionTwo = () => {
 
   return (
     <div className="container mx-auto">
+      {/* Desktop heading with animation */}
       <motion.h2
-        className="text-center font-semibold leading-tight uppercase text-[#25154E]"
-        initial={isDesktop ? { opacity: 0, y: -50 } : { opacity: 1, y: 0 }}
-        whileInView={isDesktop && hasScrolled ? { opacity: 1, y: 0 } : false}
+        className="text-center font-semibold leading-tight uppercase text-[#25154E] hidden lg:block"
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={isDesktop ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        Our approach to filmmaking is rooted in structured and intentional
-        storytelling.
+        <span className="text-[62px] font-geist">Our approach to filmmaking</span>
+        <br />
+        is rooted in structured and intentional storytelling
       </motion.h2>
+
+      {/* Mobile heading – static */}
+      <h2
+        className="
+          text-center font-semibold leading-tight uppercase text-[#25154E]
+          block lg:hidden
+        "
+      >
+        Our approach to filmmaking is rooted in structured and intentional storytelling
+      </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 md:gap-8 gap-3">
         <motion.div
           initial={isDesktop ? { opacity: 0, x: -100 } : { opacity: 1, x: 0 }}
-          whileInView={isDesktop && hasScrolled ? { opacity: 1, x: 0 } : false}
+          whileInView={isDesktop ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:text-left text-center"
         >
-          <p className="font-extralight leading-light lg:leading-tight lg:mt-32 sm:mt-6 mt-4">
+          <p className="font-extralight leading-light lg:leading-tight lg:mt-32 sm:mt-6 mt-2">
             At Wilmarcs Motion Pictures, we are passionate about creating
             meaningful and impactful films that tell your story with precision,
             creativity, and intention. Based in Sydney, we specialize in
@@ -85,7 +98,7 @@ const SectionTwo = () => {
 
         <motion.div
           initial={isDesktop ? { opacity: 0, scale: 0.9 } : { opacity: 1, scale: 1 }}
-          whileInView={isDesktop && hasScrolled ? { opacity: 1, scale: 1 } : false}
+          whileInView={isDesktop ? { opacity: 1, scale: 1 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex items-center justify-center"
@@ -95,7 +108,7 @@ const SectionTwo = () => {
             alt="Animated section visual"
             width={800}
             height={500}
-            className="w-full  h-auto lg:h-[454px]  mt-6 object-cover rounded-2xl shadow-2xl"
+            className="w-full h-auto lg:h-[350px] lg:mt-6 mt-2 object-cover rounded-2xl shadow-2xl"
             unoptimized
             priority
           />
@@ -103,12 +116,12 @@ const SectionTwo = () => {
 
         <motion.div
           initial={isDesktop ? { opacity: 0, x: 100 } : { opacity: 1, x: 0 }}
-          whileInView={isDesktop && hasScrolled ? { opacity: 1, x: 0 } : false}
+          whileInView={isDesktop ? { opacity: 1, x: 0 } : false}
           viewport={{ amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:text-left text-center"
         >
-          <p className="font-thin leading-light  lg:leading-tight lg:mt-32 sm:mt-6 mt-4">
+          <p className="font-thin leading-light lg:leading-tight lg:mt-28 sm:mt-6 mt-2">
             Our approach to filmmaking is rooted in structured and intentional
             storytelling. Every frame is meticulously planned, every message
             carefully considered, and every story told with purpose. Whether
@@ -122,11 +135,12 @@ const SectionTwo = () => {
       <motion.div
         className="flex justify-center items-center md:mt-8 mt-4"
         initial={isDesktop ? { opacity: 0, y: 50 } : { opacity: 1, y: 0 }}
-        whileInView={isDesktop && hasScrolled ? { opacity: 1, y: 0 } : false}
+        whileInView={isDesktop ? { opacity: 1, y: 0 } : false}
         viewport={{ amount: 0.3 }}
         transition={{ duration: 0.6 }}
       >
-        <Button onClick={() => setOpenPlanModal(true)}
+        <Button
+          onClick={() => setOpenPlanModal(true)}
           className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium 
                     transition-[background-position] duration-700 ease-in-out
                      bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-[position:100%_50%]
@@ -135,7 +149,6 @@ const SectionTwo = () => {
         >
           Plan A Project
         </Button>
-
       </motion.div>
 
       {openPlanModal &&
@@ -145,14 +158,9 @@ const SectionTwo = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-[90vh]
-                   p-6 md:p-8
-                   rounded-2xl relative
-                   overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-[90vh] p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
-
-
               <button
                 onClick={() => setOpenPlanModal(false)}
                 className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
@@ -163,10 +171,9 @@ const SectionTwo = () => {
               <ModalForm closeModal={() => setOpenPlanModal(false)} />
             </div>
           </div>,
-          document.body,
+          document.body
         )}
     </div>
-
   );
 };
 

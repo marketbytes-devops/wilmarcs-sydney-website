@@ -15,7 +15,7 @@ const page = () => {
         <HeroSection/>
     </section>
 
-    <section className='lg:mt-24 mt-6'>
+    <section className='lg:mt-0 mt-2'>
         <SectionTwo/>
     </section>
 

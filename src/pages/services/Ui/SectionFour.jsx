@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import services from "@/assets/images/services/services.jpg";
 import Button from "@/components/Button";
 import ModalForm from "@/components/Form/ModalForm";
 import { createPortal } from "react-dom";
@@ -15,18 +13,21 @@ const SectionFour = () => {
       <section className="container">
         <div className="flex lg:flex-row flex-col gap-4 w-full h-auto">
           <div className="lg:w-[40%] w-full ">
-            <Image
-              src={services}
-              alt="services"
-              height={445}
-              width={552}
-              className="object-cover w-full  rounded-3xl h-[460px]"
-            />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-[460px] object-cover rounded-3xl"
+            >
+              <source src="/videos/services/Event.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div className="lg:w-[60%] w-full ">
             <h5 className="text-[#24144C] text-center lg:text-left uppercase">
-                Corporate Films
+                Event Films
             </h5>
             <p>
               At Wilmarcs Motion Pictures, we are passionate about creating

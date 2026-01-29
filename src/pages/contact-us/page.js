@@ -6,24 +6,30 @@ import contactus from "@/assets/videos/contact-us/contactus.gif";
 const page = () => {
   return (
     <>
-      <section>
-        <div className="relative w-full bg-black mt-16 overflow-hidden">
-          <div
-            className="
+
+
+       <div className="md:py-4 py-0">
+    <div className="relative w-full  mt-8 overflow-hidden ">
+      {/* 1. Main container with desired aspect ratio + max height */}
+      <div 
+        className="
           relative mx-auto w-full container
           max-w-[1400px]  
-          aspect-[16/9]"
-          >
-            <div className="absolute inset-0">
-              <Image
+          aspect-[16/9]          
+        "
+      >
+
+        <div className="absolute inset-0 ">
+         <Image
                 src={contactus}
                 alt="Contact animation"
-                className="w-full h-full object-contain "
+                className="w-full h-full object-contain md:rounded-3xl rounded-none"
               />
-            </div>
-          </div>
         </div>
-      </section>
+
+      </div>
+    </div>
+    </div>
 
       <section className="container">
         <div className="w-full flex lg:flex-row flex-col">

@@ -18,7 +18,6 @@ import card3 from "@/assets/images/about/card3.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const SectionFive = () => {
-  const [hovered, setHovered] = useState(false);
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const [openPlanModal, setOpenPlanModal] = useState(false);
@@ -89,17 +88,19 @@ const SectionFive = () => {
           </div>
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-end ">
             <Button
-              onClick={() => setOpenPlanModal(true)}
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
-              className={`flex items-center overflow-hidden whitespace-nowrap text-white
-                         text-[15px] px-12 py-4 w-full lg:w-auto
-                        transition-all duration-[600ms] ease-in-out
-                                    ${
-                                      hovered
-                                        ? " bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-                                        : "bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
-                                    }`}
+              className="
+    text-white px-12 py-4
+
+    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
+    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+    bg-[length:200%_200%]
+    bg-[position:0%_50%]
+   
+    transition-[background-position,--a,--c1,--c3]
+    duration-700 ease-in-out
+    hover:bg-[position:100%_50%]
+    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
+  "
             >
               Plan a Project
             </Button>
@@ -156,7 +157,7 @@ const SectionFive = () => {
         createPortal(
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
-            onClick={() => setOpenPlanModal(false)} 
+            onClick={() => setOpenPlanModal(false)}
           >
             {/* Modal content – stop propagation so clicks inside don't close */}
             <div

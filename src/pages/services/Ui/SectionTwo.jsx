@@ -12,16 +12,54 @@ const SectionTwo = () => {
 
   return (
     <>
-      <section className="container">
+    <div className="container sm:flex sm:justify-between py-4">
+      <div>
+            <span className="hidden sm:block font-geist text-[76px] lg:text-8xl text-[#26164F]
+                              font-black tracking-tight uppercase">
+              what <br /> we do
+            </span>
+            <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] 
+                             font-black tracking-tight uppercase">
+              what we do
+            </span>
+          </div>
+      <div className="opacity-80">
+        <p className="block sm:hidden mt-2 text-center">
+              Whitworth Media Proudly is a dedicated film studio specializing
+            </p>
+        <div className="sm:block hidden lg:mt-24 mt-32">
+          <p>Whitworth Media </p>
+            <p>Proudly is a dedicated</p>
+            <p>film studio specializing</p>
+        </div>
+      </div>
+    </div>
+
+    <div className="container h-px bg-black" />
+    <div className="md:mb-6 mb-2 md:mt-4 mt-2">
+        <p className="mt-4 text-gray-700 container">Services</p>
+    </div>
+
+      <section className="container ">
         <div className="flex lg:flex-row flex-col gap-4 w-full h-auto">
           <div className="lg:w-[40%] w-full">
-            <Image
+            {/* <Image
               src={services}
               alt="services"
               height={445}
               width={552}
               className="object-cover w-full  rounded-3xl h-[460px]"
-            />
+            /> */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-[460px] object-cover rounded-3xl"
+            >
+              <source src="/videos/home/New.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div className="lg:w-[60%] w-full">

@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import services from "@/assets/images/services/services.jpg";
 import Button from "@/components/Button";
 import ModalForm from "@/components/Form/ModalForm";
 import { createPortal } from "react-dom";
@@ -72,13 +70,16 @@ const SectionThree = () => {
           </div>
 
           <div className="lg:w-[40%] w-full lg:order-2 order-1">
-            <Image
-              src={services}
-              alt="services"
-              height={445}
-              width={552}
-              className="object-cover w-full  rounded-3xl h-[460px]"
-            />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-[460px] object-cover rounded-3xl"
+            >
+              <source src="/videos/services/CSR.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
         </div>
