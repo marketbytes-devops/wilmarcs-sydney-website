@@ -57,7 +57,7 @@ export default function ProcessPreview() {
           end: 'bottom center',
           onEnter: () => {
             gsap.to(indicatorRef.current, {
-              y: index * 180,           // ← using 180px consistently (you had 480 earlier – probably typo?)
+              y: index * 180,           
               duration: 0.5,
               ease: 'power2.out'
             });
@@ -67,15 +67,15 @@ export default function ProcessPreview() {
               if (i === index) {
                 gsap.to(dot, {
                   scale: 1.25,
-                  backgroundColor: '#111827',
-                  borderColor: '#111827',
+                  backgroundColor: '#24144C',
+                  borderColor: '#24144C',
                   duration: 0.3
                 });
               } else {
                 gsap.to(dot, {
                   scale: 1,
-                  backgroundColor: '#ffffff',
-                  borderColor: '#d1d5db',
+                  backgroundColor: '#24144C',
+                  borderColor: '#24144C',
                   duration: 0.3
                 });
               }
@@ -115,7 +115,7 @@ export default function ProcessPreview() {
   }, []);
  
   return (
-    <div ref={sectionRef} className="relative min-h-screen bg-white py-16 lg:py-20">
+    <div ref={sectionRef} className="relative min-h-screen bg-white py-10 lg:py-20">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-0">
           {/* Fixed Left Side */}
@@ -127,7 +127,7 @@ export default function ProcessPreview() {
               <h1 className="text-4xl lg:text-5xl font-bold text-[#24144C] mb-6 leading-tight">
                 PROCESS PREVIEW
               </h1>
-              <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+              <p className="text-gray-600 text-base  lg:text-lg leading-relaxed">
                 We know that effective communication begins with a well-planned process. Our workflow ensures every project is executed with care, creativity, and efficiency.
               </p>
             </div>
@@ -154,7 +154,7 @@ export default function ProcessPreview() {
                 <div
                   key={index}
                   ref={el => (stepsRef.current[index] = el)}
-                  className="relative mb-10 lg:mb-20 pl-8"
+                  className="relative mb-8 lg:mb-20 pl-8"
                 >
                   {/* Dot */}
                   <div
@@ -162,7 +162,7 @@ export default function ProcessPreview() {
                   ></div>
  
                   {/* Content */}
-                  <div className="pl-10 lg:pl-12">
+                  <div className="pl-2 lg:pl-12">
                     <h6 className="text-xl lg:text-2xl font-bold text-[#1A0F37] mb-4">
                       {step.title}
                     </h6>

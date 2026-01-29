@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import img1 from "../../../assets/images/home/section4_2.png";
-import sectionFourImg from "../../../assets/images/home/section4.jpg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Button from "./../../../components/Button/index";
@@ -19,6 +16,13 @@ const SectionFour = () => {
   const cardsRef = useRef([]);
   const [openPlanModal, setOpenPlanModal] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+
+  const video1 = "/videos/services/CSR.mp4";
+  const video2 = "/videos/services/CSR.mp4";
+  const video3 = "/videos/services/Event.mp4";
+  const video4 = "/videos/services/Testimonial.mp4";
+  const video5 = "/videos/services/Social.mp4";
 
   useEffect(() => {
     if (openPlanModal) {
@@ -43,39 +47,36 @@ const SectionFour = () => {
     const cards = cardsRef.current.filter(card => card !== null);
 
     cards.forEach((card, i) => {
-  const isLast = i === cards.length - 1;
+      const isLast = i === cards.length - 1;
 
-  let scale = 1;
-  let rotation = 0;
+      let scale = 1;
+      let rotation = 0;
 
-  if (!isLast) {
-    scale = isMobile ? 0.95 : 0.9 + 0.025 * i;
-    rotation = isMobile ? -5 : -10;
-  }
+      if (!isLast) {
+        scale = isMobile ? 0.95 : 0.9 + 0.025 * i;
+        rotation = isMobile ? -5 : -10;
+      }
 
-  gsap.to(card, {
-    scale,
-    rotationX: rotation,
-    transformOrigin: "top center",
-    ease: "none",
-    scrollTrigger: {
-      trigger: card,
-      start: `top ${isMobile ? "top+=60" : 60 + 10 * i}`,
-      end: isLast
-        ? isMobile
-          ? "+=400"  
-          : "+=900"
-        : "bottom 600",
-      endTrigger: containerRef.current,
-      scrub: true,
-      pin: true,
-
-     
-      pinSpacing: isMobile && isLast ? true : false,
-    },
-  });
-});
-
+      gsap.to(card, {
+        scale,
+        rotationX: rotation,
+        transformOrigin: "top center",
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: `top ${isMobile ? "top+=60" : 60 + 10 * i}`,
+          end: isLast
+            ? isMobile
+              ? "+=400"  
+              : "+=900"
+            : "bottom 600",
+          endTrigger: containerRef.current,
+          scrub: true,
+          pin: true,
+          pinSpacing: isMobile && isLast ? true : false,
+        },
+      });
+    });
 
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
@@ -102,9 +103,9 @@ const SectionFour = () => {
 
       <section
         ref={containerRef}
-        className={`relative ${
+        className={`mt-4 sm:mt-0 relative ${
           isMobile
-            ? "pb-6"
+            ? "pb-0"
             : "pt-[100px] pb-[800px] min-h-screen"
         }`}
       >
@@ -114,9 +115,7 @@ const SectionFour = () => {
           className={`w-full bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-8 md:p-16 flex flex-col shadow-2xl  ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-            <p className="block sm:hidden text-white text-sm font-medium">
-              Films
-            </p>
+           
             <div className="hidden sm:block">
               <Button
                 className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
@@ -124,22 +123,26 @@ const SectionFour = () => {
                 Films
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <div className="hidden sm:block ">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-1 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
+            </div>
+           
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium">
-            Corporate Films
+          <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium">
+            Corporate And Brand Films
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <Image
-              src={img1}
-              alt="Corporate Films"
-              width={800}
-              height={600}
-              className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
+            <video
+              src={video1}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-[200px] sm:h-[250px] md:h-[700px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2">
               <p className="font-normal mb-4 md:mb-6">
@@ -154,8 +157,15 @@ const SectionFour = () => {
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
               </Link>
             </div>
+            
           </div>
+            <div className="block sm:hidden">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+              Plan A Project
+            </Button>
+            </div>
         </div>
+        
 
         {/* Card 2 - Documentary Films */}
         <div
@@ -178,17 +188,18 @@ const SectionFour = () => {
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-black leading-none mb-6 md:mb-8">
-            Documentary Films
+          <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-black leading-none mb-6 md:mb-8">
+         CSR And Impact Stories
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <Image
-              src={img1}
-              alt="Documentary Films"
-              width={800}
-              height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+            <video
+              src={video2}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px]lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-black order-2">
               <p className="mb-4 md:mb-6">
@@ -230,17 +241,18 @@ const SectionFour = () => {
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
-            Commercial Films
+          <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
+          Event And Launch Films
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <Image
-              src={img1}
-              alt="Commercial Films"
-              width={800}
-              height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+            <video
+              src={video3}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
@@ -279,14 +291,19 @@ const SectionFour = () => {
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
-            Event Coverage
+          <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
+            Testimonial And Case Studies
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <div className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]">
-              <Image src={img1} alt="Event Coverage" width={800} className="h-full w-full object-cover rounded-2xl md:rounded-3xl shadow-2xl" />
-            </div>
+            <video
+              src={video4}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-[200px] sm:h-[250px] md:h-[800px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl"
+            />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
@@ -303,7 +320,7 @@ const SectionFour = () => {
           </div>
         </div>
 
-        {/* Card 5 - Music Videos (now consistent with previous cards) */}
+        {/* Card 5 - Music Videos */}
         <div
           ref={(el) => (cardsRef.current[4] = el)}
           className={`w-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
@@ -327,17 +344,18 @@ const SectionFour = () => {
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
-            Music Videos
+          <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
+           Social-First Content Packs
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
-            <Image
-              src={img1}
-              alt="Music Videos"
-              width={800}
-              height={600}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+            <video
+              src={video5}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
