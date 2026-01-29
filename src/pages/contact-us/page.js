@@ -83,11 +83,11 @@ const page = () => {
               <div className="hidden md:block w-px h-40 lg:h-48 bg-[#8D8D8D] self-end" />
             </div>
 
-            {/* Location */}
+            {/* Address */}
             <div className="flex md:items-end gap-6 md:gap-10">
               <div className="space-y-1 md:mb-5">
                 <p className="text-gray-400 text-sm uppercase tracking-wide">
-                  Location
+                  Address
                 </p>
                 <h6 className="text-lg md:text-xl font-medium">
                   Sydney NSW, Australia

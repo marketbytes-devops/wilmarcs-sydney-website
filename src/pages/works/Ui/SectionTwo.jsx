@@ -25,10 +25,10 @@ const SelectedWork = () => {
   ];
 
   const videoUrls = {
-    0: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    1: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    2: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    3: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    0: "/videos/services/Event.mp4",
+    1: "/videos/services/Social.mp4",
+    2: "/videos/services/Testimonial.mp4",
+    3: "/videos/services/CSR.mp4",
   };
 
   const goFullscreen = (videoEl) => {

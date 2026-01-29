@@ -23,12 +23,11 @@ const HeroSection = () => {
       
 
      
-      <div className=" rounded-2xl overflow-hidden -mt-8 md:-mt-6 ">
+      <div className=" rounded-2xl overflow-hidden -mt-8 md:-mt-6 h-auto lg:h-[600px]">
         <Image
           src={banner} 
           alt="Wilmarcs Motion Pictures team"
-          width={1200}
-          height={800}
+          
           className="w-full object-cover"
           priority
         />
