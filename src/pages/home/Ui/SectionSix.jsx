@@ -28,60 +28,66 @@ const SectionSix = () => {
     };
   }, [openPlanModal]);
 
-  useEffect(() => {
+ useEffect(() => {
+  // Only run animations on desktop (≥ lg breakpoint)
+  if (window.innerWidth < 1024) return;
+
+  gsap.fromTo(
+    titleRef.current,
+    { opacity: 0, x: -100 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+      ease: "power1.out",
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: true,
+      },
+    }
+  );
+
+  gsap.fromTo(
+    leftContentRef.current,
+    { opacity: 0, x: -100 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: leftContentRef.current,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: true,
+      },
+    }
+  );
+
+  itemsRef.current.forEach((item) => {
+    if (!item) return;
     gsap.fromTo(
-      titleRef.current,
-      { opacity: 0, x: -100 },
+      item,
+      { opacity: 0, x: 50 },
       {
         opacity: 1,
         x: 0,
-        duration: 1.5,
-        ease: "power1.out",
+        duration: 0.6,
         scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 85%",
-          end: "top 30%",
-          scrub: true,
+          trigger: item,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
         },
       }
     );
+  });
 
-    gsap.fromTo(
-      leftContentRef.current,
-      { opacity: 0, x: -100 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: leftContentRef.current,
-          start: "top 85%",
-          end: "top 30%",
-          scrub: true,
-        },
-      }
-    );
-
-    itemsRef.current.forEach((item) => {
-      if (!item) return;
-      gsap.fromTo(
-        item,
-        { opacity: 0, x: 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          scrollTrigger: {
-            trigger: item,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      );
-    });
-  }, []);
+  // Optional: refresh ScrollTrigger after setup (good practice)
+  ScrollTrigger.refresh();
+}, []);
 
   return (
     <div className="container mx-auto">

@@ -10,7 +10,28 @@ const page = () => {
 
        <div className="md:py-4 py-0">
     <div className="relative w-full  mt-8 overflow-hidden ">
-      {/* 1. Main container with desired aspect ratio + max height */}
+
+       {/* MOBILE */} 
+        <div className="md:hidden">
+          <div 
+            className="
+              relative mx-auto w-full
+              aspect-[16/9]
+            "
+          >
+            <div className="absolute inset-0">
+               <Image
+                src={contactus}
+                alt="Contact animation"
+                className="w-full h-full object-contain md:rounded-3xl rounded-none"
+              />
+            </div>
+          </div>
+        </div>
+
+
+       {/* DESKTOP  */}
+    <div className="hidden md:block">
       <div 
         className="
           relative mx-auto w-full container
@@ -28,6 +49,7 @@ const page = () => {
         </div>
 
       </div>
+    </div>
     </div>
     </div>
 

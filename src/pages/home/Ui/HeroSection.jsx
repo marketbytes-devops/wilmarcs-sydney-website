@@ -97,10 +97,9 @@ const HeroSection = () => {
   };
 
   const slides = [
-    { id: 1, video: "/videos/home/slider1.mp4" },
-    { id: 2, video: "/videos/home/slider2.mp4" },
-    { id: 3, video: "/videos/home/slider1.mp4" },
-    { id: 4, video: "/videos/home/slider2.mp4" },
+    { id: 1, video: "/videos/services/CSR.mp4" },
+    { id: 2, video: "/videos/services/Social.mp4" },
+    { id: 3, video: "/videos/services/Testimonial.mp4" },
   ];
 
   const extendedSlides = [...slides, ...slides, ...slides];
@@ -110,16 +109,16 @@ const HeroSection = () => {
     <>
       {/* MOBILE */}
       <section className="md:hidden relative mt-4 sm:mt-0 overflow-hidden ">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/home/backgroundhero.png"
-          className="absolute inset-0 w-full h-[590px] object-cover -z-10"
-        >
-          <source src="/videos/home/backgroundhero.mp4" type="video/mp4" />
-        </video>
+         <div className="absolute inset-0 w-full h-full">
+          <Image
+            src={HomeHero}
+            alt="Hero animation"
+            fill
+            priority
+            unoptimized
+            className="object-cover"
+          />
+        </div>
         <div className="absolute inset-0 bg-black/70 z-0"></div>
         <div className="relative z-10 flex flex-col justify-center h-[560px] px-5 text-white">
           <div className="mb-4">
@@ -128,6 +127,7 @@ const HeroSection = () => {
                 <div key={slide.id}>
                   <div className="relative w-full h-[260px] rounded-2xl overflow-hidden">
                     <video
+                      autoPlay
                       muted
                       loop
                       playsInline
@@ -184,6 +184,7 @@ const HeroSection = () => {
                 <div key={`${slide.id}-${index}`} className="py-2 h-full">
                   <div className="relative mx-auto w-[220px] h-[140px] rounded-xl overflow-hidden">
                     <video
+                      autoPlay
                       muted
                       loop
                       playsInline
