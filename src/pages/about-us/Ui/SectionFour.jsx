@@ -17,12 +17,12 @@ const SectionFour = () => {
     arrows: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 2, // 👈 2 slides visible
-    slidesToScroll: 1, // 👈 move 1 slide at a time
+    slidesToShow: 2, 
+    slidesToScroll: 1, 
     swipeToSlide: true,
     responsive: [
       {
-        breakpoint: 640, // mobile
+        breakpoint: 640,
         settings: {
           slidesToShow: 1,
         },

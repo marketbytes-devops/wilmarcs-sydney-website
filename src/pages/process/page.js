@@ -11,10 +11,11 @@ const ProcessPage = () => {
     <section>
       <HeroSection/>
     </section>
-     <section className="lg:mt-18 md:mt-10 mt-6">
+     <section className="lg:mt-10 md:mt-10 mt-6">
         <SectionTwo />
       </section>
-      <section className=" lg:-mt-23 md:-mt-56 mt-0 lg:mb-28 md:mb-10 mb-6">
+  <section className="lg:mt-20 md:mt-16 mt-20 lg:mb-28 md:mb-10 mb-6">
+
         <SectionThree />
       </section>
       
