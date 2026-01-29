@@ -23,28 +23,31 @@ const SectionFive = () => {
   const [openPlanModal, setOpenPlanModal] = useState(false);
 
   useEffect(() => {
-    const track = trackRef.current;
+  const track = trackRef.current;
+  const section = sectionRef.current;
 
-    const scrollWidth = track.scrollWidth;
-    const viewportWidth = window.innerWidth;
+  if (!track || !section) return;
 
-    gsap.to(track, {
-      x: -(scrollWidth - viewportWidth),
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: () => `+=${scrollWidth}`,
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-      },
-    });
+  const scrollDistance = track.scrollWidth - section.clientWidth;
 
-    return () => ScrollTrigger.killAll();
-  }, []);
+  gsap.to(track, {
+    x: -scrollDistance,
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => `+=${scrollDistance}`,
+      scrub: 1,
+      pin: true,
+      anticipatePin: 1,
+    },
+  });
 
-  function Card({ title, image, height }) {
+  return () => ScrollTrigger.killAll();
+}, []);
+
+
+  function Card({ title, videoSrc, height }) {
     return (
       <div className="md:min-w-[380px] max-w-full">
         <p className="mb-3  font-semibold text-gray-900">{title}</p>
@@ -52,14 +55,24 @@ const SectionFive = () => {
         <div
           className={`relative w-full ${height} overflow-hidden rounded-2xl`}
         >
-          <Image
+          {/* <Image
             src={image}
             alt={title}
             fill
             className="object-cover"
             priority
-          />
+          /> */}
+          <video
+            muted
+            loop
+            autoPlay
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+             <source src={videoSrc} type="video/mp4" />
+          </video>
         </div>
+        
       </div>
     );
   }
@@ -115,16 +128,16 @@ const SectionFive = () => {
       >
         <div
           ref={trackRef}
-          className="flex items-end gap-10 will-change-transform"
+          className="flex items-end gap-8 will-change-transform"
         >
           {/* ROW 1 */}
-          <Card title="CSR teams" image={card1} height="h-[360px]" />
-          <Card title="Corporates" image={card2} height="h-[300px]" />
-          <Card title="Event teams" image={card3} height="h-[260px]" />
+          <Card title="CSR teams" videoSrc="/videos/services/CSR.mp4" height="h-[360px]" />
+          <Card title="Corporates" videoSrc="/videos/services/Testimonial.mp4" height="h-[300px]" />
+          <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[260px]" />
 
           {/* ROW 2 */}
-          <Card title="Corporates" image={card2} height="h-[300px]" />
-          <Card title="Event teams" image={card1} height="h-[380px]" />
+          <Card title="Corporates" videoSrc="/videos/services/CSR.mp4" height="h-[300px]" />
+          <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[380px]" />
         </div>
       </section>
 
@@ -132,23 +145,23 @@ const SectionFive = () => {
       <section className="block md:hidden bg-white py-6">
         <Slider {...mobileSliderSettings}>
           <div className="px-3">
-            <Card title="CSR teams" image={card1} height="h-[300px]" />
+            <Card title="CSR teams" videoSrc="/videos/services/CSR.mp4" height="h-[300px]" />
           </div>
 
           <div className="px-3">
-            <Card title="Corporates" image={card2} height="h-[300px]" />
+            <Card title="Corporates" videoSrc="/videos/services/Testimonial.mp4" height="h-[300px]" />
           </div>
 
           <div className="px-3">
-            <Card title="Event teams" image={card3} height="h-[300px]" />
+            <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[300px]" />
           </div>
 
           <div className="px-3">
-            <Card title="Corporates" image={card2} height="h-[300px]" />
+            <Card title="Corporates" videoSrc="/videos/services/CSR.mp4" height="h-[300px]" />
           </div>
 
           <div className="px-3">
-            <Card title="Event teams" image={card1} height="h-[300px]" />
+            <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[300px]" />
           </div>
         </Slider>
       </section>

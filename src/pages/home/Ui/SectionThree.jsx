@@ -43,10 +43,10 @@ export default function SelectedWork() {
   ];
 
   const videoUrls = {
-    0: "https://your-video-url-for-four-billion-meals.mp4",
-    1: "https://your-video-url-for-inside-tesco.mp4",
-    2: "https://your-video-url-for-one-million-trees.mp4",
-    3: "https://your-video-url-for-high-stakes.mp4",
+    0: "/videos/services/Event.mp4",
+    1: "/videos/services/Social.mp4",
+    2: "/videos/services/Testimonial.mp4",
+    3: "/videos/services/CSR.mp4",
   };
 
   const getPositionX = (event) => {

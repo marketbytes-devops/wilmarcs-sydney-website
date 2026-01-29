@@ -38,7 +38,7 @@ const NewSection = () => {
 
   const mm = ScrollTrigger.matchMedia();
 
-  // ✅ DESKTOP ONLY
+  // DESKTOP ONLY
   mm.add("(min-width: 1024px)", () => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -66,7 +66,7 @@ const NewSection = () => {
     return () => tl.kill();
   });
 
-  // ✅ MOBILE / TABLET
+  // MOBILE / TABLET
   mm.add("(max-width: 1023px)", () => {
     gsap.set(videoWrapperRef.current, { scale: 1 });
     gsap.set(contentRef.current, { opacity: 1, y: 0 });
@@ -86,7 +86,7 @@ const NewSection = () => {
   return (
     <>
     <section ref={sectionRef} className="container">
- <div className="flex justify-center lg:min-h-screen h-auto items-center ">
+ <div className="hidden lg:flex justify-center lg:min-h-screen  items-center ">
 
 
      <div className="flex items-center justify-center
@@ -115,14 +115,14 @@ const NewSection = () => {
       {/* Overlay content INSIDE video */}
       <div
         ref={contentRef}
-        className="absolute bottom-6 right-6 opacity-0 translate-y-6"
+        className="absolute bottom-6 right-6 opacity-0 translate-y-6 text-right"
       >
         <p className="text-white mb-4">
           You'll only receive updates on new templates<br />
           no spam, just what you signed up for.
         </p>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-end items-center">
           <Button
             onClick={() => setOpenPlanModal(true)}
             className="bg-white text-black rounded-3xl px-6 py-2 font-semibold"
