@@ -11,6 +11,7 @@ import RightArrow from "@/components/Icons/RightArrow";
 import Link from "next/link";
 import ModalForm from "../../../components/Form/ModalForm";
 import { createPortal } from "react-dom";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const SectionFour = () => {
@@ -39,36 +40,42 @@ const SectionFour = () => {
     checkMobile();
     window.addEventListener("resize", checkMobile);
 
-    const cards = cardsRef.current;
+    const cards = cardsRef.current.filter(card => card !== null);
 
-    if (cards.length > 0) {
-      const cardGap = 22;
+    cards.forEach((card, i) => {
+  const isLast = i === cards.length - 1;
 
-      cards.forEach((card, index) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: `top top+=${80 + index * cardGap}`,
-          endTrigger: cards[cards.length - 1],
-          end: `bottom top+=${50 + index * cardGap}`,
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-        });
+  let scale = 1;
+  let rotation = 0;
 
-        if (index < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.95,
-            ease: "none",
-            scrollTrigger: {
-              trigger: cards[index + 1],
-              start: `top top+=${50 + (index + 1) * cardGap}`,
-              end: `top top+=${50 + index * cardGap}`,
-              scrub: true,
-            },
-          });
-        }
-      });
-    }
+  if (!isLast) {
+    scale = isMobile ? 0.95 : 0.9 + 0.025 * i;
+    rotation = isMobile ? -5 : -10;
+  }
+
+  gsap.to(card, {
+    scale,
+    rotationX: rotation,
+    transformOrigin: "top center",
+    ease: "none",
+    scrollTrigger: {
+      trigger: card,
+      start: `top ${isMobile ? "top+=60" : 60 + 10 * i}`,
+      end: isLast
+        ? isMobile
+          ? "+=400"  
+          : "+=900"
+        : "bottom 600",
+      endTrigger: containerRef.current,
+      scrub: true,
+      pin: true,
+
+     
+      pinSpacing: isMobile && isLast ? true : false,
+    },
+  });
+});
+
 
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
@@ -78,7 +85,7 @@ const SectionFour = () => {
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-12 mx-auto">
-      <div className="w-full flex flex-col lg:flex-row -mb-10 md:mb-12 md:pt-20 gap-6 lg:gap-0">
+      <div className="w-full flex flex-col lg:flex-row md:mb-12 md:pt-12 gap-6 lg:gap-0">
         <div className="w-full lg:w-[50%]"></div>
         <div className="w-full lg:w-[50%] text-center lg:text-right">
           <h3 className="text-[#24144C] font-semibold leading-tight">
@@ -93,12 +100,18 @@ const SectionFour = () => {
         </div>
       </div>
 
-      <section className={`relative ${isMobile ? 'pb-0' : 'pb-[680vh] sm:pb-[100vh] lg:pb-[180vh] md:pb-[60vh]'}`}>
+      <section
+        ref={containerRef}
+        className={`relative ${
+          isMobile
+            ? "pb-6"
+            : "pt-[100px] pb-[800px] min-h-screen"
+        }`}
+      >
         {/* Card 1 - Corporate Films */}
         <div
           ref={(el) => (cardsRef.current[0] = el)}
-          className={`sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-8 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
-          style={{ zIndex: 1 }}
+          className={`w-full bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-8 md:p-16 flex flex-col shadow-2xl  ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -106,20 +119,17 @@ const SectionFour = () => {
             </p>
             <div className="hidden sm:block">
               <Button
-                className="text-white border-3 border-white px-4 sm:px-14 py-2
-               rounded-2xl hover:bg-white/30 transition text-sm"
+                className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Films
               </Button>
             </div>
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span
-            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium"
-          >
+          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium">
             Corporate Films
           </span>
 
@@ -131,10 +141,8 @@ const SectionFour = () => {
               height={600}
               className="h-[200px] sm:h-[250px] md:h-[600px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-1"
             />
-            <div
-              className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2"
-            >
-              <p className="font-normal  mb-4 md:mb-6">
+            <div className="flex-1 flex flex-col justify-center text-white order-2 md:order-2 lg:order-2">
+              <p className="font-normal mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
                 meaningful and impactful films that tell your story
               </p>
@@ -152,8 +160,7 @@ const SectionFour = () => {
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
-          className={`sm:h-screen sm:w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
-          style={{ zIndex: 2 }}
+          className={`w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-black text-sm font-medium">
@@ -161,18 +168,17 @@ const SectionFour = () => {
             </p>
             <div className="hidden sm:block">
               <Button
-                className="text-black border-3 border-black px-4 sm:px-14 py-2
-               rounded-2xl hover:bg-white/30 transition text-sm"
+                className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Films
               </Button>
             </div>
-            <Button className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-black leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-black leading-none mb-6 md:mb-8">
             Documentary Films
           </span>
 
@@ -206,9 +212,7 @@ const SectionFour = () => {
         {/* Card 3 - Commercial Films */}
         <div
           ref={(el) => (cardsRef.current[2] = el)}
-          className={`sm:h-screen sm:w-full shadow-2xl bg-linear-to-br from-[#6A4EAD] to-[#2E1D5A] 
-                   rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
-          style={{ zIndex: 3 }}
+          className={`w-full shadow-2xl bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -216,18 +220,17 @@ const SectionFour = () => {
             </p>
             <div className="hidden sm:block">
               <Button
-                className="text-white border-3 border-white px-4 sm:px-14 py-2
-               rounded-2xl hover:bg-white/30 transition text-sm"
+                className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
             Commercial Films
           </span>
 
@@ -258,9 +261,7 @@ const SectionFour = () => {
         {/* Card 4 - Event Coverage */}
         <div
           ref={(el) => (cardsRef.current[3] = el)}
-          className={`sm:h-screen sm:w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16
-                    shadow-2xl flex flex-col ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
-          style={{ zIndex: 4 }}
+          className={`w-full bg-gray-600 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -268,18 +269,17 @@ const SectionFour = () => {
             </p>
             <div className="hidden sm:block">
               <Button
-                className="text-white border-3 border-white px-4 sm:px-14 py-2
-               rounded-2xl hover:bg-white/30 transition text-sm"
+                className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Stories
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
           </div>
 
-          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6 md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
             Event Coverage
           </span>
 
@@ -303,11 +303,10 @@ const SectionFour = () => {
           </div>
         </div>
 
-        {/* Card 5 - Music Videos + Short Films */}
+        {/* Card 5 - Music Videos (now consistent with previous cards) */}
         <div
           ref={(el) => (cardsRef.current[4] = el)}
-          className={`w-full h-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl ${isMobile ? 'mb-6 sm:mb-8' : 'md:pb-10 lg:pb-4 pb-0'}`}
-          style={{ zIndex: 5 }}
+          className={`w-full bg-gray-800 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 shadow-2xl flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-white text-sm font-medium">
@@ -315,22 +314,24 @@ const SectionFour = () => {
             </p>
             <div className="hidden sm:block">
               <Button
-                className="text-white border-3 border-white px-4 sm:px-14 py-2
-               rounded-2xl hover:bg-white/30 transition text-sm"
+                className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
               >
                 Social
               </Button>
             </div>
-            <Button className="text-white  border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+            <Button
+              onClick={() => setOpenPlanModal(true)}
+              className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
+            >
               Plan A Project
             </Button>
           </div>
 
-          {/* Music Videos */}
-          <span className="text-4xl sm:text-5xl md:text-[80px] uppercase text-white leading-none mb-6  md:mb-8">
+          <span className="text-4xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
             Music Videos
           </span>
-          <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8 mb-12 md:mb-16 mt-3">
+
+          <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
             <Image
               src={img1}
               alt="Music Videos"
@@ -341,7 +342,7 @@ const SectionFour = () => {
             <div className="flex-1 flex flex-col justify-center text-white order-2">
               <p className="mb-4 md:mb-6">
                 At Wilmarcs Motion Pictures, we are passionate about creating
-                meaningful and impactful films that tell your story
+                meaningful and impactful films that tell your story.
               </p>
               <Link
                 href=""
@@ -352,39 +353,8 @@ const SectionFour = () => {
               </Link>
             </div>
           </div>
-
-          {/* Short Films */}
-          <span
-            className="text-4xl sm:text-5xl md:text-[80px] uppercase text-right block text-white mb-6 md:mb-8"
-          >
-            Short Films
-          </span>
-          <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8 mt-3 pb-4 md:pb-8">
-            <div className="flex-1 flex flex-col  justify-center text-white order-2 md:order-2 lg:order-1">
-              <p className="mb-4 md:mb-6">
-                At Wilmarcs Motion Pictures, we are passionate about creating
-                meaningful and impactful films that tell your story
-              </p>
-              <Link
-                href=""
-                className="font-jakarta font-medium self-start text-sm md:text-[20px] flex items-center gap-8 group transition-all duration-300"
-              >
-                See More
-                <RightArrow
-                  className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3"
-                />
-              </Link>
-            </div>
-            <Image
-              src={sectionFourImg}
-              alt="Short Films"
-              width={800}
-              height={500}
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-auto lg:max-h-[325px] w-full md:w-full lg:w-[35%]
-                        object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1 md:order-1 lg:order-2"
-            />
-          </div>
         </div>
+
       </section>
 
       {openPlanModal &&
@@ -394,10 +364,7 @@ const SectionFour = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-[90vh]
-                         p-6 md:p-8
-                         rounded-2xl relative
-                         overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-[90vh] p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button
