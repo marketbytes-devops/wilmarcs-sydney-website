@@ -64,7 +64,14 @@ const SectionFour = () => {
         ease: "none",
         scrollTrigger: {
           trigger: card,
-          start: `top ${isMobile ? "top+=60" : 80 + 10 * i}`,
+         start: `top ${
+  isMobile
+    ? "top+=60"
+    : window.innerWidth >= 1536
+    ? 180 + 10 * i
+    : 90 + 10 * i
+}`,
+
           end: isLast
             ? isMobile
               ? "+=400"
@@ -169,7 +176,7 @@ const SectionFour = () => {
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
-          className={`w-full bg-gray-200 shadow-2xl rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
+ className={`w-full shadow-2xl bg-gray-200 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-black text-sm font-medium">
@@ -200,7 +207,7 @@ const SectionFour = () => {
               loop
               muted
               playsInline
-              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px]lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+           className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-black order-2">
               <p className="mb-4 md:mb-6">
