@@ -36,15 +36,16 @@ const page = () => {
         className="
           relative mx-auto w-full container
           max-w-[1400px]  
-          aspect-[16/9]          
+          h-[70vh] lg:h-[80vh]       
         "
       >
 
         <div className="absolute inset-0 ">
          <Image
                 src={contactus}
+                fill
                 alt="Contact animation"
-                className="w-full h-full object-contain md:rounded-3xl rounded-none"
+                className="w-full h-full object-cover md:rounded-3xl rounded-none"
               />
         </div>
 

@@ -41,7 +41,7 @@ export default function HeroSection() {
         className="
           relative mx-auto w-full container
           max-w-[1400px]  
-          aspect-[16/9]          
+            h-[70vh] lg:h-[80vh]           
         "
       >
 
@@ -52,7 +52,7 @@ export default function HeroSection() {
             muted
             playsInline
             preload="auto"
-            className=" md:rounded-3xl rounded-none
+            className=" md:rounded-3xl rounded-none object-cover
               absolute inset-0 
               w-full h-full 
               "
