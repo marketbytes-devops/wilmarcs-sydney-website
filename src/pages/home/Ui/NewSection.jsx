@@ -98,7 +98,7 @@ const NewSection = () => {
               className="relative
            w-full   xl:max-w-full
            max-w-[900px]
-           aspect-4/2"
+           aspect-4/2 h-[80vh]"
 
             >
 
