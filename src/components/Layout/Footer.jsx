@@ -9,6 +9,7 @@ import lastPic1 from "@/assets/images/home/lastpic1.jpg";
 import lastPic2 from "@/assets/images/home/lastpic2.jpg";
 import lastPic3 from "@/assets/images/home/lastpic3.png";
 import Button from "@/components/Button/index";
+import Link from "next/link";
 
 import emailjs from "emailjs-com";
 
@@ -171,9 +172,11 @@ const Footer = () => {
       <div className="border-t border-gray-300 w-full mt-4"></div>
       <div className="mt-4 px-4 sm:px-6">
         <ul className="flex flex-col sm:flex-row gap-y-2 sm:gap-y-0 sm:gap-x-4 justify-center cursor-pointer text-sm sm:text-base">
+          <Link href="/privacypolicy" >
           <li className="text-[#626568] hover:text-black hover:font-semibold text-center sm:text-left">
             Privacy Policy
           </li>
+          </Link>
           <li className="text-[#626568] hover:text-black hover:font-semibold text-center sm:text-left">
             Terms of Use
           </li>

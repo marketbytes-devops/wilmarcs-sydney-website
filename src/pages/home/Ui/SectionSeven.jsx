@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import DetoIcon from "@/components/Icons/DetoIcon";
+import worksimg from "../../../assets/images/works/worksimg.png";
+import Image from "next/image";
 
 const SectionSeven = () => {
   const testimonials = [
@@ -10,18 +12,21 @@ const SectionSeven = () => {
         "“He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images and at the same keeping professional look. Finally, it also seems very reasonable to implement responsive design, so I'm very happy with that.”",
       author: "Deniyel Karios",
       title: "CEO, Company Name",
+      image: worksimg,
     },
     {
       quote:
         "“He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images and at the same keeping professional look. Finally, it also seems very reasonable to implement responsive design, so I'm very happy with that.”",
       author: "Sarah Johnson",
       title: "Product Manager, TechCorp",
+      image: worksimg,
     },
     {
       quote:
         "“He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images and at the same keeping professional look. Finally, it also seems very reasonable to implement responsive design, so I'm very happy with that.”",
       author: "Michael Chen",
       title: "Founder, StartupX",
+      image: worksimg,
     },
   ];
 
@@ -67,7 +72,16 @@ const SectionSeven = () => {
                   <div className="flex flex-col md:flex-row items-end justify-between mt-auto">
 
                     <footer className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full border-2 border-dashed border-gray-400 shrink-0" />
+                      {/* FIXED: Show the actual client image instead of gray circle */}
+                      <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-dashed border-gray-400">
+                        <Image
+                          src={current.image}
+                          alt={`${current.author} - ${current.title}`}
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                       <div>
                         <cite className="not-italic font-semibold text-gray-900">
                           {current.author}
@@ -122,8 +136,6 @@ const SectionSeven = () => {
           </div>
         </div>
       </div>
-
-     
     </>
   );
 };

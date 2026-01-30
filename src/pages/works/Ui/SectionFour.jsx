@@ -8,8 +8,9 @@ import QuoteIcon from "../../../components/Icons/Quotes";
 export default function TestimonialCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const testimonials = [
+  const originalTestimonials = [
     {
       id: 1,
       text: "He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images and at the same fetching professional response.",
@@ -31,87 +32,109 @@ export default function TestimonialCarousel() {
       role: "UI Designer",
       image: worksimg,
     },
+    {
+      id: 4,
+      text: "He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images.",
+      name: "Daniyel Karlos",
+      role: "UI Designer",
+      image: worksimg,
+    },
   ];
 
+  const testimonials = [...originalTestimonials, ...originalTestimonials];
+
+  const realSlideCount = isMobile
+    ? originalTestimonials.length
+    : Math.ceil(originalTestimonials.length / 2);
+
+  const totalRenderedGroups = isMobile
+    ? testimonials.length
+    : Math.ceil(testimonials.length / 2);
+
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const totalSlides = isMobile
-    ? testimonials.length
-    : Math.ceil(testimonials.length / 2);
+  useEffect(() => {
+    if (isPaused) return;
 
-  const goToSlide = (index) => {
-    setCurrentSlide(Math.max(0, Math.min(totalSlides - 1, index)));
-  };
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => {
+        const next = prev + 1;
+        if (next >= realSlideCount) {
+          return next - realSlideCount;
+        }
+        return next;
+      });
+    }, 6500);
+
+    return () => clearInterval(interval);
+  }, [isPaused, realSlideCount]);
 
   const containerRef = useRef(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const startTranslate = useRef(0);
-  const prevTranslate = useRef(0);
-  const animationID = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    let isDragging = false;
+    let startX = 0;
     let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = null;
 
     const getPositionX = (e) =>
-      e.type.includes("mouse") ? e.pageX : e.touches[0].pageX;
+      e.type.includes("mouse") ? e.pageX : e.touches?.[0]?.pageX || 0;
 
     const touchStart = (e) => {
-      isDragging.current = true;
-      startX.current = getPositionX(e);
-      startTranslate.current = -currentSlide * container.offsetWidth;
-      prevTranslate.current = startTranslate.current;
-
+      setIsPaused(true);
+      isDragging = true;
+      startX = getPositionX(e);
+      prevTranslate = -currentSlide * 100;
       container.style.transition = "none";
-      cancelAnimationFrame(animationID.current);
+      cancelAnimationFrame(animationID);
     };
 
     const touchMove = (e) => {
-      if (!isDragging.current) return;
+      if (!isDragging) return;
       const currentPosition = getPositionX(e);
-      currentTranslate =
-        prevTranslate.current + currentPosition - startX.current;
-
-      container.style.transform = `translateX(${currentTranslate}px)`;
+      currentTranslate = prevTranslate + currentPosition - startX;
+      container.style.transform = `translateX(${currentTranslate}%)`;
     };
 
     const touchEnd = () => {
-      if (!isDragging.current) return;
-      isDragging.current = false;
+      if (!isDragging) return;
+      isDragging = false;
 
-      const movedBy = currentTranslate - startTranslate.current;
-      const slideWidth = container.offsetWidth;
-      const threshold = slideWidth * 0.25;
+      const movedBy = currentTranslate - prevTranslate;
+      const threshold = 25;
 
       let newIndex = currentSlide;
-      if (movedBy < -threshold && currentSlide < totalSlides - 1) {
-        newIndex = currentSlide + 1;
+      if (movedBy < -threshold && currentSlide < realSlideCount - 1) {
+        newIndex++;
       }
       if (movedBy > threshold && currentSlide > 0) {
-        newIndex = currentSlide - 1;
+        newIndex--;
       }
 
-      container.style.transition = "transform 500ms ease-in-out";
+      if (newIndex >= realSlideCount) newIndex -= realSlideCount;
+      if (newIndex < 0) newIndex += realSlideCount;
+
+      container.style.transition = "transform 800ms ease-in-out";
       container.style.transform = `translateX(-${newIndex * 100}%)`;
 
       setCurrentSlide(newIndex);
 
-      currentTranslate = -newIndex * slideWidth;
-      prevTranslate.current = currentTranslate;
+      setTimeout(() => {
+        setIsPaused(false);
+      }, 4000);
     };
 
     container.addEventListener("mousedown", touchStart);
-    container.addEventListener("touchstart", touchStart);
+    container.addEventListener("touchstart", touchStart, { passive: false });
 
     window.addEventListener("mousemove", touchMove);
     window.addEventListener("touchmove", touchMove, { passive: false });
@@ -133,8 +156,8 @@ export default function TestimonialCarousel() {
 
   return (
     <div className="bg-white container">
-      <div className="mb-1 ">
-        <h2 className=" sm:text-left text-center font-bold text-[#26164F] uppercase tracking-tight">
+      <div className="mb-1">
+        <h2 className="sm:text-left text-center font-bold text-[#26164F] uppercase tracking-tight">
           WHAT CLIENTS SAY ABOUT THE TOOL
         </h2>
       </div>
@@ -143,101 +166,85 @@ export default function TestimonialCarousel() {
         <div className="overflow-hidden">
           <div
             ref={containerRef}
-            className="flex transition-transform duration-500 ease-in-out select-none cursor-grab active:cursor-grabbing"
+            className="flex transition-transform duration-800 ease-in-out select-none cursor-grab active:cursor-grabbing"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {isMobile
               ? testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0 px-2"
-                >
-                  <div className="bg-white rounded-2xl mb-4 shadow-xl p-2 min-h-[320px] flex flex-col">
-
-
-                    <div className=" relative p-4">
-                      <QuoteIcon
-                        className="text-[#26164F] w-10 h-10"
-                      />
-                    </div>
-
-                    <span className="text-gray-700 px-4 text-center justify-start text-sm mb-3 leading-relaxed">
-                      {testimonial.text}
-                    </span>
-                    <div className="flex items-center mt-auto p-4">
-                      <Image
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-12 h-12 rounded-full mr-4  bg-gray-200"
-                      />
-                      <div>
-                        <p className="font-bold text-gray-900">
-                          {testimonial.name}
-                        </p>
-                        <p className="text-gray-500 text-sm">
-                          {testimonial.role}
-                        </p>
+                  <div key={testimonial.id} className="w-full flex-shrink-0 px-2">
+                    <div className="bg-white rounded-2xl mb-4 shadow-xl p-2 min-h-[320px] flex flex-col">
+                      <div className="relative p-4">
+                        <QuoteIcon className="text-[#26164F] w-10 h-10" />
+                      </div>
+                      <span className="text-gray-700 px-4 text-center justify-start text-sm mb-3 leading-relaxed">
+                        {testimonial.text}
+                      </span>
+                      <div className="flex items-center mt-auto p-4">
+                        <Image
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-12 h-12 rounded-full mr-4 bg-gray-200"
+                        />
+                        <div>
+                          <p className="font-bold text-gray-900">{testimonial.name}</p>
+                          <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
-              : [...Array(totalSlides)].map((_, slideIndex) => {
-                const slideTestimonials = testimonials.slice(
-                  slideIndex * 2,
-                  slideIndex * 2 + 2
-                );
+                ))
+              : [...Array(totalRenderedGroups)].map((_, slideIndex) => {
+                  const start = slideIndex * 2;
+                  const slideTestimonials = testimonials.slice(start, start + 2);
 
-                return (
-                  <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {slideTestimonials.map((testimonial) => (
-                        <div
-                          key={testimonial.id}
-                          className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
-                        >
-                          <div className=" relative">
-                            <QuoteIcon
-                              className="  text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20"
-                            />
-                          </div>
-
-                          <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
-                            {testimonial.text}
-                          </span>
-                          <div className="flex items-center mt-auto">
-                            <Image
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              className="w-12 h-12 rounded-full mr-4 bg-gray-200"
-                            />
-                            <div>
-                              <p className="font-bold text-gray-900">
-                                {testimonial.name}
-                              </p>
-                              <p className="text-gray-500 text-sm">
-                                {testimonial.role}
-                              </p>
+                  return (
+                    <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {slideTestimonials.map((testimonial) => (
+                          <div
+                            key={testimonial.id}
+                            className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
+                          >
+                            <div className="relative">
+                              <QuoteIcon className="text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20" />
+                            </div>
+                            <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
+                              {testimonial.text}
+                            </span>
+                            <div className="flex items-center mt-auto">
+                              <Image
+                                src={testimonial.image}
+                                alt={testimonial.name}
+                                className="w-12 h-12 rounded-full mr-4 bg-gray-200"
+                              />
+                              <div>
+                                <p className="font-bold text-gray-900">{testimonial.name}</p>
+                                <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
           </div>
         </div>
 
         <div className="flex justify-center items-center mt-3 sm:mt-6 mb-8 space-x-2">
-          {[...Array(totalSlides)].map((_, index) => (
+          {[...Array(realSlideCount)].map((_, index) => (
             <button
               key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 ${currentSlide === index
-                ? "w-8 h-3 bg-gray-800 rounded-full"
-                : "w-3 h-3 bg-gray-400 rounded-full hover:bg-gray-600"
-                }`}
+              onClick={() => {
+                setCurrentSlide(index);
+                setIsPaused(true);
+                setTimeout(() => setIsPaused(false), 12000);
+              }}
+              className={`transition-all duration-300 ${
+                currentSlide === index
+                  ? "w-8 h-3 bg-gray-800 rounded-full"
+                  : "w-3 h-3 bg-gray-400 rounded-full hover:bg-gray-600"
+              }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
