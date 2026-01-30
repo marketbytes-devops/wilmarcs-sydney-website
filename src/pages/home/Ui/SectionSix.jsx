@@ -1,255 +1,194 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import worksimg from "../../../assets/images/works/worksimg.png";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import QuoteIcon from "../../../components/Icons/Quotes";
+import sectionSixGif from "../../../assets/videos/home/section-six.gif";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "./../../../components/Button/index";
+import ModalForm from "../../../components/Form/ModalForm";
+import { createPortal } from "react-dom";
+gsap.registerPlugin(ScrollTrigger);
 
-export default function TestimonialCarousel() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+const SectionSix = () => {
 
-  const originalTestimonials = [
-    {
-      id: 1,
-      text: "He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images and at the same fetching professional response.",
-      name: "Daniyel Karlos",
-      role: "UI Designer",
-      image: worksimg,
-    },
-    {
-      id: 2,
-      text: "He quickly delivered excellent design a per required specifications. Finally, it also seems very reasonable to implement responsive design, so I'm very happy with that.",
-      name: "Daniyel Karlos",
-      role: "UI Designer",
-      image: worksimg,
-    },
-    {
-      id: 3,
-      text: "He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images.",
-      name: "Daniyel Karlos",
-      role: "UI Designer",
-      image: worksimg,
-    },
-    {
-      id: 4,
-      text: "He quickly delivered excellent design a per required specifications. New landing page will have refreshing simple look, while keeping page load light on images.",
-      name: "Daniyel Karlos",
-      role: "UI Designer",
-      image: worksimg,
-    },
-  ];
-
-  const testimonials = [...originalTestimonials, ...originalTestimonials];
-
-  const realSlideCount = isMobile
-    ? originalTestimonials.length
-    : Math.ceil(originalTestimonials.length / 2);
-
-  const totalRenderedGroups = isMobile
-    ? testimonials.length
-    : Math.ceil(testimonials.length / 2);
-
+  const itemsRef = useRef([]);
+  const leftContentRef = useRef(null);
+  const titleRef = useRef(null);
+  const [openPlanModal, setOpenPlanModal] = useState(false);
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = prev + 1;
-        if (next >= realSlideCount) {
-          return next - realSlideCount;
-        }
-        return next;
-      });
-    }, 6500);
-
-    return () => clearInterval(interval);
-  }, [isPaused, realSlideCount]);
-
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let isDragging = false;
-    let startX = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    let animationID = null;
-
-    const getPositionX = (e) =>
-      e.type.includes("mouse") ? e.pageX : e.touches?.[0]?.pageX || 0;
-
-    const touchStart = (e) => {
-      setIsPaused(true);
-      isDragging = true;
-      startX = getPositionX(e);
-      prevTranslate = -currentSlide * 100;
-      container.style.transition = "none";
-      cancelAnimationFrame(animationID);
-    };
-
-    const touchMove = (e) => {
-      if (!isDragging) return;
-      const currentPosition = getPositionX(e);
-      currentTranslate = prevTranslate + currentPosition - startX;
-      container.style.transform = `translateX(${currentTranslate}%)`;
-    };
-
-    const touchEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-
-      const movedBy = currentTranslate - prevTranslate;
-      const threshold = 25;
-
-      let newIndex = currentSlide;
-      if (movedBy < -threshold && currentSlide < realSlideCount - 1) {
-        newIndex++;
-      }
-      if (movedBy > threshold && currentSlide > 0) {
-        newIndex--;
-      }
-
-      if (newIndex >= realSlideCount) newIndex -= realSlideCount;
-      if (newIndex < 0) newIndex += realSlideCount;
-
-      container.style.transition = "transform 800ms ease-in-out";
-      container.style.transform = `translateX(-${newIndex * 100}%)`;
-
-      setCurrentSlide(newIndex);
-
-      setTimeout(() => {
-        setIsPaused(false);
-      }, 4000);
-    };
-
-    container.addEventListener("mousedown", touchStart);
-    container.addEventListener("touchstart", touchStart, { passive: false });
-
-    window.addEventListener("mousemove", touchMove);
-    window.addEventListener("touchmove", touchMove, { passive: false });
-
-    window.addEventListener("mouseup", touchEnd);
-    window.addEventListener("mouseleave", touchEnd);
-    window.addEventListener("touchend", touchEnd);
+    if (openPlanModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
-      container.removeEventListener("mousedown", touchStart);
-      container.removeEventListener("touchstart", touchStart);
-      window.removeEventListener("mousemove", touchMove);
-      window.removeEventListener("touchmove", touchMove);
-      window.removeEventListener("mouseup", touchEnd);
-      window.removeEventListener("mouseleave", touchEnd);
-      window.removeEventListener("touchend", touchEnd);
+      document.body.style.overflow = "";
     };
-  }, [currentSlide, realSlideCount]);
+  }, [openPlanModal]);
+
+ useEffect(() => {
+  // Only run animations on desktop (≥ lg breakpoint)
+  if (window.innerWidth < 1024) return;
+
+  gsap.fromTo(
+    titleRef.current,
+    { opacity: 0, x: -100 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+      ease: "power1.out",
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: true,
+      },
+    }
+  );
+
+  gsap.fromTo(
+    leftContentRef.current,
+    { opacity: 0, x: -100 },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: leftContentRef.current,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: true,
+      },
+    }
+  );
+
+  itemsRef.current.forEach((item) => {
+    if (!item) return;
+    gsap.fromTo(
+      item,
+      { opacity: 0, x: 50 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        scrollTrigger: {
+          trigger: item,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
+        },
+      }
+    );
+  });
+
+  // Optional: refresh ScrollTrigger after setup (good practice)
+  ScrollTrigger.refresh();
+}, []);
 
   return (
-    <div className="bg-white container">
-      <div className="mb-1">
-        <h2 className="sm:text-left text-center font-bold text-[#26164F] uppercase tracking-tight">
-          WHAT CLIENTS SAY ABOUT THE TOOL
-        </h2>
-      </div>
+    <div className="container mx-auto">
+      <h3
+        ref={titleRef}
+        className="text-center lg:text-left  text-[#271751] relative z-10 leading-tight"
+      >
+        WHY WILMARCS
+      </h3>
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:-mt-24 -mt-18 gap-3">
+        <div
+          ref={leftContentRef}
+          className="lg:py-56 py-20 text-center lg:text-left"
+        >
+          <p className="leading-tight lg:mb-8 mb-4">
+            We combine artistry and technical expertise to deliver visually
+            stunning films. Every film is custom-made to align with your brand
+            and communication goals. Our structured process ensures that you're
+            always in the loop and that your film is delivered on time and on
+            budget. With years of experience in corporate, CSR, and event
+            filmmaking, our team understands how to craft powerful stories that
+            resonate with your audience.
+          </p>
 
-      <div className="relative">
-        <div className="overflow-hidden">
-          <div
-            ref={containerRef}
-            className="flex transition-transform duration-800 ease-in-out select-none cursor-grab active:cursor-grabbing"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          <Button onClick={() => setOpenPlanModal(true)}
+            className="
+    text-white px-12 py-4
+
+    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
+    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+    bg-[length:200%_200%]
+    bg-[position:0%_50%]
+   
+    transition-[background-position,--a,--c1,--c3]
+    duration-700 ease-in-out
+    hover:bg-[position:100%_50%]
+    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
+  "
           >
-            {isMobile
-              ? testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0 px-2">
-                    <div className="bg-white rounded-2xl mb-4 shadow-xl p-2 min-h-[320px] flex flex-col">
-                      <div className="relative p-4">
-                        <QuoteIcon className="text-[#26164F] w-10 h-10" />
-                      </div>
-                      <span className="text-gray-700 px-4 text-center justify-start text-sm mb-3 leading-relaxed">
-                        {testimonial.text}
-                      </span>
-                      <div className="flex items-center mt-auto p-4">
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full mr-4 bg-gray-200"
-                        />
-                        <div>
-                          <p className="font-bold text-gray-900">{testimonial.name}</p>
-                          <p className="text-gray-500 text-sm">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : [...Array(totalRenderedGroups)].map((_, slideIndex) => {
-                  const start = slideIndex * 2;
-                  const slideTestimonials = testimonials.slice(start, start + 2);
-
-                  return (
-                    <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {slideTestimonials.map((testimonial) => (
-                          <div
-                            key={testimonial.id}
-                            className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
-                          >
-                            <div className="relative">
-                              <QuoteIcon className="text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20" />
-                            </div>
-                            <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
-                              {testimonial.text}
-                            </span>
-                            <div className="flex items-center mt-auto">
-                              <Image
-                                src={testimonial.image}
-                                alt={testimonial.name}
-                                className="w-12 h-12 rounded-full mr-4 bg-gray-200"
-                              />
-                              <div>
-                                <p className="font-bold text-gray-900">{testimonial.name}</p>
-                                <p className="text-gray-500 text-sm">{testimonial.role}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-          </div>
+            Plan A Project
+          </Button>
         </div>
 
-        <div className="flex justify-center items-center mt-3 sm:mt-6 mb-8 space-x-2">
-          {[...Array(realSlideCount)].map((_, index) => (
-            <button
+        <div className="flex items-center justify-center -mt-14 -mb-6 sm:-mb-0 lg:mt-0">
+          <Image
+            src={sectionSixGif}
+            alt="Why Wilmarcs visual"
+            width={551}
+            height={900}
+            className="w-full h-auto lg:h-[700px] object-cover rounded-2xl shadow-2xl"
+            unoptimized
+            priority
+          />
+        </div>
+
+        <div className="lg:py-28 py-12 lg:-ml-12 ml-0 ">
+          {[
+            "Reliable timelines",
+            "Founder-led direction",
+            "Corporate-friendly workflows",
+            "Story-first approach",
+            "Cinematic visuals",
+          ].map((text, index) => (
+            <h6
               key={index}
-              onClick={() => {
-                setCurrentSlide(index);
-                setIsPaused(true);
-                setTimeout(() => setIsPaused(false), 12000);
-              }}
-              className={`transition-all duration-300 ${
-                currentSlide === index
-                  ? "w-8 h-3 bg-gray-800 rounded-full"
-                  : "w-3 h-3 bg-gray-400 rounded-full hover:bg-gray-600"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+              ref={(el) => (itemsRef.current[index] = el)}
+              className="bg-white p-5 drop-shadow-xl mt-3 first:mt-0  font-semibold"
+            >
+              {text}
+            </h6>
           ))}
         </div>
       </div>
+      {openPlanModal &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+            onClick={() => setOpenPlanModal(false)}
+          >
+            <div
+              className="bg-white w-full max-w-5xl h-auto
+                         p-6 md:p-8
+                         rounded-2xl relative
+                         overflow-hidden flex items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+
+              <button
+                onClick={() => setOpenPlanModal(false)}
+                className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
+              >
+                ×
+              </button>
+
+              <ModalForm closeModal={() => setOpenPlanModal(false)} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
-}
+};
+
+export default SectionSix;
