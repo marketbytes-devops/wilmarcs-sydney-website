@@ -227,8 +227,8 @@ const HeroSection = () => {
     md:max-w-[240px]         
     lg:max-w-[280px]          
     xl:max-w-[340px]          
-    2xl:max-w-[720px]         
-    3xl:max-w-[520px]         
+    2xl:max-w-[450px]         
+    3xl:max-w-[450px]         
     4xl:max-w-[45vw]   
     
     h-fit
@@ -249,7 +249,7 @@ const HeroSection = () => {
             aspect-video 
             rounded-xl lg:rounded-2xl 
             overflow-hidden
-            w-full      2xl:max-w-[720px] 2xl:h-[200]     
+            w-full      2xl:max-w-[450px] 2xl:h-[200]     
           "
                     >
                       <video
