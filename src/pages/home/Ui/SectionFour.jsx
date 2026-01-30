@@ -67,7 +67,7 @@ const SectionFour = () => {
           start: `top ${isMobile ? "top+=60" : 60 + 10 * i}`,
           end: isLast
             ? isMobile
-              ? "+=400"  
+              ? "+=400"
               : "+=900"
             : "bottom 600",
           endTrigger: containerRef.current,
@@ -103,11 +103,10 @@ const SectionFour = () => {
 
       <section
         ref={containerRef}
-        className={`mt-4 sm:mt-0 relative ${
-          isMobile
+        className={`mt-4 sm:mt-0 relative ${isMobile
             ? "pb-0"
             : "pt-[100px] pb-[800px] min-h-screen"
-        }`}
+          }`}
       >
         {/* Card 1 - Corporate Films */}
         <div
@@ -115,7 +114,7 @@ const SectionFour = () => {
           className={`w-full bg-gradient-to-br from-[#6A4EAD] to-[#2E1D5A] rounded-xl md:rounded-2xl p-4 sm:p-8 md:p-16 flex flex-col shadow-2xl  ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
-           
+
             <div className="hidden sm:block">
               <Button
                 className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
@@ -124,11 +123,11 @@ const SectionFour = () => {
               </Button>
             </div>
             <div className="hidden sm:block ">
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-1 rounded-2xl hover:bg-white/30 transition text-sm">
-              Plan A Project
-            </Button>
+              <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-1 rounded-2xl hover:bg-white/30 transition text-sm">
+                Plan A Project
+              </Button>
             </div>
-           
+
           </div>
 
           <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-6 font-jakarta font-medium">
@@ -157,15 +156,15 @@ const SectionFour = () => {
                 <RightArrow className="w-5 h-5 md:w-7 md:h-7 transition-transform duration-300 group-hover:translate-x-3" />
               </Link>
             </div>
-            
+
           </div>
-            <div className="block sm:hidden">
+          <div className="block sm:hidden">
             <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
-            </div>
+          </div>
         </div>
-        
+
 
         {/* Card 2 - Documentary Films */}
         <div
@@ -189,7 +188,7 @@ const SectionFour = () => {
           </div>
 
           <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-black leading-none mb-6 md:mb-8">
-         CSR And Impact Stories
+            CSR And Impact Stories
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
@@ -242,7 +241,7 @@ const SectionFour = () => {
           </div>
 
           <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
-          Event And Launch Films
+            Event And Launch Films
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
@@ -345,7 +344,7 @@ const SectionFour = () => {
           </div>
 
           <span className="text-2xl sm:text-5xl md:text-[62px] uppercase text-white leading-none mb-6 md:mb-8">
-           Social-First Content Packs
+            Social-First Content Packs
           </span>
 
           <div className="flex flex-col md:flex-col lg:flex-row gap-6 md:gap-8 lg:gap-8">
@@ -382,7 +381,7 @@ const SectionFour = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-[90vh] p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button

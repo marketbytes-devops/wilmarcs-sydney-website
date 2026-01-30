@@ -12,7 +12,7 @@ import ModalForm from "../../../components/Form/ModalForm";
 import { createPortal } from "react-dom";
 
 const HeroSection = () => {
-  
+
   const sectionRef = useRef(null);
   const sliderRef = useRef(null);
   const scrollTimeoutRef = useRef(null);
@@ -20,7 +20,7 @@ const HeroSection = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [playingVideos, setPlayingVideos] = useState({});
 
- 
+
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const HeroSection = () => {
     return () => window.removeEventListener("resize", checkDesktop);
   }, []);
 
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -109,7 +109,7 @@ const HeroSection = () => {
     <>
       {/* MOBILE */}
       <section className="md:hidden relative mt-4 sm:mt-0 overflow-hidden ">
-         <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src={HomeHero}
             alt="Hero animation"
@@ -198,7 +198,7 @@ const HeroSection = () => {
 
                     <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/40 pointer-events-none"></div>
 
-                    
+
                   </div>
                 </div>
               ))}
@@ -251,7 +251,7 @@ const HeroSection = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-[90vh] p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button
