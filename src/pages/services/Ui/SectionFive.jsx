@@ -1,12 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "@/components/Button";
 import ModalForm from "@/components/Form/ModalForm";
 import { createPortal } from "react-dom";
 
 const SectionFive = () => {
 
-   const [openPlanModal, setOpenPlanModal] = useState(false);
+  const [openPlanModal, setOpenPlanModal] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const videoRef = useRef(null);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <>
@@ -34,8 +47,9 @@ const SectionFive = () => {
 
           </div>
 
-          <div className="lg:w-[40%] w-full lg:order-2 order-1">
+          <div className="lg:w-[40%] w-full lg:order-2 order-1 relative group">
             <video
+              ref={videoRef}
               autoPlay
               muted
               loop
@@ -45,6 +59,27 @@ const SectionFive = () => {
               <source src="/videos/services/Testimonial.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+
+            {/* Play/Pause Button */}
+            <button
+              onClick={togglePlayPause}
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                         bg-black/50 hover:bg-black/70 text-white rounded-full p-4 
+                         transition-all duration-300 opacity-0 group-hover:opacity-100"
+              aria-label={isPlaying ? "Pause video" : "Play video"}
+            >
+              {isPlaying ? (
+                // Pause Icon
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                </svg>
+              ) : (
+                // Play Icon
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              )}
+            </button>
           </div>
 
         </div>
