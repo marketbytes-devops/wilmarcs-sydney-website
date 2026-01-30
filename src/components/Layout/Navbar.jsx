@@ -376,12 +376,6 @@ export default function Navbar() {
                     );
                   })}
                   <div className="mt-10 flex flex-col gap-4 lg:hidden -mx-10 px-8 w-screen">
-                    <button
-                      onClick={() => setOpenPlanModal(true)}
-                      className="w-full border border-white text-white py-3 rounded-full"
-                    >
-                      Plan a Project
-                    </button>
                     <Link
                       href="/contact-us"
                       onClick={() => setMobileMenuOpen(false)}
@@ -390,6 +384,13 @@ export default function Navbar() {
                     >
                       Contact Us
                     </Link>
+                    <button
+                      onClick={() => setOpenPlanModal(true)}
+                      className="w-full border border-white text-white py-3 rounded-full"
+                    >
+                      Plan a Project
+                    </button>
+                    
                   </div>
                 </div>
               </div>

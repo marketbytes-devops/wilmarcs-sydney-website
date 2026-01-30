@@ -7,11 +7,13 @@ import Image from "next/image";
 import Button from "./../../../components/Button/index";
 import ModalForm from "../../../components/Form/ModalForm";
 import { createPortal } from "react-dom";
+import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
 
 const SectionTwo = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [openPlanModal, setOpenPlanModal] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (openPlanModal) {
@@ -141,6 +143,8 @@ const SectionTwo = () => {
       >
         <Button
           onClick={() => setOpenPlanModal(true)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
          className="
     text-white px-12 py-4
 
@@ -156,6 +160,14 @@ const SectionTwo = () => {
   "
         >
           Plan A Project
+
+          <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
+                                            {isHovered ? (
+                                              <GoArrowRight size={18} />
+                                            ) : (
+                                              <GoArrowUpRight size={18} />
+                                            )}
+                                          </span>
         </Button>
       </motion.div>
 
@@ -166,7 +178,8 @@ const SectionTwo = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-visible
+                         flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button

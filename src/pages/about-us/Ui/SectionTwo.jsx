@@ -67,11 +67,7 @@ const SectionTwo = () => {
               </p>
             </div>
 
-            {/* Timeline End Line (Desktop only) */}
-            <div className="relative px-6 lg:px-4 hidden lg:block">
-              <div className="absolute -left-1 top-1 w-5 h-5 bg-[#8D8D8D] rounded-full"></div>
-              <div className="absolute left-1.5 top-4 bottom-0 w-0.5 bg-[#8D8D8D] "></div>
-            </div>
+           
           </div>
         </div>
       </div>

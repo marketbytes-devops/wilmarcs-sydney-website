@@ -9,6 +9,7 @@ import Navbar from "@/components/Layout/Navbar";
 import Footer from "@/components/Layout/Footer";
 import ScrollToTop from "@/components/ScrollToTop/index";
 import { usePathname } from "next/navigation";
+import GoToTop from "@/components/GoToTop";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -34,8 +35,13 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+       <script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          async
+        ></script>
       <body>
         <ScrollToTop />
+        <GoToTop/>
 
         {!hideLayout && <Navbar />}
 

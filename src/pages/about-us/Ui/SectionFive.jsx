@@ -11,9 +11,7 @@ import Slider from "react-slick";
 import { createPortal } from "react-dom";
 
 import ModalForm from "@/components/Form/ModalForm";
-import card1 from "@/assets/images/about/card1.png";
-import card2 from "@/assets/images/about/card2.png";
-import card3 from "@/assets/images/about/card3.png";
+import { GoArrowUpRight, GoArrowRight } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +19,7 @@ const SectionFive = () => {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const [openPlanModal, setOpenPlanModal] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (openPlanModal) {
@@ -63,7 +62,7 @@ const SectionFive = () => {
 
   function Card({ title, videoSrc, height }) {
     return (
-      <div className="md:min-w-[380px] max-w-full">
+      <div className="md:min-w-[380px] 2xl:min-w-[25%] max-w-full">
         <p className="mb-3  font-semibold text-gray-900">{title}</p>
 
         <div
@@ -115,7 +114,9 @@ const SectionFive = () => {
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-end ">
             <Button
               onClick={() => setOpenPlanModal(true)}
-              className="
+               onMouseEnter={() => setIsHovered(true)}
+               onMouseLeave={() => setIsHovered(false)}
+              className=" 
     text-white px-12 py-4
 
     [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
@@ -130,6 +131,14 @@ const SectionFive = () => {
   "
             >
               Plan a Project
+
+                <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
+                                  {isHovered ? (
+                                    <GoArrowRight size={18} />
+                                  ) : (
+                                    <GoArrowUpRight size={18} />
+                                  )}
+                                </span>
             </Button>
           </div>
         </div>
@@ -142,7 +151,7 @@ const SectionFive = () => {
       >
         <div
           ref={trackRef}
-          className="flex items-end gap-8 will-change-transform"
+          className="flex items-end gap-6 will-change-transform"
         >
           {/* ROW 1 */}
           <Card title="CSR teams" videoSrc="/videos/services/CSR.mp4" height="h-[360px]" />
@@ -179,6 +188,7 @@ const SectionFive = () => {
           </div>
         </Slider>
       </section>
+
       {openPlanModal &&
         createPortal(
           <div
@@ -189,7 +199,7 @@ const SectionFive = () => {
               className="bg-white w-full max-w-5xl h-auto
                          p-6 md:p-8
                          rounded-2xl relative
-                         overflow-hidden flex items-center"
+                         overflow-visible flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
 
