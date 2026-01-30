@@ -148,78 +148,84 @@ export default function TestimonialCarousel() {
           >
             {isMobile
               ? testimonials.map((testimonial) => (
-                  <div
-                    key={testimonial.id}
-                    className="w-full flex-shrink-0 px-2"
-                  >
-                    <div className="bg-white rounded-2xl mb-4 shadow-xl p-2  flex flex-col">
-                      
+                <div
+                  key={testimonial.id}
+                  className="w-full flex-shrink-0 px-2"
+                >
+                  <div className="bg-white rounded-2xl mb-4 shadow-xl p-2 min-h-[320px] flex flex-col">
 
-                      <span className="text-gray-700 p-4 text-center justify-start text-sm mb-3 leading-relaxed">
-                        {testimonial.text}
-                      </span>
-                      <div className="flex items-center ">
-                        <Image
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full mr-4  bg-gray-200"
-                        />
-                        <div>
-                          <p className="font-bold text-gray-900">
-                            {testimonial.name}
-                          </p>
-                          <p className="text-gray-500 text-sm">
-                            {testimonial.role}
-                          </p>
-                        </div>
+
+                    <div className=" relative p-4">
+                      <QuoteIcon
+                        className="text-[#26164F] w-10 h-10"
+                      />
+                    </div>
+
+                    <span className="text-gray-700 px-4 text-center justify-start text-sm mb-3 leading-relaxed">
+                      {testimonial.text}
+                    </span>
+                    <div className="flex items-center mt-auto p-4">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-12 h-12 rounded-full mr-4  bg-gray-200"
+                      />
+                      <div>
+                        <p className="font-bold text-gray-900">
+                          {testimonial.name}
+                        </p>
+                        <p className="text-gray-500 text-sm">
+                          {testimonial.role}
+                        </p>
                       </div>
                     </div>
                   </div>
-                ))
+                </div>
+              ))
               : [...Array(totalSlides)].map((_, slideIndex) => {
-                  const slideTestimonials = testimonials.slice(
-                    slideIndex * 2,
-                    slideIndex * 2 + 2
-                  );
+                const slideTestimonials = testimonials.slice(
+                  slideIndex * 2,
+                  slideIndex * 2 + 2
+                );
 
-                  return (
-                    <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {slideTestimonials.map((testimonial) => (
-                          <div
-                            key={testimonial.id}
-                            className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
-                          >
-                            <div className=" relative">
-                              <QuoteIcon
-                                className="  text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20"
-                              />
-                            </div>
+                return (
+                  <div key={slideIndex} className="w-full flex-shrink-0 sm:mt-5 px-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {slideTestimonials.map((testimonial) => (
+                        <div
+                          key={testimonial.id}
+                          className="bg-white rounded-2xl mb-4 shadow-xl p-2 md:p-12 md:min-h-[440px] border border-gray-100 flex flex-col"
+                        >
+                          <div className=" relative">
+                            <QuoteIcon
+                              className="  text-[#26164F] md:w-14 md:h-14 lg:w-20 lg:h-20"
+                            />
+                          </div>
 
-                            <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
-                              {testimonial.text}
-                            </span>
-                            <div className="flex items-center">
-                              <Image
-                                src={testimonial.image}
-                                alt={testimonial.name}
-                                className="w-12 h-12 rounded-full mr-4 bg-gray-200"
-                              />
-                              <div>
-                                <p className="font-bold text-gray-900">
-                                  {testimonial.name}
-                                </p>
-                                <p className="text-gray-500 text-sm">
-                                  {testimonial.role}
-                                </p>
-                              </div>
+                          <span className="text-gray-700 sm:text-[23px] text-sm mb-8 leading-relaxed">
+                            {testimonial.text}
+                          </span>
+                          <div className="flex items-center mt-auto">
+                            <Image
+                              src={testimonial.image}
+                              alt={testimonial.name}
+                              className="w-12 h-12 rounded-full mr-4 bg-gray-200"
+                            />
+                            <div>
+                              <p className="font-bold text-gray-900">
+                                {testimonial.name}
+                              </p>
+                              <p className="text-gray-500 text-sm">
+                                {testimonial.role}
+                              </p>
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
           </div>
         </div>
 
@@ -228,11 +234,10 @@ export default function TestimonialCarousel() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`transition-all duration-300 ${
-                currentSlide === index
-                  ? "w-8 h-3 bg-gray-800 rounded-full"
-                  : "w-3 h-3 bg-gray-400 rounded-full hover:bg-gray-600"
-              }`}
+              className={`transition-all duration-300 ${currentSlide === index
+                ? "w-8 h-3 bg-gray-800 rounded-full"
+                : "w-3 h-3 bg-gray-400 rounded-full hover:bg-gray-600"
+                }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
