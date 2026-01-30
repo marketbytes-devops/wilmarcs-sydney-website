@@ -10,6 +10,7 @@ import binoculars from "@/assets/videos/process/binoculars.gif";
 import puzzle from "@/assets/videos/process/puzzle.gif";
 import todo from "@/assets/videos/process/todo.gif";
 import womanpopcorn from "@/assets/videos/process/womanpopcorn.gif";
+import production from "@/assets/videos/process/production.gif";
 
 const data = [
   {
@@ -29,7 +30,7 @@ const data = [
   {
     step: "STEP 3",
     title: "PRODUCTION",
-    gif: todo,
+    gif: production,
     para:
       "With the script and structure in place, our production team takes the reins.",
   },
@@ -43,7 +44,7 @@ const data = [
   {
     step: "STEP 5",
     title: "DELIVERY",
-    gif: womanpopcorn,
+    gif: todo,
     para:
       "Once the film is complete, we deliver the final product in the format you need. Whether it's for social media, a website, or an event presentation, we ensure it's optimized for your distribution channels.",
   },
@@ -97,7 +98,34 @@ export default function ProcessStack() {
 
   return (
     <>
-    
+       <div className="container sm:flex sm:justify-between lg:py-10 py-2">
+      <div>
+            <span className="hidden sm:block font-geist text-[76px] lg:text-8xl text-[#26164F]
+                              font-black tracking-tight uppercase">
+              Our <br/>workflow
+            </span>
+            <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] 
+                             font-black tracking-tight uppercase">
+              Our workflow
+            </span>
+          </div>
+      <div className="opacity-80">
+        <p className="block sm:hidden mt-2 text-center">
+              Whitworth Media Proudly is a dedicated film studio specializing
+            </p>
+        <div className="sm:block hidden lg:mt-24 mt-32">
+          <p>Whitworth Media </p>
+            <p>Proudly is a dedicated</p>
+            <p>film studio specializing</p>
+        </div>
+      </div>
+    </div>
+
+     <div className="container h-px bg-black" />
+    <div className="md:mb-6 mb-2 md:mt-4 mt-2">
+        <p className="mt-4 text-gray-700 container">Process</p>
+    </div>
+
       {/* MOBILE VIEW*/}
     
       <div className="lg:hidden space-y-6 sm:space-y-8  px-4 sm:px-6">
