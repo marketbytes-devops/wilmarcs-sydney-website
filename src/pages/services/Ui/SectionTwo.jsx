@@ -16,7 +16,7 @@ const SectionTwo = () => {
       <div>
             <span className="hidden sm:block font-geist text-[76px] lg:text-8xl text-[#26164F]
                               font-black tracking-tight uppercase">
-              what <br /> we do
+              what we do
             </span>
             <span className="text-3xl font-geist text-center sm:hidden block text-[#26164F] 
                              font-black tracking-tight uppercase">
@@ -27,7 +27,7 @@ const SectionTwo = () => {
         <p className="block sm:hidden mt-2 text-center">
               Whitworth Media Proudly is a dedicated film studio specializing
             </p>
-        <div className="sm:block hidden lg:mt-24 mt-32">
+        <div className="sm:block hidden">
           <p>Whitworth Media </p>
             <p>Proudly is a dedicated</p>
             <p>film studio specializing</p>

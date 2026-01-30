@@ -19,10 +19,18 @@ export default function SelectedWork() {
   const sliderRef = useRef(null);
   const [videoModeIndex, setVideoModeIndex] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     setIsPlaying(true);
   }, [videoModeIndex]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobileView(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const works = [
     {
@@ -79,10 +87,12 @@ export default function SelectedWork() {
 
     if (movedBy < -50 && currentSlide < works.length - 1) {
       setCurrentSlide(currentSlide + 1);
+      setVideoModeIndex(-1);
     }
 
     if (movedBy > 50 && currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
+      setVideoModeIndex(-1);
     }
 
     setTranslatePosition();
@@ -175,13 +185,13 @@ export default function SelectedWork() {
                     )}
 
                     {/* Show Video when clicked */}
-                    {videoModeIndex === index && (
+                    {videoModeIndex === index && isMobileView && (
                       <div className="absolute inset-0 bg-black group-video">
                         <video
                           id={`mobile-video-${index}`}
                           src={videoUrls[index]}
                           autoPlay
-                          muted={true}
+                          muted={false}
                           controls={false}
                           loop
                           playsInline
@@ -261,7 +271,10 @@ export default function SelectedWork() {
             {works.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => {
+                  setCurrentSlide(index);
+                  setVideoModeIndex(-1);
+                }}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index ? "bg-gray-900 w-2" : "bg-gray-400"
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
@@ -290,7 +303,7 @@ export default function SelectedWork() {
                 )}
 
                 {/* Video */}
-                {videoModeIndex === index && (
+                {videoModeIndex === index && !isMobileView && (
                   <div className="absolute inset-0 bg-black">
                     <video
                       id={`desktop-video-${index}`}
