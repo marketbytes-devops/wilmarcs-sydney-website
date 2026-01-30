@@ -23,29 +23,43 @@ const SectionFive = () => {
   const [openPlanModal, setOpenPlanModal] = useState(false);
 
   useEffect(() => {
-  const track = trackRef.current;
-  const section = sectionRef.current;
+    if (openPlanModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-  if (!track || !section) return;
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openPlanModal]);
 
-  const scrollDistance = track.scrollWidth - section.clientWidth;
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const track = trackRef.current;
+      const section = sectionRef.current;
 
-  gsap.to(track, {
-    x: -scrollDistance,
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: () => `+=${scrollDistance}`,
-      scrub: 1,
-      pin: true,
-      anticipatePin: 1,
-    },
-  });
+      if (track && section) {
+        const scrollDistance = track.scrollWidth - section.clientWidth;
 
-  return () => ScrollTrigger.killAll();
-}, []);
+        gsap.to(track, {
+          x: -scrollDistance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${scrollDistance}`,
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true, // Handle resize better
+          },
+        });
+      }
+    }, sectionRef);
 
+    return () => ctx.revert(); // This cleans up triggers AND reverts DOM changes (pinning)
+  }, []);
 
   function Card({ title, videoSrc, height }) {
     return (
@@ -69,10 +83,9 @@ const SectionFive = () => {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-             <source src={videoSrc} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
         </div>
-        
       </div>
     );
   }
@@ -101,6 +114,7 @@ const SectionFive = () => {
           </div>
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-end ">
             <Button
+              onClick={() => setOpenPlanModal(true)}
               className="
     text-white px-12 py-4
 
@@ -165,18 +179,20 @@ const SectionFive = () => {
           </div>
         </Slider>
       </section>
-
       {openPlanModal &&
         createPortal(
           <div
             className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
             onClick={() => setOpenPlanModal(false)}
           >
-            {/* Modal content – stop propagation so clicks inside don't close */}
             <div
-              className="bg-white w-[95%] max-w-5xl max-h-[90vh] p-8 rounded-2xl relative overflow-y-auto"
+              className="bg-white w-full max-w-5xl h-auto
+                         p-6 md:p-8
+                         rounded-2xl relative
+                         overflow-hidden flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
+
               <button
                 onClick={() => setOpenPlanModal(false)}
                 className="absolute top-4 right-4 text-3xl font-bold cursor-pointer"
