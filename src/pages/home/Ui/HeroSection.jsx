@@ -284,7 +284,7 @@ const HeroSection = () => {
             onClick={() => setOpenPlanModal(false)}
           >
             <div
-              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-hidden flex items-center"
+              className="bg-white w-full max-w-5xl h-auto p-6 md:p-8 rounded-2xl relative overflow-visible flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button

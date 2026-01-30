@@ -51,45 +51,50 @@ export default function ContactFormSection() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validateForm()) return;
 
-    if (!validateForm()) return;
+  // Wait for reCAPTCHA
+  await new Promise((resolve) => {
+    const interval = setInterval(() => {
+      if (window.grecaptcha) {
+        clearInterval(interval);
+        resolve(true);
+      }
+    }, 100);
+  });
 
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      projectType: formData.projectType,
-      budget: formData.budget,
-      message: formData.message
-    };
+  const token = await grecaptcha.execute(
+    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+    { action: 'submit' }
+  );
 
-    try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      );
-
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        message: ''
-      });
-
-      router.push('/thank-you');
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      alert('Something went wrong. Please try again later.');
-    }
+  const templateParams = {
+    ...formData,
+    'g-recaptcha-response': token,
   };
+
+  await emailjs.send(
+    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+    templateParams,
+    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+  );
+
+  setFormData({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    message: ''
+  });
+
+  router.push('/thank-you');
+};
+
 
   return (
     <section className="w-full max-w-6xl mx-auto px-5 sm:py-8 py-2 md:py-10">
