@@ -15,16 +15,14 @@ const SectionThree = () => {
               alt="kevinImage"
               width={356}
               height={500}
-              className="rounded-3xl lg:h-[400px] lg:w-[356px] w-full h-auto"
+              className="rounded-3xl lg:h-[400px] w-auto h-auto"
             />
-
-            <div className="absolute rounded-3xl inset-0" />
-
             {/* TEXT */}
-            <div className="absolute bottom-4 right-18 left-18 text-center text-white z-10">
+            <div className="absolute bottom-4 left-0 right-0 text-center text-white z-10">
               <p className="font-bold">Kevin Wilson</p>
-              <p className="font-semibold ">Founder — Director</p>
+              <p className="font-semibold">Founder — Director</p>
             </div>
+            <div className="absolute rounded-3xl inset-0" />
           </div>
 
           <div className="w-full lg:w-[70%] lg:mt-40 mt-2">
