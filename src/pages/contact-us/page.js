@@ -36,7 +36,7 @@ const page = () => {
               className="
           relative mx-auto w-full container
           max-w-[1400px]  
-          aspect-[16/9]          
+          h-[70vh] lg:h-[80vh]       
         "
             >
 

@@ -113,11 +113,19 @@ const SectionSix = () => {
           </p>
 
           <Button onClick={() => setOpenPlanModal(true)}
-            className="text-white px-8 py-2 md:py-4 md:px-10 rounded-full font-medium 
-                      transition-[background-position] duration-700 ease-in-out
-                      bg-[length:200%_200%] bg-[position:0%_50%] hover:bg-[position:100%_50%]
-                       bg-[conic-gradient(from_90deg_at_50%_50%,#201147_0deg,#7356BC_360deg)]
-                       hover:bg-[conic-gradient(from_360deg_at_50%_50%,#7356BC_0deg,#201147_90deg)]"
+            className="
+    text-white px-12 py-4
+
+    [--a:90.00deg] [--c1:#936FEC] [--c3:#381A8C]
+    bg-[conic-gradient(from_var(--a)_at_50.00%_50.0%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+    bg-[length:200%_200%]
+    bg-[position:0%_50%]
+   
+    transition-[background-position,--a,--c1,--c3]
+    duration-700 ease-in-out
+    hover:bg-[position:100%_50%]
+    hover:[--a:90.00deg] hover:[--c1:#381A8C] hover:[--c3:#936FEC]
+  "
           >
             Plan A Project
           </Button>

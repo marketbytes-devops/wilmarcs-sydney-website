@@ -150,7 +150,7 @@ const SectionFive = () => {
           <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[260px]" />
 
           {/* ROW 2 */}
-          <Card title="Corporates" videoSrc="/videos/services/CSR.mp4" height="h-[300px]" />
+          <Card title="Testimonials" videoSrc="/videos/services/CSR.mp4" height="h-[300px]" />
           <Card title="Event teams" videoSrc="/videos/services/Event.mp4" height="h-[380px]" />
         </div>
       </section>
