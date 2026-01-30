@@ -64,7 +64,8 @@ const SectionSeven = () => {
                                    leading-tight mb-12 pt-12">
                     {current.quote}
                   </span>
-                  <div className="flex flex-col md:flex-row items-center justify-between  ">
+                  <div className="flex flex-col md:flex-row items-end justify-between mt-auto">
+
                     <footer className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-200 rounded-full border-2 border-dashed border-gray-400 shrink-0" />
                       <div>

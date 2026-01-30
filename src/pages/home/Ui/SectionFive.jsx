@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function ProcessPreview() {
   const sectionRef = useRef(null);
   const leftContentRef = useRef(null);
+  const leftInnerRef = useRef(null);
   const rightContentRef = useRef(null);
   const indicatorRef = useRef(null);
   const stepsRef = useRef([]);
@@ -46,6 +47,28 @@ export default function ProcessPreview() {
         pin: leftContentRef.current,
         pinSpacing: false,
       });
+
+      // Animate left content to center on scroll
+      const leftContent = leftInnerRef.current;
+      const contentHeight = leftContent.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      const centerPosition = (viewportHeight - contentHeight) / 2;
+
+      gsap.fromTo(leftInnerRef.current, 
+        {
+          y: 0
+        },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'top top-=100',
+            scrub: true,
+          },
+          y: centerPosition,
+          ease: 'none'
+        }
+      );
  
       // Animate indicator and dots based on scroll
       stepsRef.current.forEach((step, index) => {
@@ -121,9 +144,9 @@ export default function ProcessPreview() {
           {/* Fixed Left Side */}
           <div
             ref={leftContentRef}
-            className="w-full lg:w-1/2 lg:h-screen flex items-center justify-center lg:justify-start lg:pr-10"
+            className="w-full lg:w-1/2 lg:h-screen flex items-start justify-satrt lg:justify-start lg:pr-10"
           >
-            <div className="max-w-lg">
+            <div ref={leftInnerRef} className="max-w-lg">
               <h1 className="text-4xl lg:text-5xl font-bold text-[#24144C] mb-6 leading-tight">
                 PROCESS PREVIEW
               </h1>
@@ -179,4 +202,3 @@ export default function ProcessPreview() {
     </div>
   );
 }
- 

@@ -1,4 +1,5 @@
 import starfilm from "@/assets/videos/process/starfilm.gif";
+import Link from "next/link";
 
 export default function CraftingStoriesBanner() {
   return (
@@ -23,12 +24,12 @@ export default function CraftingStoriesBanner() {
           <span className="font-bold text-[24px] sm:text-[56px] text-white tracking-tight mt-2 sm:-mt-6">
             CAPTURING MOMENTS
           </span>
-
+      <Link href="/contact-us">
           {/* BUTTON */}
           <button className="mt-5 sm:mt-6 bg-white text-black font-semibold px-6 sm:px-10 lg:px-12 py-2.5 sm:py-3.5 rounded-full text-sm sm:text-lg hover:bg-gray-100 transition-colors">
             Talk to us
           </button>
-
+           </Link>
         </div>
       </div>
     </section>
