@@ -151,7 +151,6 @@ const HeroSection = () => {
         </div>
       </section>
 
-      {/* DESKTOP*/}
       {/* DESKTOP */}
       <section
         ref={sectionRef}

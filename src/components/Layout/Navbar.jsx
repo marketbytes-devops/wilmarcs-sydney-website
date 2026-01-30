@@ -93,7 +93,7 @@ export default function Navbar() {
   return (
     <>
       {showInitialNavbar && (
-        <nav className=" hidden sm:block bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-t-2xl mx-6 mt-3">
+        <nav className=" hidden sm:block bg-black py-5 fixed top-0 left-0 right-0 z-50 rounded-t-2xl mx-6 mt-3">
           <div className="container mx-auto">
             {/* Desktop View */}
             <div className="hidden lg:flex items-center justify-between">
@@ -283,7 +283,7 @@ export default function Navbar() {
       )}
 
       {(showScrolledNavbar || isMobile) && (
-        <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
+        <nav className="bg-black backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
           <div className="container mx-auto">
             <div className="flex items-center justify-between">
               <Link href="/">
