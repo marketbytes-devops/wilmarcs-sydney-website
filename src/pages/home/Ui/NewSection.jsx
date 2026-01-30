@@ -90,15 +90,15 @@ const NewSection = () => {
 
 
           <div className="flex items-center justify-center
-                pt-0 sm:pt-4 lg:pt-12 w-full">
+                pt-0 sm:pt-4 lg:pt-20 w-full">
 
             {/* Video container */}
             <div
               ref={videoWrapperRef}
               className="relative
-           w-full  lg:w-[80vw]
+           w-full   xl:max-w-full
            max-w-[900px]
-           aspect-video"
+           aspect-4/2"
 
             >
 
