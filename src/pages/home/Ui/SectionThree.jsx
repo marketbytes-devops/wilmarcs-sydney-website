@@ -181,7 +181,7 @@ export default function SelectedWork() {
                           id={`mobile-video-${index}`}
                           src={videoUrls[index]}
                           autoPlay
-                          muted={false}
+                          muted={true}
                           controls={false}
                           loop
                           playsInline

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import img1 from "../../../assets/images/home/img1.png";
 import img2 from "../../../assets/images/home/img2.png";
 import img3 from "../../../assets/images/home/img3.png";
@@ -11,6 +11,7 @@ import img4 from "../../../assets/images/home/img4.png";
 const SelectedWork = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [playingIndex, setPlayingIndex] = useState(null);
+  const [isPlaying, setIsPlaying] = useState({});
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -54,15 +55,42 @@ const SelectedWork = () => {
     }
     if (document.fullscreenElement) exitFullscreen();
     setPlayingIndex(null);
+    setIsPlaying(prev => ({ ...prev, [index]: false }));
   };
 
-  const handlePlayInline = (index) => setPlayingIndex(index);
+  const handleTogglePlay = (index) => {
+    const video = videoRefs.current[index];
+    if (!video) return;
+
+    if (video.paused) {
+      video.play();
+      setIsPlaying(prev => ({ ...prev, [index]: true }));
+    } else {
+      video.pause();
+      setIsPlaying(prev => ({ ...prev, [index]: false }));
+    }
+  };
+
+  const handlePlayInline = (index) => {
+    setPlayingIndex(index);
+    setTimeout(() => {
+      const video = videoRefs.current[index];
+      if (video) {
+        video.play();
+        setIsPlaying(prev => ({ ...prev, [index]: true }));
+      }
+    }, 50);
+  };
 
   const handlePlayFullscreen = (index) => {
     setPlayingIndex(index);
     setTimeout(() => {
       const video = videoRefs.current[index];
-      if (video) goFullscreen(video);
+      if (video) {
+        video.play();
+        setIsPlaying(prev => ({ ...prev, [index]: true }));
+        goFullscreen(video);
+      }
     }, 50);
   };
 
@@ -97,6 +125,25 @@ const SelectedWork = () => {
     return () => events.forEach((ev) => document.removeEventListener(ev, handleFsChange));
   }, []);
 
+  // Add event listeners to sync video state
+  useEffect(() => {
+    Object.keys(videoRefs.current).forEach(index => {
+      const video = videoRefs.current[index];
+      if (!video) return;
+
+      const handlePlay = () => setIsPlaying(prev => ({ ...prev, [index]: true }));
+      const handlePause = () => setIsPlaying(prev => ({ ...prev, [index]: false }));
+
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('pause', handlePause);
+
+      return () => {
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('pause', handlePause);
+      };
+    });
+  }, [playingIndex]);
+
   return (
     <div className=" bg-white container ">
       <div className="mx-auto">
@@ -127,7 +174,7 @@ const SelectedWork = () => {
         <div className="w-full h-px bg-black mt-4" />
         <p className="mt-4 text-gray-700">Latest Work</p>
 
-        {/* MOBILE CAROUSEL - improved touch handling */}
+        {/* MOBILE CAROUSEL */}
         <div className="md:hidden mt-3 -mx-6 overflow-hidden">
           <div
             ref={sliderRef}
@@ -155,11 +202,24 @@ const SelectedWork = () => {
                         <video
                           ref={(el) => (videoRefs.current[index] = el)}
                           src={videoUrls[index]}
-                          autoPlay
-                          controls
                           playsInline
                           className="absolute inset-0 w-full h-full object-cover"
                         />
+                        
+                        {/* Custom Controls Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <button
+                            onClick={() => handleTogglePlay(index)}
+                            className="w-16 h-16 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-all z-10"
+                          >
+                            {isPlaying[index] ? (
+                              <Pause className="w-7 h-7 text-black" fill="black" />
+                            ) : (
+                              <Play className="w-7 h-7 text-black ml-1" fill="black" />
+                            )}
+                          </button>
+                        </div>
+
                         <button
                           onClick={() => handleCloseVideo(index)}
                           className="absolute top-4 right-4 z-20 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light pointer-events-auto"
@@ -227,7 +287,7 @@ const SelectedWork = () => {
           </div>
         </div>
 
-        {/* Desktop grid - unchanged */}
+        {/* Desktop grid */}
         <div className="hidden md:grid grid-cols-2 mt-16 gap-6">
           {works.map((work, index) => (
             <div key={index} className="relative group cursor-pointer">
@@ -242,11 +302,24 @@ const SelectedWork = () => {
                       <video
                         ref={(el) => (videoRefs.current[index] = el)}
                         src={videoUrls[index]}
-                        autoPlay
-                        controls
                         playsInline
                         className="absolute inset-0 w-full h-full object-cover"
                       />
+                      
+                      {/* Custom Controls Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <button
+                          onClick={() => handleTogglePlay(index)}
+                          className="w-16 h-16 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-all z-10"
+                        >
+                          {isPlaying[index] ? (
+                            <Pause className="w-7 h-7 text-black" fill="black" />
+                          ) : (
+                            <Play className="w-7 h-7 text-black ml-1" fill="black" />
+                          )}
+                        </button>
+                      </div>
+
                       <button
                         onClick={() => handleCloseVideo(index)}
                         className="absolute top-4 right-4 z-20 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light"
@@ -263,22 +336,22 @@ const SelectedWork = () => {
                     />
                   )}
 
-              {playingIndex !== index && (
-                      <>
-                        <div className="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/40" />
-                        <div className="absolute inset-0 flex items-center justify-center z-10">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handlePlayInline(index);
-                            }}
-                            className="w-16 h-16 rounded-full bg-white flex items-center justify-center transition-transform hover:scale-110"
-                          >
-                            <Play className="w-7 h-7 text-black ml-1" fill="black" />
-                          </button>
-                        </div>
-                      </>
-                    )}
+                  {playingIndex !== index && (
+                    <>
+                      <div className="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/40" />
+                      <div className="absolute inset-0 flex items-center justify-center z-10">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handlePlayInline(index);
+                          }}
+                          className="w-16 h-16 rounded-full bg-white flex items-center justify-center transition-transform hover:scale-110"
+                        >
+                          <Play className="w-7 h-7 text-black ml-1" fill="black" />
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="flex justify-between items-center px-2">
