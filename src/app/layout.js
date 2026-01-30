@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const isThankYou = pathname === "/thank-you";
+  const isThankYou = pathname === "/thank-you" || pathname === "/thank-you/";
   const hideLayout = isThankYou;
 
   useEffect(() => {

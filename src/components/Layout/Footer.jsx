@@ -142,17 +142,29 @@ const Footer = () => {
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-y-6 md:gap-y-0">
           <ul
-            className="font-kumbh flex gap-x-4 sm:gap-x-6 md:gap-x-8 sm:text-[16px] text-[14px]
+            className="font-kumbh flex flex-wrap gap-x-4 sm:gap-x-6 md:gap-x-8 sm:text-[16px] text-[14px]
                          px-4 sm:px-6 md:px-10 list-none justify-center md:justify-start"
           >
-            <li className="cursor-pointer hover:text-blue-600">Facebook</li>
-            <li className="cursor-pointer hover:text-pink-600">Instagram</li>
-            <li className="cursor-pointer hover:text-red-600">Youtube</li>
-            <li className="cursor-pointer hover:text-blue-700">Linkedin</li>
+            <li className="hover:text-blue-600 transition-colors">
+              <a href="https://facebook.com/wilmarcs" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </li>
+            <li className="hover:text-pink-600 transition-colors">
+              <a href="https://instagram.com/wilmarcs" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+            <li className="hover:text-red-600 transition-colors">
+              <a href="https://youtube.com/@wilmarcs" target="_blank" rel="noopener noreferrer">Youtube</a>
+            </li>
+            <li className="hover:text-blue-700 transition-colors">
+              <a href="https://linkedin.com/company/wilmarcs" target="_blank" rel="noopener noreferrer">Linkedin</a>
+            </li>
           </ul>
-          <ul className="font-kumbh flex flex-col items-center md:items-end  text-center md:text-right">
-            <li className="text-sm sm:text-base">hello@wilmarcs.com</li>
-            <li className="text-sm sm:text-base">+61 (***** number)</li>
+          <ul className="font-kumbh flex flex-col items-center md:items-end text-center md:text-right px-4 sm:px-6 md:px-10">
+            <li className="text-sm sm:text-base hover:text-[#271751] transition-colors">
+              <a href="mailto:hello@wilmarcs.com">hello@wilmarcs.com</a>
+            </li>
+            <li className="text-sm sm:text-base hover:text-[#271751] transition-colors">
+              <a href="tel:+61000000000">+61 (***** number)</a>
+            </li>
           </ul>
         </div>
       </footer>
