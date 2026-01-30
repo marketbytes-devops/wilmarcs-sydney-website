@@ -44,7 +44,7 @@ const page = () => {
                 <Image
                   src={contactus}
                   alt="Contact animation"
-                  className="w-full h-full object-contain md:rounded-3xl rounded-none"
+                  className="w-full h-full object-cover md:rounded-3xl rounded-none"
                 />
               </div>
 
