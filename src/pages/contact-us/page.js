@@ -8,51 +8,50 @@ const page = () => {
     <>
 
 
-       <div className="md:py-4 py-0">
-    <div className="relative w-full  mt-8 overflow-hidden ">
+      <div className="md:py-4 py-0">
+        <div className="relative w-full  mt-8 overflow-hidden ">
 
-       {/* MOBILE */} 
-        <div className="md:hidden">
-          <div 
-            className="
+          {/* MOBILE */}
+          <div className="md:hidden">
+            <div
+              className="
               relative mx-auto w-full
               aspect-[16/9]
             "
-          >
-            <div className="absolute inset-0">
-               <Image
-                src={contactus}
-                alt="Contact animation"
-                className="w-full h-full object-contain md:rounded-3xl rounded-none"
-              />
+            >
+              <div className="absolute inset-0">
+                <Image
+                  src={contactus}
+                  alt="Contact animation"
+                  className="w-full h-full object-contain md:rounded-3xl rounded-none"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
 
-       {/* DESKTOP  */}
-    <div className="hidden md:block">
-      <div 
-        className="
+          {/* DESKTOP  */}
+          <div className="hidden md:block">
+            <div
+              className="
           relative mx-auto w-full container
           max-w-[1400px]  
           h-[70vh] lg:h-[80vh]       
         "
-      >
+            >
 
-        <div className="absolute inset-0 ">
-         <Image
-                src={contactus}
-                fill
-                alt="Contact animation"
-                className="w-full h-full object-cover md:rounded-3xl rounded-none"
-              />
+              <div className="absolute inset-0 ">
+                <Image
+                  src={contactus}
+                  alt="Contact animation"
+                  className="w-full h-full object-contain md:rounded-3xl rounded-none"
+                />
+              </div>
+
+            </div>
+          </div>
         </div>
-
       </div>
-    </div>
-    </div>
-    </div>
 
       <section className="container">
         <div className="w-full flex lg:flex-row flex-col">
@@ -92,13 +91,15 @@ const page = () => {
     "
           >
             {/* Email */}
-            <div className="flex md:items-end gap-6 md:gap-10">
+            <div className="flex md:items-end md:justify-between w-full">
               <div className="space-y-1 md:mb-5">
                 <p className="text-gray-400 text-sm uppercase tracking-wide">
                   Email
                 </p>
                 <h6 className="text-lg md:text-xl font-medium">
-                  hello@wilmarcs.com
+                  <a href="mailto:hello@wilmarcs.com" className="hover:text-gray-300 transition-colors">
+                    hello@wilmarcs.com
+                  </a>
                 </h6>
               </div>
 
@@ -107,7 +108,7 @@ const page = () => {
             </div>
 
             {/* Address */}
-            <div className="flex md:items-end gap-6 md:gap-10">
+            <div className="flex md:items-end md:justify-between w-full">
               <div className="space-y-1 md:mb-5">
                 <p className="text-gray-400 text-sm uppercase tracking-wide">
                   Address
@@ -122,13 +123,15 @@ const page = () => {
             </div>
 
             {/* Phone */}
-            <div className="flex md:items-end gap-6 md:gap-10">
+            <div className="flex md:items-end w-full">
               <div className="space-y-1 md:mb-5">
                 <p className="text-gray-400 text-sm uppercase tracking-wide">
                   Phone
                 </p>
                 <h6 className="text-lg md:text-xl font-medium">
-                  +61 (update number)
+                  <a href="tel:+61000000000" className="hover:text-gray-300 transition-colors">
+                    +61 (***** number)
+                  </a>
                 </h6>
               </div>
             </div>

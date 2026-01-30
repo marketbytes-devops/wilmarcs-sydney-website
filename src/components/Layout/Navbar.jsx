@@ -94,7 +94,7 @@ export default function Navbar() {
     <>
       {showInitialNavbar && (
         <nav className=" hidden sm:block bg-black/95 py-5 fixed top-0 left-0 right-0 z-50 rounded-t-2xl mx-6 mt-3">
-          <div className="mx-auto px-6">
+          <div className="container mx-auto">
             {/* Desktop View */}
             <div className="hidden lg:flex items-center justify-between">
               <div className="flex items-center space-x-4 font-geist text-[16px] font-medium">
@@ -118,9 +118,8 @@ export default function Navbar() {
                   return (
                     <Link key={link.name} href={link.href}>
                       <motion.div
-                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${
-                          pathname === link.href ? "text-white" : ""
-                        }`}
+                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${pathname === link.href || (link.href !== "/" && pathname === `${link.href}/`) ? "text-white" : ""
+                          }`}
                         initial="rest"
                         animate="rest"
                         whileHover="hover"
@@ -184,11 +183,10 @@ export default function Navbar() {
     flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px]
     transition-all transition-[background-position] duration-[600ms] ease-in-out
     bg-[length:200%_200%] bg-[position:0%_50%]
-    ${
-      hovered
-        ? "gap-8 pr-4 bg-[position:100%_50%] bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-        : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
-    }
+    ${hovered
+                      ? "gap-8 pr-4 bg-[position:100%_50%] bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
+                      : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
+                    }
     shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
   `}
                 >
@@ -273,7 +271,7 @@ export default function Navbar() {
 
       {(showScrolledNavbar || isMobile) && (
         <nav className="bg-black/90 backdrop-blur-md py-4 fixed top-0 left-0 right-0 z-50 border-gray-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto">
             <div className="flex items-center justify-between">
               <Link href="/">
                 <Image
@@ -334,22 +332,31 @@ export default function Navbar() {
 
               <div className="flex-1 flex sm:items-center sm:mt-0 mt-26">
                 <div className="sm:space-y-4 space-y-6  text-2xl lg:text-4xl font-bold text-white">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block hover:text-gray-400 transition"
+                  {navLinks.map((link, index) => {
+                    const isActive = pathname === link.href || (link.href !== "/" && pathname === `${link.href}/`);
+                    const Icon = link.icon;
+
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`flex items-center gap-4 transition ${isActive
+                            ? "text-white"
+                            : "text-gray-400 hover:text-white"
+                            }`}
+                        >
+                          {isActive && <Icon className="text-3xl lg:text-4xl" />}
+                          {link.name}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                   <div className="mt-10 flex flex-col gap-4 lg:hidden -mx-10 px-8 w-screen">
                     <button
                       onClick={() => setOpenPlanModal(true)}
