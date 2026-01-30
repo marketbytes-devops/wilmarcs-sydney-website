@@ -34,7 +34,7 @@ export default function FAQAccordion() {
 
   return (
     <div className="container sm:py-16 ">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2  lg:gap-18">
+      <div className="max-w-full mx-auto grid grid-cols-1 lg:grid-cols-2  lg:gap-18">
         {/* Left Section */}
         <div className="lg:pr-8">
           <h1 className="text-center sm:text-start font-semibold text-[#26164F] sm:mb-6 leading-tight">
