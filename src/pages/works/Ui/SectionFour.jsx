@@ -152,7 +152,7 @@ export default function TestimonialCarousel() {
       window.removeEventListener("mouseleave", touchEnd);
       window.removeEventListener("touchend", touchEnd);
     };
-  }, [currentSlide, realSlideCount]);
+  }, [currentSlide, totalSlides]); // Added isPlaying to dependencies
 
   return (
     <div className="bg-white container">
