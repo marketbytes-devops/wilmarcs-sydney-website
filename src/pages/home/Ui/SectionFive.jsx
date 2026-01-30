@@ -62,8 +62,8 @@ export default function ProcessPreview() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
-            end: 'top top-=100',
-            scrub: true,
+           end: "+=400",
+             scrub: 1, 
           },
           y: centerPosition,
           ease: 'none'
