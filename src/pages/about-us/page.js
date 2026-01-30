@@ -30,7 +30,7 @@ export default function AboutUsPage() {
           <SectionTwo />
         </div>
 
-        <div className="lg:mt-24 mt-4 ">
+        <div className="lg:mt-20 mt-4 ">
           <SectionThree />
         </div>
 
