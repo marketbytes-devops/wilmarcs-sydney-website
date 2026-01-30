@@ -50,7 +50,7 @@ export default function OperatingModelSection() {
     >
       <div
         className="
-  max-w-7xl mx-auto w-full
+  max-w-full mx-auto w-full
   grid
   grid-cols-1
   lg:[grid-template-columns:52%_45%]
