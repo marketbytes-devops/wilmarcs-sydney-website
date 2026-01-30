@@ -118,8 +118,12 @@ export default function Navbar() {
                   return (
                     <Link key={link.name} href={link.href}>
                       <motion.div
-                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${pathname === link.href || (link.href !== "/" && pathname === `${link.href}/`) ? "text-white" : ""
-                          }`}
+                        className={`relative flex items-center text-[#B0B0B0] hover:text-white ${
+                          pathname === link.href ||
+                          (link.href !== "/" && pathname === `${link.href}/`)
+                            ? "text-white"
+                            : ""
+                        }`}
                         initial="rest"
                         animate="rest"
                         whileHover="hover"
@@ -180,23 +184,32 @@ export default function Navbar() {
                   onMouseEnter={() => setHovered(true)}
                   onMouseLeave={() => setHovered(false)}
                   className={`
-    flex items-center overflow-hidden whitespace-nowrap text-white text-[15px] p-[10px]
-    transition-all transition-[background-position] duration-[600ms] ease-in-out
-    bg-[length:200%_200%] bg-[position:0%_50%]
-    ${hovered
-                      ? "gap-8 pr-4 bg-[position:100%_50%] bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#381A8C_0deg,#1A0F37_180deg,#936FEC_360deg)]"
-                      : "gap-0 bg-[conic-gradient(from_76.38deg_at_69.04%_57.5%,#936FEC_0deg,#1A0F37_180deg,#381A8C_360deg)]"
-                    }
-    shadow-[inset_0_0_0_4px_rgba(255,255,255,0.8)]
-  `}
+      group relative flex items-center text-white text-[15px]
+      transition-all duration-700 ease-in-out
+      [--a:90deg] [--c1:#936FEC] [--c3:#381A8C]
+      bg-[conic-gradient(from_var(--a)_at_50%_50%,var(--c1)_0deg,#1A0F37_180deg,var(--c3)_360deg)]
+      bg-[length:200%_200%] bg-[position:0%_50%]
+      shadow-[inset_0_0_0_4px_rgba(255,255,255,0.7)]
+      hover:bg-[position:100%_50%]
+      hover:[--a:270deg]
+      hover:[--c1:#381A8C]
+      hover:[--c3:#936FEC]
+      ${hovered ? "p-2 pr-5 gap-3" : "px-2 py-1 gap-0"}
+      rounded-full overflow-hidden
+    `}
                 >
-                  <ContactIcon />
+                  <ContactIcon className="shrink-0" />
+
                   <Link
                     href="/contact-us"
                     className={`
-      inline-block overflow-hidden transition-[max-width,opacity] duration-[500ms] ease-in-out
-      ${hovered ? "max-w-[120px] opacity-100" : "max-w-0 opacity-0"}
-    `}
+        inline-block font-medium transition-all duration-500 ease-out
+        ${
+          hovered
+            ? "max-w-[140px] opacity-100 translate-x-0"
+            : "max-w-0 opacity-0 -translate-x-4"
+        }
+      `}
                   >
                     Contact Us
                   </Link>
@@ -333,7 +346,9 @@ export default function Navbar() {
               <div className="flex-1 flex sm:items-center sm:mt-0 mt-26">
                 <div className="sm:space-y-4 space-y-6  text-2xl lg:text-4xl font-bold text-white">
                   {navLinks.map((link, index) => {
-                    const isActive = pathname === link.href || (link.href !== "/" && pathname === `${link.href}/`);
+                    const isActive =
+                      pathname === link.href ||
+                      (link.href !== "/" && pathname === `${link.href}/`);
                     const Icon = link.icon;
 
                     return (
@@ -346,12 +361,15 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className={`flex items-center gap-4 transition ${isActive
-                            ? "text-white"
-                            : "text-gray-400 hover:text-white"
-                            }`}
+                          className={`flex items-center gap-4 transition ${
+                            isActive
+                              ? "text-white"
+                              : "text-gray-400 hover:text-white"
+                          }`}
                         >
-                          {isActive && <Icon className="text-3xl lg:text-4xl" />}
+                          {isActive && (
+                            <Icon className="text-3xl lg:text-4xl" />
+                          )}
                           {link.name}
                         </Link>
                       </motion.div>
