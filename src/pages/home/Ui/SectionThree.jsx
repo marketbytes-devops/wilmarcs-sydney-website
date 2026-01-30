@@ -1,6 +1,6 @@
 "use client";
 
-import { Play } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,6 +18,11 @@ export default function SelectedWork() {
   const [prevTranslate, setPrevTranslate] = useState(0);
   const sliderRef = useRef(null);
   const [videoModeIndex, setVideoModeIndex] = useState(-1);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, [videoModeIndex]);
 
   const works = [
     {
@@ -95,7 +100,7 @@ export default function SelectedWork() {
   return (
     <section className="bg-[#C7D5D8] lg:p-8 md:p-6 p-4 rounded-2xl container">
       <div
-        className="md:max-w-7xl mx-auto rounded-3xl bg-[#E3E9E9] rounded-5xl
+        className="w-full mx-auto rounded-3xl bg-[#E3E9E9] rounded-5xl
                      px-8 py-6 md:py-12 "
       >
         {/* Header */}
@@ -115,9 +120,9 @@ export default function SelectedWork() {
             </h2>
           </div>
 
-         <Link href="/works" className="lg:w-[20%] md:w-[30%] w-full">
-          <Button
-            className="bg-black  text-white sm:py-4 px-8 py-2
+          <Link href="/works" className="lg:w-[20%] md:w-[30%] w-full">
+            <Button
+              className="bg-black  text-white sm:py-4 px-8 py-2
                             rounded-full font-medium w-full md:w-auto
                           items-center justify-center 
                             gap-3 mt-4 md:mt-0 flex md:inline-flex whitespace-nowrap
@@ -126,11 +131,11 @@ export default function SelectedWork() {
     hover:bg-[position:100%_50%]
     bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)]
     hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
-          >
-            Watch work
-            <Play className="w-5 h-5" />
-          </Button>
-         </Link>
+            >
+              Watch work
+              <Play className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Swipe Slider  */}
@@ -171,8 +176,9 @@ export default function SelectedWork() {
 
                     {/* Show Video when clicked */}
                     {videoModeIndex === index && (
-                      <div className="absolute inset-0 bg-black">
+                      <div className="absolute inset-0 bg-black group-video">
                         <video
+                          id={`mobile-video-${index}`}
                           src={videoUrls[index]}
                           autoPlay
                           muted={false}
@@ -180,7 +186,36 @@ export default function SelectedWork() {
                           loop
                           playsInline
                           className="w-full h-full object-cover"
+                          onPlay={() => setIsPlaying(true)}
+                          onPause={() => setIsPlaying(false)}
                         />
+
+                        {/* Play/Pause Overlay */}
+                        <div
+                          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 z-10
+                            ${isPlaying
+                              ? "opacity-0 hover:opacity-100"
+                              : "opacity-100"
+                            }
+                          `}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const video = document.getElementById(
+                              `mobile-video-${index}`
+                            );
+                            if (video) {
+                              video.paused ? video.play() : video.pause();
+                            }
+                          }}
+                        >
+                          <div className="bg-white/90 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
+                            {isPlaying ? (
+                              <Pause className="w-8 h-8 text-black fill-black" />
+                            ) : (
+                              <Play className="w-8 h-8 text-black ml-1 fill-black" />
+                            )}
+                          </div>
+                        </div>
 
                         {/* Close Button */}
                         <button
@@ -188,7 +223,7 @@ export default function SelectedWork() {
                             e.stopPropagation(); // prevent triggering parent click
                             setVideoModeIndex(-1);
                           }}
-                          className="absolute top-4 right-4 z-10 bg-black/60 hover:bg-black/80
+                          className="absolute top-4 right-4 z-20 bg-black/60 hover:bg-black/80
                                   text-white w-10 h-10 rounded-full flex items-center justify-center
                                    text-2xl font-light "
                         >
@@ -227,9 +262,8 @@ export default function SelectedWork() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  currentSlide === index ? "bg-gray-900 w-2" : "bg-gray-400"
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index ? "bg-gray-900 w-2" : "bg-gray-400"
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -259,19 +293,49 @@ export default function SelectedWork() {
                 {videoModeIndex === index && (
                   <div className="absolute inset-0 bg-black">
                     <video
+                      id={`desktop-video-${index}`}
                       src={videoUrls[index]}
                       autoPlay
                       loop
                       playsInline
                       className="w-full h-full object-cover"
+                      onPlay={() => setIsPlaying(true)}
+                      onPause={() => setIsPlaying(false)}
                     />
+
+                    {/* Play/Pause Overlay */}
+                    <div
+                      className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 z-10
+                              ${isPlaying
+                          ? "opacity-0 hover:opacity-100"
+                          : "opacity-100"
+                        }
+                            `}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const video = document.getElementById(
+                          `desktop-video-${index}`
+                        );
+                        if (video) {
+                          video.paused ? video.play() : video.pause();
+                        }
+                      }}
+                    >
+                      <div className="bg-white/90 backdrop-blur-sm w-16 h-16 rounded-full flex items-center justify-center shadow-2xl cursor-pointer hover:scale-110 transition-transform">
+                        {isPlaying ? (
+                          <Pause className="w-8 h-8 text-black fill-black" />
+                        ) : (
+                          <Play className="w-8 h-8 text-black ml-1 fill-black" />
+                        )}
+                      </div>
+                    </div>
 
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setVideoModeIndex(-1);
                       }}
-                      className="absolute top-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light"
+                      className="absolute top-4 right-4 z-20 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl font-light"
                     >
                       ×
                     </button>
