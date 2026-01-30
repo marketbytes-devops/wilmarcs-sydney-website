@@ -59,10 +59,10 @@ export default function PlacesMentioned() {
           >
             {/* STATIC LINE + DOTS */}
             <div className="absolute inset-0 pointer-events-none ">
-              <StaticLineWithDots x="3%" />
-              <StaticLineWithDots x="33.333%" />
-              <StaticLineWithDots x="68.666%" />
-              <StaticLineWithDots x="100%" />
+              <StaticLineWithDots x="3%" progress={scrollYProgress} />
+              <StaticLineWithDots x="33.333%" progress={scrollYProgress} />
+              <StaticLineWithDots x="68.666%" progress={scrollYProgress} />
+              <StaticLineWithDots x="100%" progress={scrollYProgress} />
             </div>
 
             {/* ANIMATED SEGMENTS */}
@@ -100,16 +100,16 @@ export default function PlacesMentioned() {
   );
 }
 
-/* STATIC LINE + DOTS */
-function StaticLineWithDots({ x }) {
+/* STATIC LINE + ANIMATED DOTS */
+function StaticLineWithDots({ x, progress }) {
   return (
     <div
-      className="absolute top-0 h-full w-[2px]  bg-[#E0E0E0]"
+      className="absolute top-0 h-full w-[2px] bg-[#E0E0E0]"
       style={{ left: x }}
     >
-      <Dot y="1%" />
-      <Dot y="50%" />
-      <Dot y="83.3%" />
+      <AnimatedDot y="1%" progress={progress} threshold={0.1} />
+      <AnimatedDot y="50%" progress={progress} threshold={0.3} />
+      <AnimatedDot y="83.3%" progress={progress} threshold={0.6} />
     </div>
   );
 }
@@ -142,13 +142,24 @@ function AnimatedSegments({ x, progress }) {
   );
 }
 
-/* DOT */
-function Dot({ y }) {
+/* ANIMATED DOT - fills when line reaches it */
+function AnimatedDot({ y, progress, threshold }) {
+  const fillProgress = useTransform(
+    progress,
+    [threshold - 0.05, threshold + 0.05],
+    [0, 1]
+  );
+
   return (
     <span
-      className="absolute left-1/2 w-4 h-4 bg-[#1a1a2e] rounded-full -translate-x-1/2 -translate-y-1/2"
+      className="absolute left-1/2 w-4 h-4 rounded-full -translate-x-1/2 -translate-y-1/2 border-2 border-[#1a1a2e]"
       style={{ top: y }}
-    />
+    >
+      <motion.span
+        style={{ scale: fillProgress }}
+        className="absolute inset-0 bg-[#1a1a2e] rounded-full origin-center"
+      />
+    </span>
   );
 }
 

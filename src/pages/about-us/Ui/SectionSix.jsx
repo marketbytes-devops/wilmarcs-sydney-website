@@ -6,7 +6,8 @@ import Button from "../../../components/Button";
 import ModalForm from "@/components/Form/ModalForm";
 import { createPortal } from "react-dom";
 import sectionsixabout from "@/assets/images/about/sectionsixabout.png";
-
+import sectionsixabout2 from"@/assets/images/about/sectionsixabout2.jpg";
+import sectionsixabout3 from"@/assets/images/about/sectionsixabout3.jpg";
 const contentItems = [
   {
     label: "Sydney-based",
@@ -17,13 +18,13 @@ const contentItems = [
   {
     label: "Professionally structured",
     color: "white",
-    image: sectionsixabout,
+    image: sectionsixabout2,
     description: "Professional film production setup / structured workflow",
   },
   {
     label: "Client-aligned",
     color: "white",
-    image: sectionsixabout,
+    image: sectionsixabout3,
     description: "Team working closely with client / collaboration scene",
   },
 ];
@@ -91,8 +92,16 @@ export default function OperatingModelSection() {
 
           <Button
             onClick={() => setOpenPlanModal(true)}
-            className="bg-black px-12 py-4 text-white mt-6 w-full lg:w-auto
-                       transition-all duration-300 bg-gradient-to-r from-[#000000] to-[#666666]"
+                     className="bg-black  text-white sm:py-4 px-8 py-2
+                            rounded-full font-medium w-full md:w-auto
+                          items-center justify-center 
+                            gap-3 mt-4 md:mt-4 flex md:inline-flex whitespace-nowrap
+                            transition-[background-position] duration-700 ease-in-out
+    bg-[length:200%_200%] bg-[position:0%_50%]
+    hover:bg-[position:100%_50%]
+    bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0deg,#666666_360deg)]
+    hover:bg-[conic-gradient(from_180deg_at_50%_50%,#111111_180deg,#777777_360deg)]"
+            
           >
             {" "}
             Schedule a conversation
