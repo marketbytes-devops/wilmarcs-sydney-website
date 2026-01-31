@@ -1,98 +1,165 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Import images
+import comicCon from '../../../assets/images/about/comiccon-india.png';
+import cafeCoffeeDay from '../../../assets/images/about/cafe-coffee-day.png';
+import samsung from '../../../assets/images/about/samsung.png';
+import himalaya from '../../../assets/images/about/himalaya.png';
+import paytm from '../../../assets/images/about/paytm.png';
+import embassy from '../../../assets/images/about/embassy.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-  "Discovery",
-  "Script & Structure",
-  "Production",
-  "Edit",
-  "Delivery",
-];
-
-export default function ProcessPreview() {
+export default function PlacesWeveBeen() {
+  const sectionRef = useRef(null);
   const containerRef = useRef(null);
-  const itemsRef = useRef([]);
+  const linesRef = useRef([]);
+
+  const logos = [
+    { src: comicCon, alt: 'Comic Con India' },
+    { src: samsung, alt: 'Samsung' },
+    { src: paytm, alt: 'Paytm' },
+    { src: cafeCoffeeDay, alt: 'Cafe Coffee Day' },
+    { src: himalaya, alt: 'Himalaya' },
+    { src: embassy, alt: 'Embassy' },
+  ];
+
+  // Group into columns
+  const columns = [
+    [logos[0], logos[3]], // Comic Con, CCD
+    [logos[1], logos[4]], // Samsung, Himalaya
+    [logos[2], logos[5]], // Paytm, Embassy
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Desktop animation only — keep as it was
-      gsap.from(itemsRef.current, {
-        y: -60,
-        opacity: 0,
-        ease: "power3.out",
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          end: "bottom 40%",
-          scrub: true,
-        },
+      // Animate lines growing downwards
+      linesRef.current.forEach((line, index) => {
+        if (!line) return;
+
+        const lineInner = line.querySelector('.line-inner');
+        const topDot = line.querySelector('.dot-top');
+        const bottomDot = line.querySelector('.dot-bottom');
+
+        // Line animation
+        gsap.fromTo(lineInner,
+          { height: 0 },
+          {
+            height: '100%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top center',
+              end: 'bottom center',
+              scrub: true,
+            }
+          }
+        );
+
+        // Top dot animation
+        gsap.fromTo(topDot,
+          { scale: 0, backgroundColor: 'transparent' },
+          {
+            scale: 1,
+            backgroundColor: '#24144C',
+            duration: 0.3,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top center',
+              toggleActions: 'play reverse play reverse'
+            }
+          }
+        );
+
+        // Bottom dot animation - fills when line reaches bottom
+        gsap.fromTo(bottomDot,
+          { scale: 1, backgroundColor: '#ffffff', borderColor: '#d1d5db' },
+          {
+            scale: 1.2,
+            backgroundColor: '#24144C',
+            borderColor: '#24144C',
+            duration: 0.3,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'bottom center',
+              toggleActions: 'play reverse play reverse'
+            }
+          }
+        );
       });
-      // → Removed the mobile animation block completely
-    }, containerRef);
+
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="container px-4">
-      <h4 className="font-semibold text-[#24144C] mb-4 text-center md:text-left uppercase">
-        PROCESS PREVIEW
-      </h4>
+    <section ref={sectionRef} className="py-20 bg-white overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
 
-      {/* DESKTOP LAYOUT - Hidden on mobile */}
-      <div className="hidden md:flex items-start justify-center gap-24 max-w-5xl mx-auto mb-8">
-        {steps.map((step, i) => (
-          <div
-            key={step}
-            ref={(el) => (itemsRef.current[i] = el)}
-            className="flex items-start gap-4"
-            style={{ marginTop: i * 40 }}
-          >
-            {/* LEFT LINE */}
-            <div className="h-48 w-px bg-[#8D8D8D]" />
-
-            {/* CONTENT */}
-            <h6 className="font-medium text-[#26164F] whitespace-nowrap mt-20">
-              {step}
-            </h6>
-
-            {/* ADD LINE ONLY AFTER DELIVERY */}
-            {i === steps.length - 1 && (
-              <div className="h-44 w-px bg-gray-400 mt-10" />
-            )}
+          {/* Left Content */}
+          <div className="lg:w-1/3 pt-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#24144C] mb-6 leading-tight uppercase">
+              Places We've<br />Been Mentioned.
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              We've been recognised by some respected brands and publications for our work. Here are a few that have caught people's attention.
+            </p>
           </div>
-        ))}
-      </div>
 
-      {/* MOBILE LAYOUT - Hidden on desktop - now static (no refs/animation) */}
-      <div className="md:hidden flex mb-6 sm:mb-0">
-        <div className="relative flex">
-          {/* Big Vertical Line */}
-          <div className="w-px bg-[#8D8D8D] absolute left-0 top-0 bottom-0" />
+          {/* Right Content - Grid System */}
+          <div className="lg:w-2/3 relative" ref={containerRef}>
+            <div className="grid grid-cols-1 md:grid-cols-3">
 
-          {/* Steps List */}
-          <div className="flex flex-col gap-6 pl-8">
-            {steps.map((step, i) => (
-              <div
-                key={step}
-                // Removed ref — no longer needed
-                className="flex items-center gap-3"
-              >
-                {/* Small horizontal line connecting to main line */}
-                <div className="w-4 h-px bg-[#8D8D8D] absolute left-0" />
-                
-                {/* Number and text */}
-                <span className="font-medium text-[#26164F]">
-                  {i + 1}. {step}
-                </span>
-              </div>
-            ))}
+              {/* Columns */}
+              {columns.map((col, colIndex) => (
+                <div key={colIndex} className="flex flex-col items-center justify-around min-h-[400px] py-10 relative">
+                  {col.map((logo, logoIndex) => (
+                    <div key={logoIndex} className="h-32 flex items-center justify-center p-4">
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        className="max-h-full w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-80 hover:opacity-100"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ))}
+
+              {/* Vertical Lines Overlay - Desktop Only */}
+              {[0, 1, 2, 3].map((index) => (
+                <div
+                  key={index}
+                  ref={el => linesRef.current[index] = el}
+                  className="hidden md:block absolute top-0 bottom-0 w-px"
+                  style={{
+                    left: index === 3 ? '100%' : `${(index / 3) * 100}%`,
+                    // On mobile, this layout might break if we just do absolute positioning percentage.
+                    // The grid cols trigger this.
+                    // For pure mobile, maybe we stack? But user asked for "same like about us page" which usually implies desktop elegance.
+                    // I'll hide these lines on mobile if needed or adjust.
+                  }}
+                >
+                  {/* Background faint line */}
+                  <div className="absolute inset-0 bg-gray-200"></div>
+
+                  {/* Animated Fill Line */}
+                  <div className="line-inner absolute top-0 left-0 w-full bg-[#24144C]"></div>
+
+                  {/* Top Dot */}
+                  <div className="dot-top absolute -top-1.5 -left-[5px] w-3 h-3 rounded-full border border-[#24144C] bg-[#24144C]"></div>
+
+                  {/* Bottom Dot */}
+                  <div className="dot-bottom absolute -bottom-1.5 -left-[5px] w-3 h-3 rounded-full border border-gray-300 bg-white"></div>
+                </div>
+              ))}
+
+            </div>
           </div>
         </div>
       </div>

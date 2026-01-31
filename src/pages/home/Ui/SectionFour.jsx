@@ -64,23 +64,17 @@ const SectionFour = () => {
         ease: "none",
         scrollTrigger: {
           trigger: card,
-         start: `top ${
-  isMobile
-    ? "top+=60"
-    : window.innerWidth >= 1536
-    ? 180 + 10 * i
-    : 90 + 10 * i
-}`,
-
-          end: isLast
-            ? isMobile
-              ? "+=400"
-              : "+=900"
-            : "bottom 600",
+          start: `top ${isMobile
+            ? "top+=60"
+            : window.innerWidth >= 1536
+              ? 180 + 10 * i
+              : 90 + 10 * i
+            }`,
+          end: "bottom bottom",
           endTrigger: containerRef.current,
           scrub: true,
           pin: true,
-          pinSpacing: isMobile && isLast ? true : false,
+          pinSpacing: false,
         },
       });
     });
@@ -111,8 +105,8 @@ const SectionFour = () => {
       <section
         ref={containerRef}
         className={`mt-4 sm:mt-0 relative ${isMobile
-            ? "pb-0"
-            : "pt-[100px] pb-[800px] min-h-screen"
+          ? "pb-0"
+          : "pt-[100px] pb-[800px] min-h-screen"
           }`}
       >
         {/* Card 1 - Corporate Films */}
@@ -176,7 +170,7 @@ const SectionFour = () => {
         {/* Card 2 - Documentary Films */}
         <div
           ref={(el) => (cardsRef.current[1] = el)}
- className={`w-full shadow-2xl bg-gray-200 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
+          className={`w-full shadow-2xl bg-gray-200 rounded-xl md:rounded-2xl p-4 sm:p-6 md:p-16 flex flex-col ${isMobile ? 'mb-6 sm:mb-8 h-auto' : 'h-[600px] mb-[50px]'}`}
         >
           <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mb-6 md:mb-8">
             <p className="block sm:hidden text-black text-sm font-medium">
@@ -190,9 +184,9 @@ const SectionFour = () => {
               </Button>
             </div>
             <div className="hidden sm:block">
-            <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Plan A Project
-            </Button>
+              <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+                Plan A Project
+              </Button>
             </div>
           </div>
 
@@ -207,7 +201,7 @@ const SectionFour = () => {
               loop
               muted
               playsInline
-           className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
+              className="h-[200px] sm:h-[250px] md:h-[400px] lg:h-[800px] lg:max-h-[325px] w-full md:w-full lg:w-[35%] object-cover rounded-2xl md:rounded-3xl shadow-2xl order-1"
             />
             <div className="flex-1 flex flex-col justify-center text-black order-2">
               <p className="mb-4 md:mb-6">
@@ -226,7 +220,7 @@ const SectionFour = () => {
               </Link>
             </div>
           </div>
-           <div className="block sm:hidden mt-2">
+          <div className="block sm:hidden mt-2">
             <Button onClick={() => setOpenPlanModal(true)} className="text-black border-3 border-black px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -250,9 +244,9 @@ const SectionFour = () => {
               </Button>
             </div>
             <div className="hidden sm:block">
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Plan A Project
-            </Button>
+              <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+                Plan A Project
+              </Button>
             </div>
           </div>
 
@@ -283,7 +277,7 @@ const SectionFour = () => {
               </Link>
             </div>
           </div>
-            <div className="block sm:hidden mt-2">
+          <div className="block sm:hidden mt-2">
             <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -307,9 +301,9 @@ const SectionFour = () => {
               </Button>
             </div>
             <div className="hidden sm:block">
-            <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
-              Plan A Project
-            </Button>
+              <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
+                Plan A Project
+              </Button>
             </div>
           </div>
 
@@ -340,7 +334,7 @@ const SectionFour = () => {
               </Link>
             </div>
           </div>
-            <div className="block sm:hidden mt-2">
+          <div className="block sm:hidden mt-2">
             <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>
@@ -364,12 +358,12 @@ const SectionFour = () => {
               </Button>
             </div>
             <div className="hidden sm:block">
-            <Button
-              onClick={() => setOpenPlanModal(true)}
-              className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
-            >
-              Plan A Project
-            </Button>
+              <Button
+                onClick={() => setOpenPlanModal(true)}
+                className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm"
+              >
+                Plan A Project
+              </Button>
             </div>
           </div>
 
@@ -400,7 +394,7 @@ const SectionFour = () => {
               </Link>
             </div>
           </div>
-             <div className="block sm:hidden mt-2">
+          <div className="block sm:hidden mt-2">
             <Button onClick={() => setOpenPlanModal(true)} className="text-white border-3 border-white px-4 sm:px-14 py-2 rounded-2xl hover:bg-white/30 transition text-sm">
               Plan A Project
             </Button>

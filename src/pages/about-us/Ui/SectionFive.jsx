@@ -114,8 +114,8 @@ const SectionFive = () => {
           <div className="w-full lg:w-[20%] flex justify-center lg:justify-end ">
             <Button
               onClick={() => setOpenPlanModal(true)}
-               onMouseEnter={() => setIsHovered(true)}
-               onMouseLeave={() => setIsHovered(false)}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               className=" 
     text-white px-12 py-4
 
@@ -132,13 +132,13 @@ const SectionFive = () => {
             >
               Plan a Project
 
-                <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
-                                  {isHovered ? (
-                                    <GoArrowRight size={18} />
-                                  ) : (
-                                    <GoArrowUpRight size={18} />
-                                  )}
-                                </span>
+              <span className="ml-3 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white text-[#3B1D8F] transition-all duration-400">
+                {isHovered ? (
+                  <GoArrowRight size={18} />
+                ) : (
+                  <GoArrowUpRight size={18} />
+                )}
+              </span>
             </Button>
           </div>
         </div>
